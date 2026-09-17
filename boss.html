@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Les Boss — Le Royaume des Ombres</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            color: white;
+            background:
+                radial-gradient(circle at top, #35105c, #100019 45%, #050008);
+            padding: 30px 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .crown {
+            font-size: 55px;
+            animation: float 3s infinite ease-in-out;
+        }
+
+        h1 {
+            font-size: 38px;
+            margin: 10px 0;
+            letter-spacing: 3px;
+        }
+
+        .subtitle {
+            color: #c9a7ff;
+            font-size: 16px;
+        }
+
+        .boss-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 22px;
+        }
+
+        .boss {
+            padding: 28px 20px;
+            border: 1px solid #7138a8;
+            border-radius: 18px;
+            background: rgba(30, 5, 48, 0.8);
+            text-align: center;
+            box-shadow: 0 0 20px rgba(120, 40, 180, 0.15);
+            transition: 0.3s;
+        }
+
+        .boss:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 0 30px rgba(160, 70, 220, 0.4);
+            border-color: #a85cff;
+        }
+
+        .boss-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .boss h2 {
+            margin-bottom: 10px;
+        }
+
+        .boss p {
+            color: #c8bfd2;
+            line-height: 1.5;
+            margin-bottom: 18px;
+        }
+
+        .difficulty {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: #32114b;
+            color: #d7b7ff;
+            font-size: 13px;
+            margin-bottom: 18px;
+        }
+
+        button {
+            border: none;
+            padding: 11px 20px;
+            border-radius: 25px;
+            background: linear-gradient(90deg, #6b21a8, #9333ea);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 18px rgba(170, 80, 255, 0.5);
+        }
+
+        .locked {
+            opacity: 0.5;
+        }
+
+        .locked button {
+            background: #33283a;
+            cursor: not-allowed;
+        }
+
+        .back {
+            display: block;
+            width: fit-content;
+            margin: 40px auto 0;
+            text-decoration: none;
+            color: #d8b8ff;
+            border: 1px solid #7138a8;
+            padding: 10px 18px;
+            border-radius: 20px;
+        }
+
+        .back:hover {
+            background: #24102f;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #7d6c89;
+            font-size: 13px;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <header>
+        <div class="crown">☠️</div>
+
+        <h1>LES BOSS</h1>
+
+        <p class="subtitle">
+            Choisis ton épreuve et entre dans l'Arène des Ombres.
+        </p>
+    </header>
+
+    <div class="boss-grid">
+
+        <!-- BOSS 1 -->
+        <div class="boss">
+
+            <div class="boss-icon">🌑</div>
+
+            <h2>Boss des Ombres</h2>
+
+            <span class="difficulty">
+                FACILE
+            </span>
+
+            <p>
+                Une première épreuve pour tester tes connaissances.
+            </p>
+
+            <button onclick="window.location.href='quiz.html'">
+                ⚔️ Affronter
+            </button>
+
+        </div>
+
+        <!-- BOSS 2 -->
+        <div class="boss">
+
+            <div class="boss-icon">🔥</div>
+
+            <h2>Boss des Flammes</h2>
+
+            <span class="difficulty">
+                MOYEN
+            </span>
+
+            <p>
+                Les questions deviennent plus difficiles.
+            </p>
+
+            <button onclick="alert('🔥 Ce Boss sera bientôt disponible !')">
+                🔒 Bientôt
+            </button>
+
+        </div>
+
+        <!-- BOSS 3 -->
+        <div class="boss">
+
+            <div class="boss-icon">⚡</div>
+
+            <h2>Boss du Tonnerre</h2>
+
+            <span class="difficulty">
+                DIFFICILE
+            </span>
+
+            <p>
+                Seuls les véritables combattants peuvent réussir.
+            </p>
+
+            <button onclick="alert('⚡ Ce Boss sera bientôt disponible !')">
+                🔒 Bientôt
+            </button>
+
+        </div>
+
+        <!-- BOSS 4 -->
+        <div class="boss">
+
+            <div class="boss-icon">👹</div>
+
+            <h2>Roi Démon</h2>
+
+            <span class="difficulty">
+                EXPERT
+            </span>
+
+            <p>
+                Une épreuve réservée aux Ombres les plus puissantes.
+            </p>
+
+            <button onclick="alert('👹 Ce Boss sera bientôt disponible !')">
+                🔒 Bientôt
+            </button>
+
+        </div>
+
+        <!-- BOSS 5 -->
+        <div class="boss locked">
+
+            <div class="boss-icon">👑</div>
+
+            <h2>Boss Ultime</h2>
+
+            <span class="difficulty">
+                ULTIME
+            </span>
+
+            <p>
+                Le dernier défi du Royaume des Ombres.
+            </p>
+
+            <button disabled>
+                🔒 Verrouillé
+            </button>
+
+        </div>
+
+    </div>
+
+    <a href="index.html" class="back">
+        ← Retour au Royaume
+    </a>
+
+    <footer>
+        ⚔️ DÉFI · COMBAT · AURA · GLOIRE ⚔️
+    </footer>
+
+</div>
+
+</body>
+</html>
