@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Royaume des Ombres</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            color: #f5f5f5;
+            background:
+                radial-gradient(circle at top, #24152f 0%, #0b0810 45%, #050509 100%);
+        }
+
+        .container {
+            width: min(900px, 92%);
+            margin: auto;
+            padding: 40px 0;
+        }
+
+        header {
+            text-align: center;
+            padding: 35px 20px;
+            border-bottom: 1px solid #38313f;
+        }
+
+        .crown {
+            font-size: 45px;
+        }
+
+        h1 {
+            margin: 10px 0;
+            font-size: clamp(28px, 7vw, 55px);
+            letter-spacing: 4px;
+        }
+
+        .subtitle {
+            color: #aaa3b5;
+            font-size: 15px;
+        }
+
+        .status {
+            display: inline-block;
+            margin-top: 18px;
+            padding: 8px 15px;
+            border: 1px solid #403746;
+            border-radius: 30px;
+            color: #bda9ff;
+        }
+
+        .section-title {
+            margin: 30px 0 15px;
+            color: #aaa3b5;
+            letter-spacing: 2px;
+            font-size: 13px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .card {
+            padding: 22px;
+            background: #121019;
+            border: 1px solid #302b38;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: #68568d;
+        }
+
+        .icon {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .card h2 {
+            font-size: 18px;
+            margin: 0 0 7px;
+        }
+
+        .card p {
+            color: #99939f;
+            font-size: 13px;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .enter {
+            width: 100%;
+            margin-top: 20px;
+            padding: 18px;
+            border: 1px solid #51436e;
+            border-radius: 15px;
+            background: #171321;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .enter:hover {
+            background: #211a2d;
+        }
+
+        #message {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: #111018;
+            border: 1px solid #302b38;
+            border-radius: 15px;
+        }
+
+        #message h2 {
+            margin-top: 0;
+        }
+
+        #message p {
+            color: #aaa3b5;
+            line-height: 1.6;
+        }
+
+        footer {
+            text-align: center;
+            color: #68636d;
+            font-size: 11px;
+            letter-spacing: 2px;
+            margin-top: 35px;
+        }
+
+        @media (max-width: 600px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                letter-spacing: 2px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <header>
+        <div class="crown">👑</div>
+
+        <h1>LE ROYAUME DES OMBRES</h1>
+
+        <div class="subtitle">
+            Une nouvelle ère commence dans les ténèbres.
+        </div>
+
+        <div class="status">
+            ● Royaume ouvert
+        </div>
+    </header>
+
+
+    <div class="section-title">
+        ACCÈS AU ROYAUME
+    </div>
+
+
+    <div class="grid">
+
+        <div class="card" onclick="showMessage(
+            '☠️ LES BOSS',
+            'Affronte les 5 Boss du Royaume : Facile, Moyen, Difficile, Expert et Boss Ultime.'
+        )">
+
+            <div class="icon">☠️</div>
+
+            <h2>Les Boss</h2>
+
+            <p>
+                Affronte les différents niveaux de difficulté.
+            </p>
+
+        </div>
+
+
+        <div class="card" onclick="showMessage(
+            '⚔️ L’ARÈNE',
+            'Entre dans les affrontements du Royaume et découvre les résultats des combats.'
+        )">
+
+            <div class="icon">⚔️</div>
+
+            <h2>L'Arène</h2>
+
+            <p>
+                Entre dans les affrontements du Royaume.
+            </p>
+
+        </div>
+
+
+        <div class="card" onclick="showMessage(
+            '🩸 LES DÉFIS',
+            'Défie un membre selon les règles du Royaume et mets tes points en jeu.'
+        )">
+
+            <div class="icon">🩸</div>
+
+            <h2>Les Défis</h2>
+
+            <p>
+                Défie un autre membre et mise tes points.
+            </p>
+
+        </div>
+
+
+        <div class="card" onclick="showMessage(
+            '🏆 CLASSEMENT',
+            'Découvre les points, les rangs et les titres des membres du Royaume.'
+        )">
+
+            <div class="icon">🏆</div>
+
+            <h2>Classement</h2>
+
+            <p>
+                Découvre les rangs et les titres des Ombres.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <button class="enter" onclick="showMessage(
+        '🌑 SESSION DU ROYAUME',
+        'Le Royaume est prêt. Cette zone affichera bientôt la session active, le Boss actuel et les événements en cours.'
+    )">
+
+        🌑 Entrer dans le Royaume
+
+    </button>
+
+
+    <div id="message">
+
+        <h2 id="messageTitle"></h2>
+
+        <p id="messageText"></p>
+
+    </div>
+
+
+    <footer>
+        ⚔️ DÉFI · COMBAT · AURA · GLOIRE ⚔️
+    </footer>
+
+</div>
+
+
+<script>
+
+function showMessage(title, text) {
+
+    document.getElementById("messageTitle").textContent = title;
+
+    document.getElementById("messageText").textContent = text;
+
+    document.getElementById("message").style.display = "block";
+
+    document.getElementById("message").scrollIntoView({
+        behavior: "smooth"
+    });
+}
+
+</script>
+
+</body>
+</html>
