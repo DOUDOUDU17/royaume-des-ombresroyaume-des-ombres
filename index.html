@@ -3,11 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Le Royaume des Ombres</title>
 
     <style>
         * {
             box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -16,112 +21,206 @@
             font-family: Arial, sans-serif;
             color: #f5f5f5;
             background:
-                radial-gradient(circle at top, #24152f 0%, #0b0810 45%, #050509 100%);
+                radial-gradient(circle at 50% 0%, #35204b 0%, #110b18 35%, #050509 75%);
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(120, 70, 180, 0.08), transparent 25%),
+                radial-gradient(circle at 80% 70%, rgba(120, 70, 180, 0.06), transparent 25%);
         }
 
         .container {
-            width: min(900px, 92%);
+            width: min(1050px, 92%);
             margin: auto;
-            padding: 40px 0;
+            padding: 25px 0 40px;
         }
+
+        /* ================= HEADER ================= */
 
         header {
             text-align: center;
-            padding: 35px 20px;
+            padding: 45px 20px 35px;
             border-bottom: 1px solid #38313f;
+            animation: apparition 1s ease;
         }
 
         .crown {
-            font-size: 45px;
+            font-size: 55px;
+            filter: drop-shadow(0 0 15px #8c62bd);
+            animation: floating 3s ease-in-out infinite;
         }
 
         h1 {
-            margin: 10px 0;
-            font-size: clamp(28px, 7vw, 55px);
-            letter-spacing: 4px;
+            margin: 15px 0 10px;
+            font-size: clamp(30px, 7vw, 60px);
+            letter-spacing: 5px;
+            text-shadow: 0 0 25px rgba(150, 100, 200, 0.4);
         }
 
         .subtitle {
             color: #aaa3b5;
             font-size: 15px;
+            letter-spacing: 1px;
         }
 
         .status {
             display: inline-block;
-            margin-top: 18px;
-            padding: 8px 15px;
-            border: 1px solid #403746;
+            margin-top: 20px;
+            padding: 9px 18px;
+            border: 1px solid #51436e;
             border-radius: 30px;
-            color: #bda9ff;
+            color: #cbb8ff;
+            background: rgba(25, 18, 35, 0.7);
         }
 
+        /* ================= SESSION ================= */
+
+        .session {
+            margin-top: 30px;
+            padding: 25px;
+            border: 1px solid #38313f;
+            border-radius: 18px;
+            background: linear-gradient(145deg, #15111d, #0d0b11);
+            box-shadow: 0 10px 35px rgba(0,0,0,0.25);
+            animation: apparition 1.2s ease;
+        }
+
+        .session-title {
+            color: #cbb8ff;
+            font-size: 13px;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+        }
+
+        .session-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .stat {
+            padding: 18px;
+            border-radius: 14px;
+            background: #0f0d14;
+            border: 1px solid #2f2937;
+            text-align: center;
+        }
+
+        .stat-icon {
+            font-size: 25px;
+        }
+
+        .stat-value {
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        .stat-label {
+            margin-top: 5px;
+            color: #817a88;
+            font-size: 12px;
+        }
+
+        /* ================= MENU ================= */
+
         .section-title {
-            margin: 30px 0 15px;
+            margin: 35px 0 15px;
             color: #aaa3b5;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             font-size: 13px;
         }
 
         .grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
+            gap: 16px;
         }
 
         .card {
-            padding: 22px;
-            background: #121019;
+            position: relative;
+            padding: 25px;
+            background: linear-gradient(145deg, #15121c, #0e0c12);
             border: 1px solid #302b38;
-            border-radius: 15px;
+            border-radius: 17px;
             cursor: pointer;
-            transition: 0.2s;
+            transition: 0.25s;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            right: -35px;
+            top: -35px;
+            border-radius: 50%;
+            background: rgba(120, 80, 170, 0.08);
         }
 
         .card:hover {
-            transform: translateY(-4px);
-            border-color: #68568d;
+            transform: translateY(-6px);
+            border-color: #765c9e;
+            box-shadow: 0 12px 30px rgba(90, 50, 130, 0.15);
         }
 
         .icon {
-            font-size: 30px;
-            margin-bottom: 10px;
+            font-size: 34px;
+            margin-bottom: 12px;
         }
 
         .card h2 {
-            font-size: 18px;
-            margin: 0 0 7px;
+            font-size: 19px;
+            margin: 0 0 8px;
         }
 
         .card p {
             color: #99939f;
             font-size: 13px;
-            line-height: 1.5;
+            line-height: 1.6;
             margin: 0;
         }
+
+        /* ================= BUTTON ================= */
 
         .enter {
             width: 100%;
             margin-top: 20px;
-            padding: 18px;
-            border: 1px solid #51436e;
-            border-radius: 15px;
-            background: #171321;
+            padding: 19px;
+            border: 1px solid #66518b;
+            border-radius: 16px;
+            background: linear-gradient(90deg, #171321, #21182d, #171321);
             color: white;
             font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 1px;
             cursor: pointer;
+            transition: 0.25s;
         }
 
         .enter:hover {
-            background: #211a2d;
+            transform: translateY(-3px);
+            border-color: #9879c7;
+            box-shadow: 0 10px 30px rgba(120, 80, 170, 0.2);
         }
+
+        /* ================= MESSAGE ================= */
 
         #message {
             display: none;
             margin-top: 20px;
-            padding: 20px;
+            padding: 25px;
             background: #111018;
-            border: 1px solid #302b38;
-            border-radius: 15px;
+            border: 1px solid #40364d;
+            border-radius: 16px;
+            animation: apparition 0.4s ease;
         }
 
         #message h2 {
@@ -130,24 +229,58 @@
 
         #message p {
             color: #aaa3b5;
-            line-height: 1.6;
+            line-height: 1.7;
         }
+
+        /* ================= FOOTER ================= */
 
         footer {
             text-align: center;
             color: #68636d;
             font-size: 11px;
-            letter-spacing: 2px;
-            margin-top: 35px;
+            letter-spacing: 3px;
+            margin-top: 40px;
         }
 
-        @media (max-width: 600px) {
-            .grid {
+        /* ================= ANIMATIONS ================= */
+
+        @keyframes apparition {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes floating {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 650px) {
+
+            .grid,
+            .session-grid {
                 grid-template-columns: 1fr;
             }
 
             h1 {
                 letter-spacing: 2px;
+            }
+
+            .container {
+                width: 94%;
             }
         }
     </style>
@@ -158,6 +291,7 @@
 <div class="container">
 
     <header>
+
         <div class="crown">👑</div>
 
         <h1>LE ROYAUME DES OMBRES</h1>
@@ -169,19 +303,56 @@
         <div class="status">
             ● Royaume ouvert
         </div>
+
     </header>
 
 
+    <!-- SESSION -->
+
+    <section class="session">
+
+        <div class="session-title">
+            🌑 SESSION DU ROYAUME
+        </div>
+
+        <div class="session-grid">
+
+            <div class="stat">
+                <div class="stat-icon">☠️</div>
+                <div class="stat-value">Aucun</div>
+                <div class="stat-label">Boss actuel</div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-icon">⭐</div>
+                <div class="stat-value">0</div>
+                <div class="stat-label">Tes points</div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-icon">🏆</div>
+                <div class="stat-value">Ombre</div>
+                <div class="stat-label">Ton rang</div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- MENU -->
+
     <div class="section-title">
-        ACCÈS AU ROYAUME
+        ⚔️ ACCÈS AU ROYAUME
     </div>
 
 
     <div class="grid">
 
+
         <div class="card" onclick="showMessage(
             '☠️ LES BOSS',
-            'Affronte les 5 Boss du Royaume : Facile, Moyen, Difficile, Expert et Boss Ultime.'
+            'Affronte les différents Boss du Royaume. Chaque Boss possède son niveau de difficulté, ses questions et ses récompenses.'
         )">
 
             <div class="icon">☠️</div>
@@ -189,7 +360,7 @@
             <h2>Les Boss</h2>
 
             <p>
-                Affronte les différents niveaux de difficulté.
+                Affronte les Boss et tente de gagner leurs récompenses.
             </p>
 
         </div>
@@ -197,7 +368,7 @@
 
         <div class="card" onclick="showMessage(
             '⚔️ L’ARÈNE',
-            'Entre dans les affrontements du Royaume et découvre les résultats des combats.'
+            'L’Arène accueillera les affrontements et les événements spéciaux du Royaume.'
         )">
 
             <div class="icon">⚔️</div>
@@ -213,7 +384,7 @@
 
         <div class="card" onclick="showMessage(
             '🩸 LES DÉFIS',
-            'Défie un membre selon les règles du Royaume et mets tes points en jeu.'
+            'Défie un autre membre du Royaume selon les règles établies et mets tes points en jeu.'
         )">
 
             <div class="icon">🩸</div>
@@ -221,7 +392,7 @@
             <h2>Les Défis</h2>
 
             <p>
-                Défie un autre membre et mise tes points.
+                Défie un autre membre et tente de prendre sa place.
             </p>
 
         </div>
@@ -229,7 +400,7 @@
 
         <div class="card" onclick="showMessage(
             '🏆 CLASSEMENT',
-            'Découvre les points, les rangs et les titres des membres du Royaume.'
+            'Le classement affichera les membres, leurs points, leurs rangs et leurs titres.'
         )">
 
             <div class="icon">🏆</div>
@@ -245,13 +416,10 @@
     </div>
 
 
-    <button class="enter" onclick="showMessage(
-        '🌑 SESSION DU ROYAUME',
-        'Le Royaume est prêt. Cette zone affichera bientôt la session active, le Boss actuel et les événements en cours.'
-    )">
+    <!-- ENTRER -->
 
-        🌑 Entrer dans le Royaume
-
+    <button class="enter" onclick="enterKingdom()">
+        🌑 ENTRER DANS LE ROYAUME
     </button>
 
 
@@ -266,6 +434,8 @@
 
     <footer>
         ⚔️ DÉFI · COMBAT · AURA · GLOIRE ⚔️
+        <br><br>
+        LE ROYAUME DES OMBRES
     </footer>
 
 </div>
@@ -284,6 +454,17 @@ function showMessage(title, text) {
     document.getElementById("message").scrollIntoView({
         behavior: "smooth"
     });
+
+}
+
+
+function enterKingdom() {
+
+    showMessage(
+        "🌑 BIENVENUE, OMBRE",
+        "Le Royaume est ouvert. Les futures sessions, les Boss, les défis et le classement seront accessibles ici."
+    );
+
 }
 
 </script>
