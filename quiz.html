@@ -228,10 +228,11 @@ body {
 
     <div class="header">
         <h1>☠️ QUIZ</h1>
-        <p>🌑 Boss des Ombres — Niveau Facile</p>
+        <p id="bossTitle">🌑 Boss des Ombres</p>
     </div>
 
     <div class="timer-box">
+
         <div class="timer">
             ⏱️ Temps global
             <strong id="globalTimer">05:00</strong>
@@ -241,6 +242,7 @@ body {
             ⚡ Temps question
             <strong id="questionTimer">15</strong>
         </div>
+
     </div>
 
     <div class="progress" id="progress">
@@ -258,6 +260,7 @@ body {
         <div class="answers" id="answers"></div>
 
         <div class="qrr-area" id="qrrArea">
+
             <textarea
                 id="qrrAnswer"
                 placeholder="Écris ta réponse ici..."
@@ -266,6 +269,7 @@ body {
             <button class="validate" onclick="submitQRR()">
                 Valider ma réponse
             </button>
+
         </div>
 
         <div class="message" id="message"></div>
@@ -273,21 +277,29 @@ body {
     </div>
 
     <div class="navigation">
-        <button class="nav-btn" id="previousBtn" onclick="previousQuestion()">
+
+        <button
+            class="nav-btn"
+            id="previousBtn"
+            onclick="previousQuestion()">
             ← Précédente
         </button>
 
-        <button class="nav-btn" id="nextBtn" onclick="nextQuestion()">
+        <button
+            class="nav-btn"
+            id="nextBtn"
+            onclick="nextQuestion()">
             Suivante →
         </button>
+
     </div>
 
     <div class="end-box" id="endBox">
+
         <h2>🌑 Boss terminé</h2>
 
-        <p>
-            Le temps du Boss est terminé ou toutes les questions ont été
-            traitées.
+        <p id="endReason">
+            Le Boss est terminé.
         </p>
 
         <p>
@@ -297,6 +309,7 @@ body {
         <a class="back" href="boss.html">
             ← Retour aux Boss
         </a>
+
     </div>
 
 </div>
@@ -304,83 +317,225 @@ body {
 <script>
 
 /* =========================================
-   CONFIGURATION OFFICIELLE
-   BOSS DES OMBRES
+   RÉCUPÉRATION DU BOSS
    ========================================= */
 
-const bossConfig = {
-    nom: "Boss des Ombres",
-    niveau: "Facile",
+const urlParams = new URLSearchParams(window.location.search);
 
-    tempsGlobal: 5 * 60,
+const bossChoisi =
+    urlParams.get("boss") || "ombres";
 
-    tempsQCM: 15,
-    tempsQRR: null,
 
-    questions: [
+/* =========================================
+   CONFIGURATION DES BOSS
+   ========================================= */
 
-        {
-            type: "QCM",
-            question: "Quel est le principal objectif du groupe LE ROYAUME DES OMBRES ?",
-            answers: [
-                "Organiser des quiz et des défis",
-                "Jouer uniquement à Roblox",
-                "Créer uniquement des vidéos",
-                "Faire uniquement du football"
-            ],
-            correct: 0
-        },
+const bossConfigs = {
 
-        {
-            type: "QCM",
-            question: "Combien de minutes dure le temps global d'un Boss ?",
-            answers: [
-                "3 minutes",
-                "5 minutes",
-                "7 minutes",
-                "10 minutes"
-            ],
-            correct: 1
-        },
+    ombres: {
 
-        {
-            type: "QCM",
-            question: "Quel type de question demande une réponse écrite ?",
-            answers: [
-                "QCM",
-                "QRR",
-                "Bonus",
-                "Classement"
-            ],
-            correct: 1
-        },
+        nom: "🌑 Boss des Ombres",
+        niveau: "Facile",
 
-        {
-            type: "QCM",
-            question: "Que signifie QCM ?",
-            answers: [
-                "Question à choix multiples",
-                "Question à correction manuelle",
-                "Question courte mystère",
-                "Question de classement maximal"
-            ],
-            correct: 0
-        },
+        tempsGlobal: 5 * 60,
 
-        {
-            type: "QCM",
-            question: "Que devient une réponse QRR après sa validation ?",
-            answers: [
-                "Elle est automatiquement notée 100 %",
-                "Elle est automatiquement supprimée",
-                "Elle est enregistrée pour correction",
-                "Elle donne automatiquement un bonus"
-            ],
-            correct: 2
-        }
+        tempsQCM: 15,
+        tempsQRR: null,
 
-    ]
+        questions: [
+
+            {
+                type: "QCM",
+                question: "Quel est le principal objectif du groupe LE ROYAUME DES OMBRES ?",
+                answers: [
+                    "Organiser des quiz et des défis",
+                    "Jouer uniquement à Roblox",
+                    "Créer uniquement des vidéos",
+                    "Faire uniquement du football"
+                ],
+                correct: 0
+            },
+
+            {
+                type: "QCM",
+                question: "Combien de minutes dure le temps global d'un Boss ?",
+                answers: [
+                    "3 minutes",
+                    "5 minutes",
+                    "7 minutes",
+                    "10 minutes"
+                ],
+                correct: 1
+            },
+
+            {
+                type: "QCM",
+                question: "Quel type de question demande une réponse écrite ?",
+                answers: [
+                    "QCM",
+                    "QRR",
+                    "Bonus",
+                    "Classement"
+                ],
+                correct: 1
+            },
+
+            {
+                type: "QCM",
+                question: "Que signifie QCM ?",
+                answers: [
+                    "Question à choix multiples",
+                    "Question à correction manuelle",
+                    "Question courte mystère",
+                    "Question de classement maximal"
+                ],
+                correct: 0
+            },
+
+            {
+                type: "QCM",
+                question: "Que devient une réponse QRR après sa validation ?",
+                answers: [
+                    "Elle est automatiquement notée 100 %",
+                    "Elle est automatiquement supprimée",
+                    "Elle est enregistrée pour correction",
+                    "Elle donne automatiquement un bonus"
+                ],
+                correct: 2
+            }
+
+        ]
+    },
+
+
+    /* =====================================
+       🔥 BOSS DES FLAMMES
+       ===================================== */
+
+    flammes: {
+
+        nom: "🔥 Boss des Flammes",
+        niveau: "Moyen",
+
+        tempsGlobal: 5 * 60,
+
+        tempsQCM: 25,
+        tempsQRR: 45,
+
+        questions: [
+
+            {
+                type: "QCM",
+
+                question:
+                "À Water 7, quel était le métier de Franky avant de devenir officiellement membre de l'équipage de Luffy ?",
+
+                answers: [
+                    "Charpentier naval",
+                    "Chasseur de primes",
+                    "Capitaine corsaire",
+                    "Forgeron"
+                ],
+
+                correct: 0
+            },
+
+
+            {
+                type: "QCM",
+
+                question:
+                "Dans Naruto, lequel de ces personnages n'a jamais été Hokage ?",
+
+                answers: [
+                    "Minato Namikaze",
+                    "Hiruzen Sarutobi",
+                    "Jiraiya",
+                    "Kakashi Hatake"
+                ],
+
+                correct: 2
+            },
+
+
+            {
+                type: "QCM",
+
+                question:
+                "Avant de devenir Pourfendeur, quel métier Tanjiro exerçait-il principalement avec sa famille ?",
+
+                answers: [
+                    "Pêcheur",
+                    "Marchand de charbon",
+                    "Forgeron",
+                    "Cultivateur de riz"
+                ],
+
+                correct: 1
+            },
+
+
+            {
+                type: "QCM",
+
+                question:
+                "Dans Dragon Ball Z, lequel de ces personnages n'est pas un Saiyan ?",
+
+                answers: [
+                    "Bardock",
+                    "Raditz",
+                    "Nappa",
+                    "Zarbon"
+                ],
+
+                correct: 3
+            },
+
+
+            {
+                type: "QCM",
+
+                question:
+                "Quelle affirmation décrit correctement les Six Eyes de Satoru Gojo ?",
+
+                answers: [
+                    "C'est une technique qui permet de créer des shikigami",
+                    "C'est une capacité liée à une perception extrêmement précise de l'énergie occulte",
+                    "C'est le nom de son domaine",
+                    "C'est une technique permettant de copier toutes les techniques"
+                ],
+
+                correct: 1
+            },
+
+
+            {
+                type: "QRR",
+
+                question:
+                "Dans Bleach, Ichigo possède plusieurs origines liées à ses pouvoirs. Cite les principales origines qui composent son identité spirituelle et explique brièvement comment elles sont liées à ses pouvoirs."
+            },
+
+
+            {
+                type: "QRR",
+
+                question:
+                "Pourquoi le Gouvernement Mondial considère-t-il Luffy comme une menace particulière ? Donne au moins deux éléments précis liés à son histoire, à ses pouvoirs ou à ses actions."
+            }
+
+        ]
+    }
+
 };
+
+
+/* =========================================
+   CONFIGURATION ACTIVE
+   ========================================= */
+
+const bossConfig =
+    bossConfigs[bossChoisi] || bossConfigs.ombres;
 
 
 /* =========================================
@@ -389,8 +544,11 @@ const bossConfig = {
 
 let currentQuestion = 0;
 
-let globalTime = bossConfig.tempsGlobal;
-let questionTime = bossConfig.tempsQCM;
+let globalTime =
+    bossConfig.tempsGlobal;
+
+let questionTime =
+    bossConfig.tempsQCM;
 
 let globalInterval;
 let questionInterval;
@@ -401,7 +559,15 @@ let answersGiven = [];
 
 
 /* =========================================
-   AFFICHAGE
+   TITRE
+   ========================================= */
+
+document.getElementById("bossTitle").textContent =
+    bossConfig.nom + " — Niveau " + bossConfig.niveau;
+
+
+/* =========================================
+   AFFICHER QUESTION
    ========================================= */
 
 function showQuestion() {
@@ -410,16 +576,21 @@ function showQuestion() {
 
     clearInterval(questionInterval);
 
-    const q = bossConfig.questions[currentQuestion];
+    const q =
+        bossConfig.questions[currentQuestion];
+
 
     document.getElementById("progress").textContent =
         `Question ${currentQuestion + 1} / ${bossConfig.questions.length}`;
 
+
     document.getElementById("questionText").textContent =
         q.question;
 
+
     document.getElementById("questionType").textContent =
         q.type;
+
 
     const answersContainer =
         document.getElementById("answers");
@@ -427,27 +598,40 @@ function showQuestion() {
     const qrrArea =
         document.getElementById("qrrArea");
 
+
     const message =
         document.getElementById("message");
 
+
     answersContainer.innerHTML = "";
+
     message.textContent = "";
 
+
     qrrArea.style.display = "none";
+
     answersContainer.style.display = "grid";
+
 
     if (q.type === "QCM") {
 
-        questionTime = bossConfig.tempsQCM;
+        questionTime =
+            bossConfig.tempsQCM;
+
 
         q.answers.forEach((answer, index) => {
 
-            const button = document.createElement("button");
+            const button =
+                document.createElement("button");
 
-            button.className = "answer";
-            button.textContent = answer;
+            button.className =
+                "answer";
 
-            button.onclick = () => selectAnswer(index, button);
+            button.textContent =
+                answer;
+
+            button.onclick =
+                () => selectAnswer(index, button);
 
             answersContainer.appendChild(button);
 
@@ -455,26 +639,40 @@ function showQuestion() {
 
     }
 
+
     else if (q.type === "QRR") {
 
-        questionTime = bossConfig.tempsQRR;
+        questionTime =
+            bossConfig.tempsQRR;
 
-        answersContainer.style.display = "none";
-        qrrArea.style.display = "block";
+        answersContainer.style.display =
+            "none";
 
-        document.getElementById("qrrAnswer").value = "";
+        qrrArea.style.display =
+            "block";
+
+        document.getElementById("qrrAnswer").value =
+            "";
+
+        document.getElementById("qrrAnswer").disabled =
+            false;
     }
+
 
     document.getElementById("questionTimer").textContent =
         questionTime;
 
+
     startQuestionTimer();
+
 
     document.getElementById("previousBtn").disabled =
         currentQuestion === 0;
 
+
     document.getElementById("nextBtn").disabled =
-        currentQuestion === bossConfig.questions.length - 1;
+        currentQuestion ===
+        bossConfig.questions.length - 1;
 }
 
 
@@ -486,22 +684,32 @@ function selectAnswer(index, button) {
 
     if (finished) return;
 
+
     const buttons =
         document.querySelectorAll(".answer");
 
+
     buttons.forEach(btn => {
+
         btn.classList.remove("selected");
+
     });
+
 
     button.classList.add("selected");
 
+
     answersGiven[currentQuestion] = {
+
         type: "QCM",
+
         answer: index
+
     };
 
+
     document.getElementById("message").textContent =
-        "Réponse enregistrée.";
+        "✅ Réponse enregistrée.";
 }
 
 
@@ -513,8 +721,10 @@ function submitQRR() {
 
     if (finished) return;
 
+
     const text =
         document.getElementById("qrrAnswer").value.trim();
+
 
     if (text === "") {
 
@@ -523,6 +733,7 @@ function submitQRR() {
 
         return;
     }
+
 
     answersGiven[currentQuestion] = {
 
@@ -534,10 +745,13 @@ function submitQRR() {
 
     };
 
+
     document.getElementById("message").textContent =
         "✅ Réponse enregistrée — à corriger manuellement.";
 
-    document.getElementById("qrrAnswer").disabled = true;
+
+    document.getElementById("qrrAnswer").disabled =
+        true;
 }
 
 
@@ -549,20 +763,25 @@ function startGlobalTimer() {
 
     clearInterval(globalInterval);
 
-    globalInterval = setInterval(() => {
 
-        globalTime--;
+    globalInterval =
+        setInterval(() => {
 
-        updateGlobalTimer();
+            globalTime--;
 
-        if (globalTime <= 0) {
+            updateGlobalTimer();
 
-            clearInterval(globalInterval);
 
-            finishQuiz("⏱️ Le temps global de 5 minutes est écoulé.");
-        }
+            if (globalTime <= 0) {
 
-    }, 1000);
+                clearInterval(globalInterval);
+
+                finishQuiz(
+                    "⏱️ Le temps global de 5 minutes est écoulé."
+                );
+            }
+
+        }, 1000);
 }
 
 
@@ -574,47 +793,58 @@ function startQuestionTimer() {
 
     clearInterval(questionInterval);
 
-    questionInterval = setInterval(() => {
 
-        questionTime--;
+    questionInterval =
+        setInterval(() => {
 
-        document.getElementById("questionTimer").textContent =
-            questionTime;
+            questionTime--;
 
-        if (questionTime <= 0) {
+            document.getElementById("questionTimer").textContent =
+                questionTime;
 
-            clearInterval(questionInterval);
 
-            lockQuestion();
+            if (questionTime <= 0) {
 
-        }
+                clearInterval(questionInterval);
 
-    }, 1000);
+                lockQuestion();
+
+            }
+
+        }, 1000);
 }
 
+
+/* =========================================
+   VERROUILLAGE
+   ========================================= */
 
 function lockQuestion() {
 
     const buttons =
         document.querySelectorAll(".answer");
 
+
     buttons.forEach(button => {
 
         button.disabled = true;
+
         button.classList.add("locked");
 
     });
 
-    document.getElementById("qrrAnswer").disabled = true;
+
+    document.getElementById("qrrAnswer").disabled =
+        true;
+
 
     document.getElementById("message").textContent =
         "⏱️ Temps de cette question écoulé.";
-
 }
 
 
 /* =========================================
-   TIMER GLOBAL AFFICHAGE
+   AFFICHAGE TIMER GLOBAL
    ========================================= */
 
 function updateGlobalTimer() {
@@ -625,30 +855,41 @@ function updateGlobalTimer() {
     const seconds =
         globalTime % 60;
 
+
     document.getElementById("globalTimer").textContent =
         `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
 }
 
 
 /* =========================================
-   NAVIGATION
+   QUESTION SUIVANTE
    ========================================= */
 
 function nextQuestion() {
 
-    if (currentQuestion < bossConfig.questions.length - 1) {
+    if (
+        currentQuestion <
+        bossConfig.questions.length - 1
+    ) {
 
         currentQuestion++;
 
         showQuestion();
+
     }
 
     else {
 
-        finishQuiz("🌑 Toutes les questions ont été traitées.");
+        finishQuiz(
+            "🌑 Toutes les questions ont été traitées."
+        );
     }
 }
 
+
+/* =========================================
+   QUESTION PRÉCÉDENTE
+   ========================================= */
 
 function previousQuestion() {
 
@@ -657,33 +898,41 @@ function previousQuestion() {
         currentQuestion--;
 
         showQuestion();
+
     }
 }
 
 
 /* =========================================
-   FIN DU BOSS
+   FIN DU QUIZ
    ========================================= */
 
 function finishQuiz(reason) {
 
     if (finished) return;
 
+
     finished = true;
 
+
     clearInterval(globalInterval);
+
     clearInterval(questionInterval);
+
 
     document.getElementById("quizBox").style.display =
         "none";
 
+
     document.querySelector(".navigation").style.display =
         "none";
+
 
     document.getElementById("endBox").style.display =
         "block";
 
-    document.querySelector("#endBox p").textContent =
+
+    document.getElementById("endReason").textContent =
         reason;
 }
 
