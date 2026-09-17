@@ -3,844 +3,456 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>☠️ Quiz — Le Royaume des Ombres</title>
+
+<title>☠️ Les Boss — Le Royaume des Ombres</title>
 
 <style>
-    * {
-        box-sizing: border-box;
-    }
 
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: linear-gradient(135deg, #090014, #1a0033, #050008);
-        color: white;
-        min-height: 100vh;
-    }
+* {
+    box-sizing: border-box;
+}
 
-    header {
-        text-align: center;
-        padding: 30px 15px;
-        border-bottom: 1px solid #5c2a82;
-    }
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background:
+        radial-gradient(circle at top, #2b0647 0%, #10001c 45%, #050008 100%);
+    color: white;
+    min-height: 100vh;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+    text-align: center;
+    padding: 45px 20px 30px;
+    border-bottom: 1px solid #5c2a82;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 42px;
+    color: #dfb0ff;
+    text-shadow: 0 0 20px rgba(180, 90, 255, 0.5);
+}
+
+header p {
+    margin-top: 10px;
+    color: #c4abcF;
+    font-size: 17px;
+}
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 40px 20px;
+}
+
+/* =========================
+   BOSS GRID
+========================= */
+
+.boss-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+/* =========================
+   BOSS CARD
+========================= */
+
+.boss-card {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(43, 12, 60, 0.95),
+            rgba(15, 4, 24, 0.98)
+        );
+
+    border: 1px solid #63328a;
+    border-radius: 18px;
+
+    padding: 25px;
+
+    text-align: center;
+
+    box-shadow:
+        0 0 20px rgba(110, 40, 160, 0.18);
+
+    transition: 0.3s;
+}
+
+.boss-card:hover {
+    transform: translateY(-7px);
+
+    border-color: #a55bd2;
+
+    box-shadow:
+        0 0 30px rgba(150, 70, 220, 0.35);
+}
+
+.boss-icon {
+    font-size: 55px;
+    margin-bottom: 10px;
+}
+
+.boss-card h2 {
+    margin: 10px 0;
+    color: #e2b7ff;
+}
+
+.boss-card p {
+    color: #c2aecb;
+    line-height: 1.5;
+}
+
+/* =========================
+   DIFFICULTÉ
+========================= */
+
+.difficulty {
+    display: inline-block;
+
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    margin: 8px 0 18px;
+
+    background: #35134a;
+
+    color: #dcaeff;
+
+    font-size: 13px;
+
+    font-weight: bold;
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.boss-button {
+    width: 100%;
+
+    border: none;
+
+    padding: 13px;
+
+    border-radius: 10px;
+
+    background: linear-gradient(
+        135deg,
+        #7136a0,
+        #9b4dcc
+    );
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.25s;
+}
+
+.boss-button:hover {
+    transform: scale(1.03);
+
+    background: linear-gradient(
+        135deg,
+        #8c48c0,
+        #b05be0
+    );
+}
+
+/* =========================
+   LOCKED
+========================= */
+
+.locked {
+    opacity: 0.65;
+}
+
+.locked .boss-button {
+    background: #302037;
+    color: #a997ad;
+    cursor: not-allowed;
+}
+
+.locked:hover {
+    transform: none;
+}
+
+/* =========================
+   BACK BUTTON
+========================= */
+
+.back {
+    display: block;
+
+    width: fit-content;
+
+    margin: 45px auto 0;
+
+    text-decoration: none;
+
+    background: #21112b;
+
+    border: 1px solid #63328a;
+
+    color: #d8b7e8;
+
+    padding: 12px 22px;
+
+    border-radius: 10px;
+
+    transition: 0.2s;
+}
+
+.back:hover {
+    background: #351746;
+    border-color: #9a58c4;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    text-align: center;
+
+    padding: 30px 15px;
+
+    color: #8e7898;
+
+    border-top: 1px solid #32183f;
+
+    margin-top: 30px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
 
     header h1 {
-        margin: 0;
-        color: #d9a7ff;
+        font-size: 30px;
     }
 
     header p {
-        color: #bda8c9;
+        font-size: 14px;
     }
 
-    .quiz-container {
-        max-width: 850px;
-        margin: 30px auto;
-        padding: 20px;
+    .container {
+        padding: 25px 15px;
     }
 
-    .boss-title {
-        text-align: center;
-        margin-bottom: 20px;
-    }
+}
 
-    .boss-title h2 {
-        color: #e0b3ff;
-        margin-bottom: 5px;
-    }
-
-    .timers {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        flex-wrap: wrap;
-        margin-bottom: 25px;
-    }
-
-    .timer-box {
-        background: rgba(70, 25, 100, 0.5);
-        border: 1px solid #7440a3;
-        border-radius: 12px;
-        padding: 12px 20px;
-        min-width: 170px;
-        text-align: center;
-    }
-
-    .timer-label {
-        font-size: 13px;
-        color: #c8afd8;
-    }
-
-    .timer {
-        font-size: 25px;
-        font-weight: bold;
-        color: #fff;
-        margin-top: 4px;
-    }
-
-    .question-box {
-        background: rgba(20, 5, 30, 0.9);
-        border: 1px solid #67368d;
-        border-radius: 16px;
-        padding: 25px;
-        box-shadow: 0 0 25px rgba(100, 40, 150, 0.25);
-    }
-
-    .question-number {
-        color: #b77cff;
-        font-weight: bold;
-        margin-bottom: 10px;
-    }
-
-    .question-type {
-        display: inline-block;
-        background: #35104f;
-        color: #dcb8ff;
-        padding: 5px 10px;
-        border-radius: 8px;
-        font-size: 12px;
-        margin-bottom: 15px;
-    }
-
-    .question {
-        font-size: 20px;
-        line-height: 1.5;
-        margin-bottom: 20px;
-    }
-
-    .answers {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-    }
-
-    .answer {
-        background: #160a20;
-        border: 1px solid #51306b;
-        color: white;
-        padding: 14px;
-        border-radius: 10px;
-        cursor: pointer;
-        text-align: left;
-        font-size: 16px;
-        transition: 0.2s;
-    }
-
-    .answer:hover {
-        background: #2b123c;
-        border-color: #a45bdd;
-    }
-
-    .answer.selected {
-        background: #4a1d69;
-        border-color: #c27aff;
-    }
-
-    textarea {
-        width: 100%;
-        min-height: 160px;
-        resize: vertical;
-        background: #0d0612;
-        color: white;
-        border: 1px solid #704091;
-        border-radius: 10px;
-        padding: 15px;
-        font-size: 16px;
-        outline: none;
-    }
-
-    textarea:focus {
-        border-color: #c27aff;
-    }
-
-    .navigation {
-        display: flex;
-        justify-content: space-between;
-        gap: 10px;
-        margin-top: 25px;
-    }
-
-    button {
-        border: none;
-        border-radius: 10px;
-        padding: 12px 20px;
-        font-size: 15px;
-        cursor: pointer;
-        font-weight: bold;
-    }
-
-    .prev-btn {
-        background: #302037;
-        color: white;
-    }
-
-    .next-btn {
-        background: #7136a0;
-        color: white;
-    }
-
-    .next-btn:hover {
-        background: #8c48c0;
-    }
-
-    .prev-btn:hover {
-        background: #493354;
-    }
-
-    .submit-qrr {
-        margin-top: 15px;
-        background: #7136a0;
-        color: white;
-    }
-
-    .submit-qrr:hover {
-        background: #8c48c0;
-    }
-
-    .progress {
-        text-align: center;
-        margin-top: 20px;
-        color: #bda8c9;
-    }
-
-    .end-box {
-        display: none;
-        text-align: center;
-        background: rgba(20, 5, 30, 0.95);
-        border: 1px solid #75439b;
-        border-radius: 16px;
-        padding: 35px 20px;
-    }
-
-    .end-box h2 {
-        color: #d6a2ff;
-    }
-
-    .back-btn {
-        display: inline-block;
-        margin-top: 20px;
-        text-decoration: none;
-        background: #7136a0;
-        color: white;
-        padding: 12px 20px;
-        border-radius: 10px;
-    }
-
-    .locked {
-        opacity: 0.5;
-        pointer-events: none;
-    }
 </style>
 </head>
 
 <body>
 
+<!-- =========================
+     HEADER
+========================= -->
+
 <header>
-    <h1>☠️ QUIZ — LE ROYAUME DES OMBRES</h1>
-    <p>Affronte le Boss et prouve ta maîtrise des mangas & anime.</p>
+
+    <h1>☠️ LES BOSS</h1>
+
+    <p>
+        Affronte les Boss du Royaume et prouve ta maîtrise.
+    </p>
+
 </header>
 
-<div class="quiz-container">
 
-    <div class="boss-title">
-        <h2 id="bossName">☠️ Boss des Ombres</h2>
-        <p id="bossDifficulty">Niveau : Facile</p>
-    </div>
+<!-- =========================
+     BOSS
+========================= -->
 
-    <div class="timers">
-        <div class="timer-box">
-            <div class="timer-label">⏱️ Temps global</div>
-            <div class="timer" id="globalTimer">05:00</div>
-        </div>
+<div class="container">
 
-        <div class="timer-box">
-            <div class="timer-label">⚡ Temps question</div>
-            <div class="timer" id="questionTimer">00:15</div>
-        </div>
-    </div>
+    <div class="boss-grid">
 
-    <div id="quizBox" class="question-box">
 
-        <div class="question-number" id="questionNumber">
-            Question 1 / 5
-        </div>
+        <!-- 🌑 BOSS DES OMBRES -->
 
-        <div class="question-type" id="questionType">
-            QCM
-        </div>
+        <div class="boss-card">
 
-        <div class="question" id="questionText"></div>
+            <div class="boss-icon">🌑</div>
 
-        <div id="answers" class="answers"></div>
+            <h2>Boss des Ombres</h2>
 
-        <div id="qrrArea" style="display:none;">
-            <textarea id="qrrAnswer" placeholder="Écris ta réponse ici..."></textarea>
-            <button class="submit-qrr" onclick="saveQRR()">
-                ✍️ Valider ma réponse
-            </button>
-        </div>
+            <span class="difficulty">
+                FACILE
+            </span>
 
-        <div class="navigation">
-            <button class="prev-btn" onclick="previousQuestion()">
-                ← Précédente
+            <p>
+                Le premier défi du Royaume.
+                Prouve que tu maîtrises les bases
+                du monde manga et anime.
+            </p>
+
+            <button
+                class="boss-button"
+                onclick="window.location.href='quiz.html?boss=ombres'"
+            >
+                🌑 Affronter le Boss
             </button>
 
-            <button class="next-btn" onclick="nextQuestion()">
-                Suivante →
+        </div>
+
+
+        <!-- 🔥 BOSS DES FLAMMES -->
+
+        <div class="boss-card">
+
+            <div class="boss-icon">🔥</div>
+
+            <h2>Boss des Flammes</h2>
+
+            <span class="difficulty">
+                MOYEN
+            </span>
+
+            <p>
+                Les choses deviennent sérieuses.
+                Les questions sont plus difficiles
+                et les pièges commencent.
+            </p>
+
+            <button
+                class="boss-button"
+                onclick="window.location.href='quiz.html?boss=flammes'"
+            >
+                🔥 Affronter le Boss
             </button>
+
         </div>
 
-        <div class="progress" id="progressText">
-            Progression : 1 / 5
+
+        <!-- ⚡ BOSS DU TONNERRE -->
+
+        <div class="boss-card">
+
+            <div class="boss-icon">⚡</div>
+
+            <h2>Boss du Tonnerre</h2>
+
+            <span class="difficulty">
+                DIFFICILE
+            </span>
+
+            <p>
+                Un véritable test de connaissance.
+                Les questions sont plus complexes
+                et le temps devient précieux.
+            </p>
+
+            <button
+                class="boss-button"
+                onclick="window.location.href='quiz.html?boss=tonnerre'"
+            >
+                ⚡ Affronter le Boss
+            </button>
+
         </div>
+
+
+        <!-- 👹 ROI DÉMON -->
+
+        <div class="boss-card locked">
+
+            <div class="boss-icon">👹</div>
+
+            <h2>Roi Démon</h2>
+
+            <span class="difficulty">
+                EXPERT
+            </span>
+
+            <p>
+                Seuls les véritables maîtres du Royaume
+                pourront affronter ce Boss.
+            </p>
+
+            <button
+                class="boss-button"
+                onclick="alert('👹 Le Roi Démon sera bientôt disponible !')"
+            >
+                🔒 Bientôt
+            </button>
+
+        </div>
+
+
+        <!-- 👑 BOSS ULTIME -->
+
+        <div class="boss-card locked">
+
+            <div class="boss-icon">👑</div>
+
+            <h2>Boss Ultime</h2>
+
+            <span class="difficulty">
+                ULTIME
+            </span>
+
+            <p>
+                Le défi suprême du Royaume.
+                Une épreuve réservée aux meilleurs
+                chasseurs.
+            </p>
+
+            <button
+                class="boss-button"
+                onclick="alert('👑 Le Boss Ultime sera bientôt disponible !')"
+            >
+                🔒 Bientôt
+            </button>
+
+        </div>
+
 
     </div>
 
-    <div id="endBox" class="end-box">
-        <h2>👑 Boss terminé !</h2>
-        <p id="endMessage">
-            Tes réponses ont été enregistrées.
-        </p>
 
-        <a href="boss.html" class="back-btn">
-            ⚔️ Retour aux Boss
-        </a>
-    </div>
+    <!-- RETOUR -->
+
+    <a href="index.html" class="back">
+        ← Retour au Royaume
+    </a>
 
 </div>
 
-<script>
 
-const bossConfigs = {
+<!-- =========================
+     FOOTER
+========================= -->
 
-    ombres: {
-        name: "☠️ Boss des Ombres",
-        difficulty: "Facile",
-        globalTime: 300,
-        questions: [
+<footer>
 
-            {
-                type: "QCM",
-                time: 15,
-                question: "Dans One Piece, quel est le rêve de Luffy ?",
-                answers: [
-                    "Devenir le plus grand épéiste du monde",
-                    "Devenir le Roi des Pirates",
-                    "Devenir Amiral",
-                    "Trouver All Blue"
-                ],
-                correct: 1
-            },
+    🌑 LE ROYAUME DES OMBRES 🌑
+    <br>
+    <small>
+        Les ténèbres n'attendent que les plus courageux...
+    </small>
 
-            {
-                type: "QCM",
-                time: 15,
-                question: "Dans Naruto, qui est le rival principal de Naruto pendant une grande partie de l'histoire ?",
-                answers: [
-                    "Gaara",
-                    "Neji",
-                    "Sasuke",
-                    "Shikamaru"
-                ],
-                correct: 2
-            },
-
-            {
-                type: "QCM",
-                time: 15,
-                question: "Dans Demon Slayer, comment s'appelle la sœur de Tanjiro ?",
-                answers: [
-                    "Kanao",
-                    "Nezuko",
-                    "Mitsuri",
-                    "Aoi"
-                ],
-                correct: 1
-            },
-
-            {
-                type: "QCM",
-                time: 15,
-                question: "Dans Dragon Ball, quelle transformation est devenue emblématique de Goku ?",
-                answers: [
-                    "Super Saiyan",
-                    "Ultra Instinct",
-                    "Mode Sage",
-                    "Bankai"
-                ],
-                correct: 0
-            },
-
-            {
-                type: "QCM",
-                time: 15,
-                question: "Dans Bleach, comment s'appelle le Zanpakutō d'Ichigo Kurosaki ?",
-                answers: [
-                    "Senbonzakura",
-                    "Zangetsu",
-                    "Ryūjin Jakka",
-                    "Hyorinmaru"
-                ],
-                correct: 1
-            }
-
-        ]
-    },
-
-
-    flammes: {
-        name: "🔥 Boss des Flammes",
-        difficulty: "Moyen",
-        globalTime: 300,
-        questions: [
-
-            {
-                type: "QCM",
-                time: 25,
-                question: "À Water 7, quel était le métier de Franky avant de devenir officiellement membre de l'équipage de Luffy ?",
-                answers: [
-                    "Charpentier naval",
-                    "Chasseur de primes",
-                    "Capitaine corsaire",
-                    "Forgeron"
-                ],
-                correct: 0
-            },
-
-            {
-                type: "QCM",
-                time: 25,
-                question: "Dans Naruto, lequel de ces personnages n'a jamais été Hokage ?",
-                answers: [
-                    "Minato Namikaze",
-                    "Hiruzen Sarutobi",
-                    "Jiraiya",
-                    "Kakashi Hatake"
-                ],
-                correct: 2
-            },
-
-            {
-                type: "QCM",
-                time: 25,
-                question: "Avant de devenir Pourfendeur, quel métier Tanjiro exerçait-il principalement avec sa famille ?",
-                answers: [
-                    "Pêcheur",
-                    "Marchand de charbon",
-                    "Forgeron",
-                    "Cultivateur de riz"
-                ],
-                correct: 1
-            },
-
-            {
-                type: "QCM",
-                time: 25,
-                question: "Dans Dragon Ball Z, lequel de ces personnages n'est pas un Saiyan ?",
-                answers: [
-                    "Bardock",
-                    "Raditz",
-                    "Nappa",
-                    "Zarbon"
-                ],
-                correct: 3
-            },
-
-            {
-                type: "QCM",
-                time: 25,
-                question: "Quelle affirmation décrit correctement les Six Eyes de Satoru Gojo ?",
-                answers: [
-                    "C'est une technique qui permet de créer des shikigami",
-                    "C'est une capacité liée à une perception extrêmement précise de l'énergie occulte",
-                    "C'est le nom de son domaine",
-                    "C'est une technique permettant de copier toutes les techniques"
-                ],
-                correct: 1
-            },
-
-            {
-                type: "QRR",
-                time: 45,
-                question: "Dans Bleach, Ichigo possède plusieurs origines liées à ses pouvoirs. Cite les principales origines qui composent son identité spirituelle et explique brièvement comment elles sont liées à ses pouvoirs."
-            },
-
-            {
-                type: "QRR",
-                time: 45,
-                question: "Pourquoi le Gouvernement Mondial considère-t-il Luffy comme une menace particulière ? Donne au moins deux éléments précis liés à son histoire, à ses pouvoirs ou à ses actions."
-            }
-
-        ]
-    },
-
-
-    tonnerre: {
-        name: "⚡ Boss du Tonnerre",
-        difficulty: "Difficile",
-        globalTime: 300,
-        questions: [
-
-            {
-                type: "QCM",
-                time: 30,
-                question: "Dans One Piece, quel est le véritable nom de Gol D. Roger ?",
-                answers: [
-                    "Gol D. Roger",
-                    "Gold Roger",
-                    "Gol Roger D.",
-                    "Roger D. Gol"
-                ],
-                correct: 0
-            },
-
-            {
-                type: "QCM",
-                time: 30,
-                question: "Dans Naruto, lequel de ces personnages possède le Mangekyō Sharingan ?",
-                answers: [
-                    "Neji Hyûga",
-                    "Rock Lee",
-                    "Kakashi Hatake",
-                    "Might Guy"
-                ],
-                correct: 2
-            },
-
-            {
-                type: "QCM",
-                time: 30,
-                question: "Dans Bleach, comment s'appelle le Zanpakutō de Byakuya Kuchiki ?",
-                answers: [
-                    "Senbonzakura",
-                    "Zangetsu",
-                    "Hyōrinmaru",
-                    "Katen Kyōkotsu"
-                ],
-                correct: 0
-            },
-
-            {
-                type: "QCM",
-                time: 30,
-                question: "Dans Hunter × Hunter, quelle catégorie de Nen correspond principalement à Gon lorsqu'il utilise son pouvoir naturel ?",
-                answers: [
-                    "Spécialisation",
-                    "Renforcement",
-                    "Manipulation",
-                    "Matérialisation"
-                ],
-                correct: 1
-            },
-
-            {
-                type: "QRR",
-                time: 60,
-                question: "Explique pourquoi Vegeta est initialement considéré comme un adversaire majeur de Goku, puis indique au moins une raison importante qui explique son évolution par la suite."
-            },
-
-            {
-                type: "QRR",
-                time: 60,
-                question: "Quelle est la différence fondamentale entre une Technique Maudite et une Extension du Territoire ? Explique avec un exemple lié à un personnage."
-            },
-
-            {
-                type: "QRR",
-                time: 60,
-                question: "Pourquoi Muzan Kibutsuji cherche-t-il particulièrement à éliminer Tanjiro après certains événements de l'histoire ? Donne au moins deux éléments précis."
-            },
-
-            {
-                type: "QRR",
-                time: 60,
-                question: "Explique pourquoi le Gouvernement Mondial considère l'existence de certaines informations historiques comme dangereuse. Donne au moins deux exemples d'éléments liés à cette menace."
-            }
-
-        ]
-    }
-
-};
-
-
-// ===============================
-// RÉCUPÉRATION DU BOSS
-// ===============================
-
-const params = new URLSearchParams(window.location.search);
-
-let bossKey = params.get("boss") || "ombres";
-
-if (!bossConfigs[bossKey]) {
-    bossKey = "ombres";
-}
-
-const boss = bossConfigs[bossKey];
-
-let currentQuestion = 0;
-let globalTimeLeft = boss.globalTime;
-let questionTimeLeft = boss.questions[0].time;
-
-let globalInterval;
-let questionInterval;
-
-let userAnswers = [];
-
-
-// ===============================
-// AFFICHAGE DU BOSS
-// ===============================
-
-document.getElementById("bossName").textContent = boss.name;
-document.getElementById("bossDifficulty").textContent =
-    "Niveau : " + boss.difficulty;
-
-
-// ===============================
-// AFFICHER UNE QUESTION
-// ===============================
-
-function showQuestion() {
-
-    const q = boss.questions[currentQuestion];
-
-    document.getElementById("questionNumber").textContent =
-        "Question " + (currentQuestion + 1) + " / " + boss.questions.length;
-
-    document.getElementById("progressText").textContent =
-        "Progression : " + (currentQuestion + 1) + " / " + boss.questions.length;
-
-    document.getElementById("questionType").textContent = q.type;
-
-    document.getElementById("questionText").textContent = q.question;
-
-    const answersDiv = document.getElementById("answers");
-    const qrrArea = document.getElementById("qrrArea");
-    const qrrAnswer = document.getElementById("qrrAnswer");
-
-    answersDiv.innerHTML = "";
-
-    if (q.type === "QCM") {
-
-        answersDiv.style.display = "flex";
-        qrrArea.style.display = "none";
-
-        q.answers.forEach((answer, index) => {
-
-            const button = document.createElement("button");
-
-            button.className = "answer";
-            button.textContent =
-                String.fromCharCode(65 + index) + ". " + answer;
-
-            button.onclick = function() {
-                selectAnswer(index, button);
-            };
-
-            answersDiv.appendChild(button);
-        });
-
-    } else {
-
-        answersDiv.style.display = "none";
-        qrrArea.style.display = "block";
-
-        qrrAnswer.value =
-            userAnswers[currentQuestion]?.answer || "";
-    }
-
-    startQuestionTimer(q.time);
-}
-
-
-// ===============================
-// RÉPONSE QCM
-// ===============================
-
-function selectAnswer(index, button) {
-
-    const buttons = document.querySelectorAll(".answer");
-
-    buttons.forEach(btn => {
-        btn.classList.remove("selected");
-    });
-
-    button.classList.add("selected");
-
-    userAnswers[currentQuestion] = {
-        type: "QCM",
-        answer: index
-    };
-}
-
-
-// ===============================
-// RÉPONSE QRR
-// ===============================
-
-function saveQRR() {
-
-    const text = document.getElementById("qrrAnswer").value.trim();
-
-    userAnswers[currentQuestion] = {
-        type: "QRR",
-        answer: text,
-        statut: "à corriger"
-    };
-
-    alert("✍️ Réponse enregistrée et envoyée à la correction.");
-
-}
-
-
-// ===============================
-// TIMER QUESTION
-// ===============================
-
-function startQuestionTimer(seconds) {
-
-    clearInterval(questionInterval);
-
-    questionTimeLeft = seconds;
-
-    updateQuestionTimer();
-
-    questionInterval = setInterval(() => {
-
-        questionTimeLeft--;
-
-        updateQuestionTimer();
-
-        if (questionTimeLeft <= 0) {
-
-            clearInterval(questionInterval);
-
-            alert("⏰ Temps écoulé pour cette question !");
-
-            nextQuestion();
-        }
-
-    }, 1000);
-}
-
-
-function updateQuestionTimer() {
-
-    const minutes = Math.floor(questionTimeLeft / 60);
-    const seconds = questionTimeLeft % 60;
-
-    document.getElementById("questionTimer").textContent =
-        String(minutes).padStart(2, "0") + ":" +
-        String(seconds).padStart(2, "0");
-}
-
-
-// ===============================
-// TIMER GLOBAL
-// ===============================
-
-function startGlobalTimer() {
-
-    updateGlobalTimer();
-
-    globalInterval = setInterval(() => {
-
-        globalTimeLeft--;
-
-        updateGlobalTimer();
-
-        if (globalTimeLeft <= 0) {
-
-            clearInterval(globalInterval);
-            clearInterval(questionInterval);
-
-            alert("⏰ Les 5 minutes sont écoulées !");
-
-            finishQuiz();
-        }
-
-    }, 1000);
-}
-
-
-function updateGlobalTimer() {
-
-    const minutes = Math.floor(globalTimeLeft / 60);
-    const seconds = globalTimeLeft % 60;
-
-    document.getElementById("globalTimer").textContent =
-        String(minutes).padStart(2, "0") + ":" +
-        String(seconds).padStart(2, "0");
-}
-
-
-// ===============================
-// QUESTION SUIVANTE
-// ===============================
-
-function nextQuestion() {
-
-    clearInterval(questionInterval);
-
-    if (currentQuestion < boss.questions.length - 1) {
-
-        currentQuestion++;
-
-        showQuestion();
-
-    } else {
-
-        finishQuiz();
-    }
-}
-
-
-// ===============================
-// QUESTION PRÉCÉDENTE
-// ===============================
-
-function previousQuestion() {
-
-    if (currentQuestion > 0) {
-
-        clearInterval(questionInterval);
-
-        currentQuestion--;
-
-        showQuestion();
-    }
-}
-
-
-// ===============================
-// FIN DU QUIZ
-// ===============================
-
-function finishQuiz() {
-
-    clearInterval(globalInterval);
-    clearInterval(questionInterval);
-
-    document.getElementById("quizBox").style.display = "none";
-
-    document.getElementById("endBox").style.display = "block";
-
-    document.getElementById("endMessage").textContent =
-        "☠️ " + boss.name +
-        " terminé ! Tes réponses ont été enregistrées. Les QRR devront être corrigées manuellement.";
-
-}
-
-
-// ===============================
-// DÉMARRAGE
-// ===============================
-
-showQuestion();
-
-startGlobalTimer();
-
-</script>
+</footer>
 
 </body>
 </html>
