@@ -1,359 +1,1032 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz — Le Royaume des Ombres</title>
 
-    <title>Quiz — Royaume des Ombres</title>
+<style>
+* {
+    box-sizing: border-box;
+}
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #08000f, #170025, #050008);
+    color: white;
+    min-height: 100vh;
+}
 
-        body {
-            min-height: 100vh;
-            font-family: Arial, sans-serif;
-            background:
-                radial-gradient(circle at top, #32105c, #0b0614 55%, #030207);
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
+.container {
+    width: 90%;
+    max-width: 850px;
+    margin: auto;
+    padding: 25px 0 50px;
+}
 
-        .quiz-container {
-            width: 100%;
-            max-width: 800px;
-            background: rgba(20, 10, 35, 0.95);
-            border: 1px solid #6d2bbf;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 0 35px rgba(110, 40, 200, 0.35);
-        }
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
 
-        .title {
-            text-align: center;
-            font-size: 32px;
-            margin-bottom: 8px;
-        }
+header h1 {
+    color: #c77dff;
+    font-size: 32px;
+    margin-bottom: 5px;
+}
 
-        .boss-name {
-            text-align: center;
-            color: #c77dff;
-            font-size: 18px;
-            margin-bottom: 25px;
-        }
+header p {
+    color: #aaa;
+}
 
-        .progress {
-            height: 10px;
-            background: #241333;
-            border-radius: 20px;
-            overflow: hidden;
-            margin-bottom: 25px;
-        }
+.stats {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+}
 
-        .progress-bar {
-            width: 0%;
-            height: 100%;
-            background: #9d4edd;
-            transition: width 0.4s;
-        }
+.stat {
+    flex: 1;
+    min-width: 150px;
+    background: rgba(40, 10, 60, 0.9);
+    border: 1px solid #6a0dad;
+    border-radius: 12px;
+    padding: 12px;
+    text-align: center;
+}
 
-        .question-number {
-            color: #c77dff;
-            margin-bottom: 12px;
-        }
+.stat strong {
+    display: block;
+    color: #d8aaff;
+    font-size: 20px;
+    margin-top: 5px;
+}
 
-        .question {
-            font-size: 24px;
-            line-height: 1.4;
-            margin-bottom: 25px;
-        }
+.timer-global {
+    margin-bottom: 15px;
+}
 
-        .answers {
-            display: grid;
-            gap: 12px;
-        }
+.timer-global .label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
 
-        .answer {
-            width: 100%;
-            padding: 16px;
-            border: 1px solid #522080;
-            border-radius: 12px;
-            background: #160b24;
-            color: white;
-            text-align: left;
-            font-size: 17px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
+.bar {
+    width: 100%;
+    height: 12px;
+    background: #24102f;
+    border-radius: 20px;
+    overflow: hidden;
+}
 
-        .answer:hover {
-            background: #291044;
-            transform: translateY(-2px);
-        }
+.bar-fill {
+    height: 100%;
+    width: 100%;
+    background: #8e44ad;
+    transition: width 1s linear;
+}
 
-        .answer.correct {
-            background: #174d2b;
-            border-color: #36c76f;
-        }
+.question-box {
+    background: rgba(18, 5, 28, 0.95);
+    border: 1px solid #6a0dad;
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 0 25px rgba(106, 13, 173, 0.25);
+}
 
-        .answer.wrong {
-            background: #5a1820;
-            border-color: #ff4d6d;
-        }
+.question-number {
+    color: #b56cff;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
 
-        .info {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 25px;
-            color: #cfc3d9;
-        }
+.question {
+    font-size: 22px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
 
-        .next-btn {
-            display: none;
-            margin: 25px auto 0;
-            padding: 13px 25px;
-            border: none;
-            border-radius: 10px;
-            background: #8b3dce;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
+.timer-question {
+    background: #240d32;
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+    margin-bottom: 20px;
+}
 
-        .next-btn:hover {
-            background: #a855e8;
-        }
+.timer-question strong {
+    color: #e0b3ff;
+    font-size: 22px;
+}
 
-        .back {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-            color: #c77dff;
-            text-decoration: none;
-        }
+.answers {
+    display: grid;
+    gap: 12px;
+}
 
-        @media (max-width: 600px) {
-            .quiz-container {
-                padding: 20px;
-            }
+.answer {
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #632a80;
+    background: #180622;
+    color: white;
+    cursor: pointer;
+    text-align: left;
+    font-size: 16px;
+    transition: 0.2s;
+}
 
-            .title {
-                font-size: 26px;
-            }
+.answer:hover {
+    background: #2c0d3d;
+    transform: translateX(3px);
+}
 
-            .question {
-                font-size: 20px;
-            }
-        }
-    </style>
+.answer.correct {
+    background: #155d27;
+    border-color: #2ecc71;
+}
+
+.answer.wrong {
+    background: #6b1515;
+    border-color: #e74c3c;
+}
+
+.answer.disabled {
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+textarea {
+    width: 100%;
+    min-height: 170px;
+    resize: vertical;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #6a0dad;
+    background: #100419;
+    color: white;
+    font-size: 16px;
+    outline: none;
+}
+
+textarea:focus {
+    border-color: #c77dff;
+    box-shadow: 0 0 10px rgba(199, 125, 255, 0.25);
+}
+
+.submit-answer,
+.next-button,
+.finish-button {
+    margin-top: 15px;
+    padding: 13px 20px;
+    border: none;
+    border-radius: 10px;
+    background: #6a0dad;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.submit-answer:hover,
+.next-button:hover,
+.finish-button:hover {
+    background: #8e44ad;
+}
+
+.progress {
+    margin-top: 20px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #26102f;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #9b59b6;
+    width: 0%;
+    transition: 0.3s;
+}
+
+.message {
+    text-align: center;
+    margin-top: 15px;
+    min-height: 25px;
+    color: #d8aaff;
+}
+
+.result {
+    display: none;
+    text-align: center;
+    background: rgba(18, 5, 28, 0.95);
+    border: 1px solid #6a0dad;
+    border-radius: 18px;
+    padding: 30px;
+}
+
+.result h2 {
+    color: #c77dff;
+}
+
+.result .big-score {
+    font-size: 40px;
+    color: #e0b3ff;
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+.back {
+    display: inline-block;
+    margin-top: 25px;
+    color: #c77dff;
+    text-decoration: none;
+}
+
+.back:hover {
+    text-decoration: underline;
+}
+
+.warning {
+    color: #ffcc66;
+}
+
+.danger {
+    color: #ff6666;
+}
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 26px;
+    }
+
+    .question {
+        font-size: 19px;
+    }
+
+    .question-box {
+        padding: 18px;
+    }
+}
+</style>
 </head>
 
 <body>
 
-    <div class="quiz-container">
+<div class="container">
 
-        <h1 class="title">☠️ QUIZ</h1>
+<header>
+    <h1>☠️ QUIZ</h1>
+    <p>🌑 Boss des Ombres</p>
+</header>
 
-        <p class="boss-name">🌑 Boss des Ombres</p>
+<div class="stats">
 
-        <div class="progress">
-            <div class="progress-bar" id="progressBar"></div>
+    <div class="stat">
+        Question
+        <strong id="questionNumber">1 / 5</strong>
+    </div>
+
+    <div class="stat">
+        Score
+        <strong id="score">0</strong>
+    </div>
+
+    <div class="stat">
+        Série
+        <strong id="streak">0</strong>
+    </div>
+
+</div>
+
+<div class="timer-global">
+
+    <div class="label">
+        <span>⏳ Temps global</span>
+        <strong id="globalTimer">05:00</strong>
+    </div>
+
+    <div class="bar">
+        <div class="bar-fill" id="globalBar"></div>
+    </div>
+
+</div>
+
+<div id="quizArea">
+
+    <div class="question-box">
+
+        <div class="question-number" id="typeLabel">
+            ☑️ QUESTION À CHOIX MULTIPLE
         </div>
 
-        <p class="question-number" id="questionNumber">
-            Question 1 / 5
-        </p>
-
-        <h2 class="question" id="question">
-            Chargement de la question...
-        </h2>
-
-        <div class="answers" id="answers"></div>
-
-        <div class="info">
-            <span>⭐ Points : <strong id="score">0</strong></span>
-            <span>🔥 Série : <strong id="streak">0</strong></span>
+        <div class="question" id="question">
+            Chargement...
         </div>
 
-        <button class="next-btn" id="nextButton" onclick="nextQuestion()">
-            Question suivante ⚔️
+        <div class="timer-question">
+            ⏱️ Temps pour cette question :
+            <strong id="questionTimer">30</strong>s
+        </div>
+
+        <div id="answers" class="answers"></div>
+
+        <div id="writtenArea" style="display:none;">
+
+            <textarea
+                id="writtenAnswer"
+                placeholder="✍️ Rédige ta réponse ici..."
+            ></textarea>
+
+            <button
+                class="submit-answer"
+                onclick="submitWrittenAnswer()"
+            >
+                Valider ma réponse
+            </button>
+
+        </div>
+
+        <div class="message" id="message"></div>
+
+        <button
+            class="next-button"
+            id="nextButton"
+            onclick="nextQuestion()"
+            style="display:none;"
+        >
+            Question suivante →
         </button>
-
-        <a href="boss.html" class="back">
-            ← Retour aux Boss
-        </a>
 
     </div>
 
-    <script>
+    <div class="progress">
 
-        const questions = [
-            {
-                question: "Dans One Piece, comment s'appelle le capitaine de l'équipage au Chapeau de Paille ?",
-                answers: [
-                    "Monkey D. Luffy",
-                    "Roronoa Zoro",
-                    "Sanji",
-                    "Trafalgar Law"
-                ],
-                correct: 0
-            },
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
 
-            {
-                question: "Dans Naruto, quel est le nom du démon renard scellé en Naruto ?",
-                answers: [
-                    "Shukaku",
-                    "Kurama",
-                    "Gyûki",
-                    "Matatabi"
-                ],
-                correct: 1
-            },
+    </div>
 
-            {
-                question: "Dans Demon Slayer, quelle est la respiration principalement utilisée par Tanjiro au début de son aventure ?",
-                answers: [
-                    "Respiration de la Foudre",
-                    "Respiration du Vent",
-                    "Respiration de l'Eau",
-                    "Respiration de la Pierre"
-                ],
-                correct: 2
-            },
+</div>
 
-            {
-                question: "Dans Dragon Ball, quel est le nom du héros principal ?",
-                answers: [
-                    "Vegeta",
-                    "Gohan",
-                    "Piccolo",
-                    "Son Goku"
-                ],
-                correct: 3
-            },
+<div class="result" id="result">
 
-            {
-                question: "Dans Bleach, quel est le prénom du personnage principal ?",
-                answers: [
-                    "Ichigo",
-                    "Byakuya",
-                    "Renji",
-                    "Urahara"
-                ],
-                correct: 0
-            }
-        ];
+    <h2>👑 Boss terminé !</h2>
 
-        let currentQuestion = 0;
-        let score = 0;
-        let streak = 0;
+    <div class="big-score" id="finalScore">
+        0
+    </div>
 
-        const questionElement = document.getElementById("question");
-        const answersElement = document.getElementById("answers");
-        const questionNumberElement = document.getElementById("questionNumber");
-        const scoreElement = document.getElementById("score");
-        const streakElement = document.getElementById("streak");
-        const nextButton = document.getElementById("nextButton");
-        const progressBar = document.getElementById("progressBar");
+    <p id="finalMessage"></p>
 
-        function showQuestion() {
+    <a class="back" href="boss.html">
+        ← Retour aux Boss
+    </a>
 
-            const question = questions[currentQuestion];
+</div>
 
-            questionElement.textContent = question.question;
+</div>
 
-            questionNumberElement.textContent =
-                `Question ${currentQuestion + 1} / ${questions.length}`;
+<script>
 
-            answersElement.innerHTML = "";
+/* =========================================================
+   CONFIGURATION DU BOSS
+   ========================================================= */
 
-            nextButton.style.display = "none";
+/*
+   IMPORTANT :
+   Les valeurs de points ne sont PAS inventées ici.
 
-            progressBar.style.width =
-                `${((currentQuestion) / questions.length) * 100}%`;
+   Le système de points définitif sera intégré lorsque
+   nous aurons fixé les valeurs exactes de chaque Boss.
+*/
 
-            question.answers.forEach((answer, index) => {
+const CONFIG = {
 
-                const button = document.createElement("button");
+    tempsGlobal: 5 * 60,
 
-                button.className = "answer";
-                button.textContent = answer;
+    tempsParQuestion: 30,
 
-                button.onclick = () => checkAnswer(index, button);
+    /*
+       Préparation pour les pénalités de retard.
 
-                answersElement.appendChild(button);
-            });
+       On ne met volontairement PAS encore une valeur
+       de retrait de points.
+    */
+    penaliteRetard: null
+
+};
+
+
+/* =========================================================
+   QUESTIONS
+   ========================================================= */
+
+const questions = [
+
+    {
+        type: "qcm",
+
+        question: "Qui est le capitaine de l'équipage du Chapeau de paille ?",
+
+        answers: [
+            "Roronoa Zoro",
+            "Monkey D. Luffy",
+            "Sanji",
+            "Trafalgar Law"
+        ],
+
+        correct: 1
+    },
+
+    {
+        type: "qcm",
+
+        question: "Comment s'appelle le démon renard à neuf queues dans Naruto ?",
+
+        answers: [
+            "Kurama",
+            "Shukaku",
+            "Gyûki",
+            "Matatabi"
+        ],
+
+        correct: 0
+    },
+
+    {
+        type: "qcm",
+
+        question: "Quelle est la première respiration que Tanjiro maîtrise principalement dans Demon Slayer ?",
+
+        answers: [
+            "Respiration de la Foudre",
+            "Respiration de la Flamme",
+            "Respiration de l'Eau",
+            "Respiration du Vent"
+        ],
+
+        correct: 2
+    },
+
+    {
+        type: "qcm",
+
+        question: "Comment s'appelle le héros principal de Dragon Ball ?",
+
+        answers: [
+            "Vegeta",
+            "Son Goku",
+            "Gohan",
+            "Trunks"
+        ],
+
+        correct: 1
+    },
+
+    {
+        type: "qcm",
+
+        question: "Comment s'appelle le personnage principal de Bleach ?",
+
+        answers: [
+            "Ichigo Kurosaki",
+            "Uryû Ishida",
+            "Renji Abarai",
+            "Byakuya Kuchiki"
+        ],
+
+        correct: 0
+    }
+
+];
+
+
+/* =========================================================
+   VARIABLES
+   ========================================================= */
+
+let currentQuestion = 0;
+
+let score = 0;
+
+let streak = 0;
+
+let questionTime = CONFIG.tempsParQuestion;
+
+let globalTime = CONFIG.tempsGlobal;
+
+let questionInterval;
+
+let globalInterval;
+
+let answered = false;
+
+
+/* =========================================================
+   ELEMENTS HTML
+   ========================================================= */
+
+const questionElement =
+    document.getElementById("question");
+
+const answersElement =
+    document.getElementById("answers");
+
+const writtenArea =
+    document.getElementById("writtenArea");
+
+const writtenAnswer =
+    document.getElementById("writtenAnswer");
+
+const questionTimer =
+    document.getElementById("questionTimer");
+
+const globalTimer =
+    document.getElementById("globalTimer");
+
+const globalBar =
+    document.getElementById("globalBar");
+
+const questionNumber =
+    document.getElementById("questionNumber");
+
+const scoreElement =
+    document.getElementById("score");
+
+const streakElement =
+    document.getElementById("streak");
+
+const message =
+    document.getElementById("message");
+
+const nextButton =
+    document.getElementById("nextButton");
+
+const typeLabel =
+    document.getElementById("typeLabel");
+
+const progressFill =
+    document.getElementById("progressFill");
+
+const quizArea =
+    document.getElementById("quizArea");
+
+const result =
+    document.getElementById("result");
+
+
+/* =========================================================
+   AFFICHER LE TEMPS
+   ========================================================= */
+
+function formatTime(seconds) {
+
+    const minutes =
+        Math.floor(seconds / 60);
+
+    const secs =
+        seconds % 60;
+
+    return (
+        String(minutes).padStart(2, "0")
+        + ":"
+        + String(secs).padStart(2, "0")
+    );
+}
+
+
+/* =========================================================
+   TIMER GLOBAL
+   ========================================================= */
+
+function startGlobalTimer() {
+
+    globalInterval = setInterval(() => {
+
+        globalTime--;
+
+        globalTimer.textContent =
+            formatTime(globalTime);
+
+        const percentage =
+            (globalTime / CONFIG.tempsGlobal) * 100;
+
+        globalBar.style.width =
+            percentage + "%";
+
+        if (globalTime <= 30) {
+
+            globalTimer.classList.add("danger");
+
+        } else if (globalTime <= 60) {
+
+            globalTimer.classList.add("warning");
+
         }
 
-        function checkAnswer(selected, selectedButton) {
+        if (globalTime <= 0) {
 
-            const question = questions[currentQuestion];
+            clearInterval(globalInterval);
 
-            const buttons = document.querySelectorAll(".answer");
+            finishQuiz("⏰ Le temps global est écoulé.");
 
-            buttons.forEach(button => {
-                button.disabled = true;
-            });
-
-            if (selected === question.correct) {
-
-                selectedButton.classList.add("correct");
-
-                score += 100;
-                streak++;
-
-            } else {
-
-                selectedButton.classList.add("wrong");
-
-                buttons[question.correct].classList.add("correct");
-
-                streak = 0;
-            }
-
-            scoreElement.textContent = score;
-            streakElement.textContent = streak;
-
-            nextButton.style.display = "block";
         }
 
-        function nextQuestion() {
+    }, 1000);
 
-            currentQuestion++;
+}
 
-            if (currentQuestion < questions.length) {
 
-                showQuestion();
+/* =========================================================
+   TIMER QUESTION
+   ========================================================= */
 
-            } else {
+function startQuestionTimer() {
 
-                finishQuiz();
-            }
+    clearInterval(questionInterval);
+
+    questionTime =
+        CONFIG.tempsParQuestion;
+
+    questionTimer.textContent =
+        questionTime;
+
+    questionTimer.classList.remove(
+        "danger",
+        "warning"
+    );
+
+    questionInterval = setInterval(() => {
+
+        questionTime--;
+
+        questionTimer.textContent =
+            questionTime;
+
+        if (questionTime <= 10) {
+
+            questionTimer.classList.add(
+                "danger"
+            );
+
+        } else if (questionTime <= 20) {
+
+            questionTimer.classList.add(
+                "warning"
+            );
+
         }
 
-        function finishQuiz() {
+        if (questionTime <= 0) {
 
-            progressBar.style.width = "100%";
+            clearInterval(questionInterval);
 
-            questionNumberElement.textContent = "👑 Boss terminé";
+            timeOutQuestion();
 
-            questionElement.textContent =
-                `Félicitations ! Tu as obtenu ${score} points.`;
-
-            answersElement.innerHTML = "";
-
-            nextButton.style.display = "none";
         }
 
-        showQuestion();
+    }, 1000);
 
-    </script>
+}
+
+
+/* =========================================================
+   TEMPS DEPASSE
+   ========================================================= */
+
+function timeOutQuestion() {
+
+    if (answered) return;
+
+    answered = true;
+
+    streak = 0;
+
+    streakElement.textContent =
+        streak;
+
+    message.textContent =
+        "⏰ Temps dépassé ! Cette question est verrouillée.";
+
+    message.classList.add("danger");
+
+    disableAnswers();
+
+    /*
+       Une pénalité pourra être appliquée ici
+       lorsque la valeur officielle sera définie.
+
+       Exemple futur :
+
+       score -= CONFIG.penaliteRetard;
+    */
+
+    nextButton.style.display =
+        "block";
+
+}
+
+
+/* =========================================================
+   CHARGER QUESTION
+   ========================================================= */
+
+function loadQuestion() {
+
+    clearInterval(questionInterval);
+
+    answered = false;
+
+    message.textContent = "";
+
+    message.className = "message";
+
+    nextButton.style.display =
+        "none";
+
+    answersElement.innerHTML =
+        "";
+
+    writtenAnswer.value =
+        "";
+
+    writtenArea.style.display =
+        "none";
+
+    const q =
+        questions[currentQuestion];
+
+    questionNumber.textContent =
+        `${currentQuestion + 1} / ${questions.length}`;
+
+    questionElement.textContent =
+        q.question;
+
+    progressFill.style.width =
+        `${((currentQuestion) / questions.length) * 100}%`;
+
+    if (q.type === "qcm") {
+
+        typeLabel.textContent =
+            "☑️ QUESTION À CHOIX MULTIPLE";
+
+        q.answers.forEach((answer, index) => {
+
+            const button =
+                document.createElement("button");
+
+            button.className =
+                "answer";
+
+            button.textContent =
+                answer;
+
+            button.onclick =
+                () => checkAnswer(index, button);
+
+            answersElement.appendChild(
+                button
+            );
+
+        });
+
+    }
+
+    else if (q.type === "qrr") {
+
+        typeLabel.textContent =
+            "📝 QUESTION À RÉPONSE RÉDIGÉE";
+
+        writtenArea.style.display =
+            "block";
+
+    }
+
+    startQuestionTimer();
+
+}
+
+
+/* =========================================================
+   REPONSE QCM
+   ========================================================= */
+
+function checkAnswer(index, button) {
+
+    if (answered) return;
+
+    answered = true;
+
+    clearInterval(questionInterval);
+
+    const q =
+        questions[currentQuestion];
+
+    const buttons =
+        document.querySelectorAll(".answer");
+
+    buttons.forEach(btn => {
+
+        btn.classList.add("disabled");
+
+    });
+
+    if (index === q.correct) {
+
+        button.classList.add(
+            "correct"
+        );
+
+        /*
+           Le nombre exact de points sera
+           raccordé au système officiel.
+        */
+
+        message.textContent =
+            "✅ Bonne réponse !";
+
+        streak++;
+
+    } else {
+
+        button.classList.add(
+            "wrong"
+        );
+
+        buttons[q.correct].classList.add(
+            "correct"
+        );
+
+        message.textContent =
+            "❌ Mauvaise réponse.";
+
+        streak = 0;
+
+    }
+
+    streakElement.textContent =
+        streak;
+
+    nextButton.style.display =
+        "block";
+
+}
+
+
+/* =========================================================
+   REPONSE REDIGEE
+   ========================================================= */
+
+function submitWrittenAnswer() {
+
+    if (answered) return;
+
+    const text =
+        writtenAnswer.value.trim();
+
+    if (text === "") {
+
+        message.textContent =
+            "⚠️ Écris une réponse avant de valider.";
+
+        return;
+
+    }
+
+    answered = true;
+
+    clearInterval(questionInterval);
+
+    /*
+       IMPORTANT :
+
+       Les QRR seront destinées à une correction
+       manuelle.
+
+       La réponse est donc enregistrée ici
+       pour pouvoir être traitée plus tard.
+    */
+
+    message.textContent =
+        "📝 Réponse enregistrée. Elle devra être corrigée.";
+
+    streak = 0;
+
+    streakElement.textContent =
+        streak;
+
+    nextButton.style.display =
+        "block";
+
+}
+
+
+/* =========================================================
+   DESACTIVER LES REPONSES
+   ========================================================= */
+
+function disableAnswers() {
+
+    const buttons =
+        document.querySelectorAll(".answer");
+
+    buttons.forEach(button => {
+
+        button.classList.add(
+            "disabled"
+        );
+
+    });
+
+    writtenAnswer.disabled =
+        true;
+
+}
+
+
+/* =========================================================
+   QUESTION SUIVANTE
+   ========================================================= */
+
+function nextQuestion() {
+
+    if (!answered) return;
+
+    currentQuestion++;
+
+    if (
+        currentQuestion >=
+        questions.length
+    ) {
+
+        finishQuiz(
+            "👑 Toutes les questions ont été traitées."
+        );
+
+        return;
+
+    }
+
+    loadQuestion();
+
+}
+
+
+/* =========================================================
+   FIN DU QUIZ
+   ========================================================= */
+
+function finishQuiz(reason) {
+
+    clearInterval(questionInterval);
+
+    clearInterval(globalInterval);
+
+    quizArea.style.display =
+        "none";
+
+    result.style.display =
+        "block";
+
+    progressFill.style.width =
+        "100%";
+
+    document.getElementById(
+        "finalScore"
+    ).textContent =
+        score + " points";
+
+    document.getElementById(
+        "finalMessage"
+    ).textContent =
+        reason;
+
+}
+
+
+/* =========================================================
+   DEMARRAGE
+   ========================================================= */
+
+globalTimer.textContent =
+    formatTime(globalTime);
+
+loadQuestion();
+
+startGlobalTimer();
+
+</script>
 
 </body>
 </html>
