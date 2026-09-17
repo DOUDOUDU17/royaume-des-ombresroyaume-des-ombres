@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -361,7 +360,7 @@ const bossChoisi = urlParams.get("boss") || "ombres";
 const bossConfigs = {
 
     /* =========================
-       BOSS DES OMBRES
+       🌑 BOSS DES OMBRES
        ========================= */
 
     ombres: {
@@ -438,7 +437,7 @@ const bossConfigs = {
 
 
     /* =========================
-       BOSS DES FLAMMES
+       🔥 BOSS DES FLAMMES
        ========================= */
 
     flammes: {
@@ -525,7 +524,7 @@ const bossConfigs = {
 
 
     /* =========================
-       BOSS DU TONNERRE
+       ⚡ BOSS DU TONNERRE
        ========================= */
 
     tonnerre: {
@@ -606,39 +605,253 @@ const bossConfigs = {
             }
 
         ]
+    },
+
+
+    /* =========================
+       👹 ROI DÉMON
+       ========================= */
+
+    "roi-demon": {
+        nom: "👹 Roi Démon",
+        niveau: "Expert",
+        tempsGlobal: 5 * 60,
+        tempsQCM: 35,
+        tempsQRR: 75,
+
+        questions: [
+
+            {
+                type: "QCM",
+                question: "Quel événement est directement lié au déclenchement de la Grande Ère des Pirates dans One Piece ?",
+                options: [
+                    "La destruction d'Ohara",
+                    "L'exécution de Gol D. Roger",
+                    "La guerre de Marineford",
+                    "L'arrivée de Luffy à Grand Line"
+                ],
+                correct: 1
+            },
+
+            {
+                type: "QCM",
+                question: "Dans Naruto, lequel de ces personnages a été membre de l'Akatsuki ?",
+                options: [
+                    "Jiraiya",
+                    "Orochimaru",
+                    "Shikamaru",
+                    "Yamato"
+                ],
+                correct: 1
+            },
+
+            {
+                type: "QCM",
+                question: "Quel est le nom du Bankai d'Ichigo Kurosaki dans sa forme connue sous le nom de Tensa Zangetsu ?",
+                options: [
+                    "Senbonzakura Kageyoshi",
+                    "Daiguren Hyōrinmaru",
+                    "Tensa Zangetsu",
+                    "Katen Kyōkotsu: Karamatsu Shinjū"
+                ],
+                correct: 2
+            },
+
+            {
+                type: "QRR",
+                question: "Explique pourquoi Goku et Vegeta, malgré leur rivalité, finissent par combattre régulièrement du même côté. Donne au moins deux éléments précis de leur évolution."
+            },
+
+            {
+                type: "QRR",
+                question: "Explique le rôle des Six Eyes de Gojo et indique pourquoi cette capacité est particulièrement importante lorsqu'elle est associée à sa technique du Limitless."
+            },
+
+            {
+                type: "QRR",
+                question: "Explique pourquoi Yoriichi Tsugikuni est considéré comme une figure exceptionnelle dans l'histoire des Pourfendeurs. Donne au moins deux éléments précis."
+            },
+
+            {
+                type: "QRR",
+                question: "Explique ce que représente le Siècle Oublié dans l'histoire de One Piece et pourquoi le Gouvernement Mondial cherche à empêcher certaines informations à son sujet d'être découvertes."
+            },
+
+            {
+                type: "QRR",
+                question: "Explique pourquoi Itachi Uchiha est un personnage dont les actions sont difficiles à comprendre au début de l'histoire. Donne au moins deux éléments permettant de comprendre ses choix."
+            },
+
+            {
+                type: "QRR",
+                question: "Explique les principales différences entre les Shinigami, Hollows et Quincy, notamment concernant leur nature et leur manière d'utiliser ou d'interagir avec les pouvoirs spirituels."
+            },
+
+            {
+                type: "QRR",
+                question: "Un personnage peut être extrêmement puissant sans être considéré comme le personnage le plus important de l'histoire. Explique cette différence en utilisant au moins deux exemples provenant de mangas ou animes différents."
+            }
+
+        ]
+    },
+
+
+    /* =========================
+       👑 BOSS ULTIME
+       ========================= */
+
+    "boss-ultime": {
+        nom: "👑 Boss Ultime",
+        niveau: "Ultime",
+        tempsGlobal: 5 * 60,
+        tempsQCM: 40,
+        tempsQRR: 90,
+
+        questions: [
+
+            {
+                type: "QCM",
+                question: "Quel événement est associé à la révélation de la véritable nature du fruit de Luffy ?",
+                options: [
+                    "La guerre de Marineford",
+                    "L'éveil de son fruit à Wano",
+                    "Son arrivée à Dressrosa",
+                    "Son combat contre Katakuri"
+                ],
+                correct: 1
+            },
+
+            {
+                type: "QCM",
+                question: "Lequel de ces personnages est directement lié au clan Ōtsutsuki ?",
+                options: [
+                    "Hashirama Senju",
+                    "Madara Uchiha",
+                    "Hagoromo Ōtsutsuki",
+                    "Tobirama Senju"
+                ],
+                correct: 2
+            },
+
+            {
+                type: "QRR",
+                question: "Explique les différentes composantes de l'identité spirituelle d'Ichigo et comment elles contribuent à son évolution en tant que combattant."
+            },
+
+            {
+                type: "QRR",
+                question: "Explique pourquoi le Siècle Oublié, les Ponéglyphes et le Gouvernement Mondial sont liés. Donne au moins deux éléments précis."
+            },
+
+            {
+                type: "QRR",
+                question: "Explique le rôle de la volonté du feu dans Naruto et montre comment elle influence les actions de plusieurs générations de ninjas."
+            },
+
+            {
+                type: "QRR",
+                question: "Explique comment la relation entre Goku et Vegeta évolue depuis leur première confrontation jusqu'à leur coopération contre des adversaires majeurs."
+            },
+
+            {
+                type: "QRR",
+                question: "Explique la différence entre énergie occulte, technique maudite et extension du territoire, avec au moins un exemple précis."
+            },
+
+            {
+                type: "QRR",
+                question: "Explique le lien entre Yoriichi, la Respiration du Soleil et l'évolution des différentes techniques de respiration utilisées par les Pourfendeurs."
+            },
+
+            {
+                type: "QRR",
+                question: "Explique les principes fondamentaux du Nen et pourquoi la compréhension de ses catégories est importante dans les combats."
+            },
+
+            {
+                type: "QRR",
+                question: "Explique pourquoi les actions de Luffy ont progressivement attiré l'attention des grandes puissances du monde. Donne au moins trois éléments précis."
+            },
+
+            {
+                type: "QRR",
+                question: "Explique pourquoi les différentes origines d'Ichigo rendent son parcours particulier dans l'univers de Bleach."
+            },
+
+            {
+                type: "QRR",
+                question: "Choisis deux mangas ou animes différents et explique comment chacun construit progressivement le mystère autour de son univers, de ses pouvoirs ou de son histoire. Donne des exemples précis."
+            }
+
+        ]
     }
 
 };
 
 
-const bossConfig = bossConfigs[bossChoisi] || bossConfigs.ombres;
+const bossConfig =
+    bossConfigs[bossChoisi] || bossConfigs.ombres;
 
 let currentQuestion = 0;
 let answers = [];
+
 let globalTime = bossConfig.tempsGlobal;
 let questionTime = 0;
 
 let globalInterval = null;
 let questionInterval = null;
+
 let quizFinished = false;
+let questionLocked = false;
 
 
-const bossTitle = document.getElementById("bossTitle");
-const globalTimer = document.getElementById("globalTimer");
-const questionTimer = document.getElementById("questionTimer");
-const questionNumber = document.getElementById("questionNumber");
-const questionType = document.getElementById("questionType");
-const questionText = document.getElementById("questionText");
-const answersContainer = document.getElementById("answers");
-const qrrArea = document.getElementById("qrrArea");
-const qrrAnswer = document.getElementById("qrrAnswer");
-const qrrSubmit = document.getElementById("qrrSubmit");
-const message = document.getElementById("message");
-const previousBtn = document.getElementById("previousBtn");
-const nextBtn = document.getElementById("nextBtn");
-const progressBar = document.getElementById("progressBar");
-const quizCard = document.getElementById("quizCard");
-const endBox = document.getElementById("endBox");
+const bossTitle =
+    document.getElementById("bossTitle");
+
+const globalTimer =
+    document.getElementById("globalTimer");
+
+const questionTimer =
+    document.getElementById("questionTimer");
+
+const questionNumber =
+    document.getElementById("questionNumber");
+
+const questionType =
+    document.getElementById("questionType");
+
+const questionText =
+    document.getElementById("questionText");
+
+const answersContainer =
+    document.getElementById("answers");
+
+const qrrArea =
+    document.getElementById("qrrArea");
+
+const qrrAnswer =
+    document.getElementById("qrrAnswer");
+
+const qrrSubmit =
+    document.getElementById("qrrSubmit");
+
+const message =
+    document.getElementById("message");
+
+const previousBtn =
+    document.getElementById("previousBtn");
+
+const nextBtn =
+    document.getElementById("nextBtn");
+
+const progressBar =
+    document.getElementById("progressBar");
+
+const quizCard =
+    document.getElementById("quizCard");
+
+const endBox =
+    document.getElementById("endBox");
 
 
 bossTitle.textContent = bossConfig.nom;
@@ -646,11 +859,15 @@ bossTitle.textContent = bossConfig.nom;
 
 function formatTime(seconds) {
 
-    const minutes = Math.floor(seconds / 60);
-    const secs = seconds % 60;
+    const minutes =
+        Math.floor(seconds / 60);
 
-    return String(minutes).padStart(2, "0") + ":" +
-           String(secs).padStart(2, "0");
+    const secs =
+        seconds % 60;
+
+    return String(minutes).padStart(2, "0")
+        + ":" +
+        String(secs).padStart(2, "0");
 }
 
 
@@ -660,14 +877,19 @@ function showQuestion() {
 
     clearInterval(questionInterval);
 
-    const q = bossConfig.questions[currentQuestion];
+    const q =
+        bossConfig.questions[currentQuestion];
+
+    questionLocked = false;
 
     questionNumber.textContent =
         `Question ${currentQuestion + 1} / ${bossConfig.questions.length}`;
 
-    questionType.textContent = q.type;
+    questionType.textContent =
+        q.type;
 
-    questionText.textContent = q.question;
+    questionText.textContent =
+        q.question;
 
     answersContainer.innerHTML = "";
 
@@ -675,30 +897,63 @@ function showQuestion() {
 
     message.textContent = "";
 
+
     progressBar.style.width =
-        ((currentQuestion + 1) / bossConfig.questions.length * 100) + "%";
+        ((currentQuestion + 1) /
+        bossConfig.questions.length * 100) + "%";
 
 
     if (q.type === "QCM") {
 
         q.options.forEach((option, index) => {
 
-            const button = document.createElement("button");
+            const button =
+                document.createElement("button");
 
-            button.className = "answer-btn";
+            button.className =
+                "answer-btn";
+
             button.textContent =
-                String.fromCharCode(65 + index) + ". " + option;
+                String.fromCharCode(65 + index)
+                + ". "
+                + option;
 
-            button.addEventListener("click", function() {
-                selectAnswer(index);
-            });
+            button.addEventListener(
+                "click",
+                function() {
+                    selectAnswer(index);
+                }
+            );
 
             answersContainer.appendChild(button);
         });
 
+
+        const savedAnswer =
+            answers[currentQuestion];
+
+
+        if (savedAnswer &&
+            savedAnswer.type === "QCM") {
+
+            const buttons =
+                document.querySelectorAll(".answer-btn");
+
+            buttons.forEach((button, index) => {
+
+                if (index === savedAnswer.answer) {
+
+                    button.classList.add("selected");
+                }
+
+            });
+        }
+
     } else {
 
         qrrArea.classList.remove("hidden");
+
+        qrrAnswer.disabled = false;
 
         qrrAnswer.value =
             answers[currentQuestion]?.answer || "";
@@ -708,10 +963,13 @@ function showQuestion() {
     }
 
 
-    previousBtn.disabled = currentQuestion === 0;
+    previousBtn.disabled =
+        currentQuestion === 0;
+
 
     nextBtn.textContent =
-        currentQuestion === bossConfig.questions.length - 1
+        currentQuestion ===
+        bossConfig.questions.length - 1
             ? "🏁 Terminer"
             : "Suivante →";
 
@@ -732,15 +990,21 @@ function showQuestion() {
 
 function selectAnswer(index) {
 
-    if (quizFinished) return;
+    if (quizFinished ||
+        questionLocked) return;
+
 
     answers[currentQuestion] = {
+
         type: "QCM",
+
         answer: index
     };
 
+
     const buttons =
         document.querySelectorAll(".answer-btn");
+
 
     buttons.forEach((button, i) => {
 
@@ -751,17 +1015,21 @@ function selectAnswer(index) {
 
     });
 
+
     message.textContent =
         "✅ Réponse enregistrée.";
-
 }
 
 
 function submitQRR() {
 
-    if (quizFinished) return;
+    if (quizFinished ||
+        questionLocked) return;
 
-    const text = qrrAnswer.value.trim();
+
+    const text =
+        qrrAnswer.value.trim();
+
 
     if (!text) {
 
@@ -771,14 +1039,21 @@ function submitQRR() {
         return;
     }
 
+
     answers[currentQuestion] = {
+
         type: "QRR",
+
         answer: text,
+
         submitted: true,
+
         statut: "à corriger"
     };
 
+
     qrrSubmit.disabled = true;
+
 
     message.textContent =
         "📝 Réponse enregistrée — elle sera corrigée manuellement.";
@@ -789,44 +1064,59 @@ function startQuestionTimer() {
 
     clearInterval(questionInterval);
 
-    questionInterval = setInterval(() => {
 
-        questionTime--;
+    questionInterval =
+        setInterval(() => {
 
-        questionTimer.textContent =
-            formatTime(questionTime);
+            if (questionLocked ||
+                quizFinished) return;
 
 
-        if (questionTime <= 0) {
+            questionTime--;
 
-            clearInterval(questionInterval);
 
-            lockQuestion();
+            questionTimer.textContent =
+                formatTime(questionTime);
 
-        }
 
-    }, 1000);
+            if (questionTime <= 0) {
+
+                clearInterval(questionInterval);
+
+                lockQuestion();
+            }
+
+        }, 1000);
 }
 
 
 function lockQuestion() {
 
+    if (questionLocked) return;
+
+
+    questionLocked = true;
+
+
     const buttons =
         document.querySelectorAll(".answer-btn");
+
 
     buttons.forEach(button => {
 
         button.disabled = true;
-        button.classList.add("locked");
 
+        button.classList.add("locked");
     });
 
+
     qrrAnswer.disabled = true;
+
     qrrSubmit.disabled = true;
+
 
     message.textContent =
         "⏰ Temps écoulé pour cette question.";
-
 }
 
 
@@ -835,29 +1125,35 @@ function startGlobalTimer() {
     globalTimer.textContent =
         formatTime(globalTime);
 
-    globalInterval = setInterval(() => {
 
-        globalTime--;
+    globalInterval =
+        setInterval(() => {
 
-        globalTimer.textContent =
-            formatTime(globalTime);
+            if (quizFinished) return;
 
 
-        if (globalTime <= 0) {
+            globalTime--;
 
-            clearInterval(globalInterval);
 
-            finishQuiz(true);
+            globalTimer.textContent =
+                formatTime(globalTime);
 
-        }
 
-    }, 1000);
+            if (globalTime <= 0) {
+
+                clearInterval(globalInterval);
+
+                finishQuiz(true);
+            }
+
+        }, 1000);
 }
 
 
 function nextQuestion() {
 
     if (quizFinished) return;
+
 
     if (currentQuestion <
         bossConfig.questions.length - 1) {
@@ -869,7 +1165,6 @@ function nextQuestion() {
     } else {
 
         finishQuiz(false);
-
     }
 }
 
@@ -878,12 +1173,12 @@ function previousQuestion() {
 
     if (quizFinished) return;
 
+
     if (currentQuestion > 0) {
 
         currentQuestion--;
 
         showQuestion();
-
     }
 }
 
@@ -892,10 +1187,14 @@ function finishQuiz(timeUp) {
 
     if (quizFinished) return;
 
+
     quizFinished = true;
 
+
     clearInterval(globalInterval);
+
     clearInterval(questionInterval);
+
 
     quizCard.classList.add("hidden");
 
@@ -912,7 +1211,6 @@ function finishQuiz(timeUp) {
         document.getElementById("endMessage").textContent =
             "🏁 Boss terminé ! Tes réponses ont été enregistrées. Les QRR seront corrigées manuellement.";
     }
-
 }
 
 
@@ -921,10 +1219,12 @@ previousBtn.addEventListener(
     previousQuestion
 );
 
+
 nextBtn.addEventListener(
     "click",
     nextQuestion
 );
+
 
 qrrSubmit.addEventListener(
     "click",
@@ -940,4 +1240,3 @@ showQuestion();
 
 </body>
 </html>
-```
