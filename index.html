@@ -9,19 +9,16 @@
     <style>
         * {
             box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            margin: 0;
             min-height: 100vh;
             font-family: Arial, sans-serif;
-            color: #f5f5f5;
+            color: white;
             background:
-                radial-gradient(circle at 50% 0%, #35204b 0%, #110b18 35%, #050509 75%);
+                radial-gradient(circle at top, #32105c, #0b0614 50%, #030207);
             overflow-x: hidden;
         }
 
@@ -31,232 +28,148 @@
             inset: 0;
             pointer-events: none;
             background:
-                radial-gradient(circle at 20% 30%, rgba(120, 70, 180, 0.08), transparent 25%),
-                radial-gradient(circle at 80% 70%, rgba(120, 70, 180, 0.06), transparent 25%);
+                radial-gradient(circle at 20% 20%, rgba(150, 60, 255, 0.12), transparent 25%),
+                radial-gradient(circle at 80% 70%, rgba(100, 20, 180, 0.10), transparent 30%);
         }
-
-        .container {
-            width: min(1050px, 92%);
-            margin: auto;
-            padding: 25px 0 40px;
-        }
-
-        /* ================= HEADER ================= */
 
         header {
             text-align: center;
-            padding: 45px 20px 35px;
-            border-bottom: 1px solid #38313f;
-            animation: apparition 1s ease;
+            padding: 55px 20px 35px;
         }
 
         .crown {
             font-size: 55px;
-            filter: drop-shadow(0 0 15px #8c62bd);
-            animation: floating 3s ease-in-out infinite;
+            animation: float 3s ease-in-out infinite;
         }
 
         h1 {
-            margin: 15px 0 10px;
-            font-size: clamp(30px, 7vw, 60px);
-            letter-spacing: 5px;
-            text-shadow: 0 0 25px rgba(150, 100, 200, 0.4);
+            margin-top: 10px;
+            font-size: 42px;
+            letter-spacing: 3px;
+            text-shadow: 0 0 20px rgba(180, 90, 255, 0.8);
         }
 
         .subtitle {
-            color: #aaa3b5;
-            font-size: 15px;
-            letter-spacing: 1px;
+            margin-top: 12px;
+            color: #c77dff;
+            font-size: 17px;
         }
 
         .status {
             display: inline-block;
-            margin-top: 20px;
-            padding: 9px 18px;
-            border: 1px solid #51436e;
-            border-radius: 30px;
-            color: #cbb8ff;
-            background: rgba(25, 18, 35, 0.7);
+            margin-top: 18px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: rgba(80, 30, 120, 0.35);
+            border: 1px solid #6d2bbf;
+            color: #d9b3ff;
+            font-size: 14px;
         }
 
-        /* ================= SESSION ================= */
-
-        .session {
-            margin-top: 30px;
-            padding: 25px;
-            border: 1px solid #38313f;
-            border-radius: 18px;
-            background: linear-gradient(145deg, #15111d, #0d0b11);
-            box-shadow: 0 10px 35px rgba(0,0,0,0.25);
-            animation: apparition 1.2s ease;
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: auto;
         }
 
-        .session-title {
-            color: #cbb8ff;
-            font-size: 13px;
-            letter-spacing: 3px;
-            margin-bottom: 20px;
-        }
-
-        .session-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-        }
-
-        .stat {
-            padding: 18px;
-            border-radius: 14px;
-            background: #0f0d14;
-            border: 1px solid #2f2937;
-            text-align: center;
-        }
-
-        .stat-icon {
-            font-size: 25px;
-        }
-
-        .stat-value {
-            font-size: 22px;
-            font-weight: bold;
-            margin-top: 8px;
-        }
-
-        .stat-label {
-            margin-top: 5px;
-            color: #817a88;
-            font-size: 12px;
-        }
-
-        /* ================= MENU ================= */
-
-        .section-title {
-            margin: 35px 0 15px;
-            color: #aaa3b5;
-            letter-spacing: 3px;
-            font-size: 13px;
-        }
-
-        .grid {
+        .cards {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
+            gap: 20px;
+            margin-top: 20px;
         }
 
         .card {
             position: relative;
-            padding: 25px;
-            background: linear-gradient(145deg, #15121c, #0e0c12);
-            border: 1px solid #302b38;
-            border-radius: 17px;
+            padding: 28px;
+            min-height: 180px;
+            border-radius: 18px;
+            background: rgba(20, 10, 35, 0.92);
+            border: 1px solid #4f207d;
+            box-shadow: 0 0 25px rgba(100, 30, 180, 0.15);
             cursor: pointer;
-            transition: 0.25s;
+            transition: 0.3s ease;
             overflow: hidden;
         }
 
         .card::before {
             content: "";
             position: absolute;
-            width: 100px;
-            height: 100px;
-            right: -35px;
-            top: -35px;
+            width: 120px;
+            height: 120px;
+            right: -50px;
+            top: -50px;
+            background: rgba(170, 70, 255, 0.12);
             border-radius: 50%;
-            background: rgba(120, 80, 170, 0.08);
         }
 
         .card:hover {
-            transform: translateY(-6px);
-            border-color: #765c9e;
-            box-shadow: 0 12px 30px rgba(90, 50, 130, 0.15);
+            transform: translateY(-7px);
+            border-color: #9d4edd;
+            box-shadow: 0 0 30px rgba(150, 60, 255, 0.35);
         }
 
         .icon {
-            font-size: 34px;
-            margin-bottom: 12px;
+            font-size: 38px;
+            margin-bottom: 15px;
         }
 
         .card h2 {
-            font-size: 19px;
-            margin: 0 0 8px;
+            font-size: 22px;
+            margin-bottom: 10px;
         }
 
         .card p {
-            color: #99939f;
-            font-size: 13px;
-            line-height: 1.6;
-            margin: 0;
+            color: #bcaec8;
+            line-height: 1.5;
         }
 
-        /* ================= BUTTON ================= */
+        .card .arrow {
+            position: absolute;
+            right: 22px;
+            bottom: 20px;
+            color: #c77dff;
+            font-size: 22px;
+        }
 
         .enter {
-            width: 100%;
-            margin-top: 20px;
-            padding: 19px;
-            border: 1px solid #66518b;
-            border-radius: 16px;
-            background: linear-gradient(90deg, #171321, #21182d, #171321);
+            display: block;
+            width: fit-content;
+            margin: 35px auto;
+            padding: 15px 30px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #7b2cbf, #9d4edd);
             color: white;
-            font-size: 16px;
+            text-decoration: none;
             font-weight: bold;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: 0.25s;
+            box-shadow: 0 0 25px rgba(150, 60, 255, 0.35);
+            transition: 0.3s;
         }
 
         .enter:hover {
-            transform: translateY(-3px);
-            border-color: #9879c7;
-            box-shadow: 0 10px 30px rgba(120, 80, 170, 0.2);
+            transform: scale(1.05);
+            box-shadow: 0 0 35px rgba(180, 80, 255, 0.55);
         }
 
-        /* ================= MESSAGE ================= */
-
-        #message {
-            display: none;
-            margin-top: 20px;
-            padding: 25px;
-            background: #111018;
-            border: 1px solid #40364d;
-            border-radius: 16px;
-            animation: apparition 0.4s ease;
+        .message {
+            max-width: 700px;
+            margin: 10px auto 40px;
+            padding: 18px;
+            text-align: center;
+            border-radius: 14px;
+            background: rgba(20, 10, 35, 0.75);
+            border: 1px solid #3f195f;
+            color: #bcaec8;
         }
-
-        #message h2 {
-            margin-top: 0;
-        }
-
-        #message p {
-            color: #aaa3b5;
-            line-height: 1.7;
-        }
-
-        /* ================= FOOTER ================= */
 
         footer {
             text-align: center;
-            color: #68636d;
-            font-size: 11px;
-            letter-spacing: 3px;
-            margin-top: 40px;
+            padding: 30px 20px;
+            color: #74647e;
+            font-size: 13px;
         }
 
-        /* ================= ANIMATIONS ================= */
-
-        @keyframes apparition {
-            from {
-                opacity: 0;
-                transform: translateY(15px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes floating {
+        @keyframes float {
             0%, 100% {
                 transform: translateY(0);
             }
@@ -266,21 +179,17 @@
             }
         }
 
-        /* ================= MOBILE ================= */
+        @media (max-width: 700px) {
+            h1 {
+                font-size: 30px;
+            }
 
-        @media (max-width: 650px) {
-
-            .grid,
-            .session-grid {
+            .cards {
                 grid-template-columns: 1fr;
             }
 
-            h1 {
-                letter-spacing: 2px;
-            }
-
-            .container {
-                width: 94%;
+            .card {
+                min-height: 160px;
             }
         }
     </style>
@@ -288,186 +197,106 @@
 
 <body>
 
-<div class="container">
-
     <header>
-
         <div class="crown">👑</div>
 
         <h1>LE ROYAUME DES OMBRES</h1>
 
-        <div class="subtitle">
-            Une nouvelle ère commence dans les ténèbres.
-        </div>
+        <p class="subtitle">
+            Là où seuls les plus puissants survivent...
+        </p>
 
         <div class="status">
-            ● Royaume ouvert
+            🌑 Royaume actif
         </div>
-
     </header>
 
+    <main class="container">
 
-    <!-- SESSION -->
+        <section class="cards">
 
-    <section class="session">
+            <!-- BOSS -->
+            <div class="card" onclick="window.location.href='boss.html'">
+                <div class="icon">☠️</div>
 
-        <div class="session-title">
-            🌑 SESSION DU ROYAUME
-        </div>
+                <h2>Les Boss</h2>
 
-        <div class="session-grid">
+                <p>
+                    Affronte les Boss du Royaume et prouve ta maîtrise
+                    des univers manga et anime.
+                </p>
 
-            <div class="stat">
-                <div class="stat-icon">☠️</div>
-                <div class="stat-value">Aucun</div>
-                <div class="stat-label">Boss actuel</div>
+                <div class="arrow">→</div>
             </div>
 
-            <div class="stat">
-                <div class="stat-icon">⭐</div>
-                <div class="stat-value">0</div>
-                <div class="stat-label">Tes points</div>
+
+            <!-- ARENE -->
+            <div class="card" onclick="alert('⚔️ L’Arène sera bientôt disponible !')">
+                <div class="icon">⚔️</div>
+
+                <h2>L'Arène</h2>
+
+                <p>
+                    Affronte d'autres membres dans des défis
+                    et combats légendaires.
+                </p>
+
+                <div class="arrow">→</div>
             </div>
 
-            <div class="stat">
-                <div class="stat-icon">🏆</div>
-                <div class="stat-value">Ombre</div>
-                <div class="stat-label">Ton rang</div>
+
+            <!-- DEFIS -->
+            <div class="card" onclick="alert('🩸 Les Défis seront bientôt disponibles !')">
+                <div class="icon">🩸</div>
+
+                <h2>Les Défis</h2>
+
+                <p>
+                    Relève des défis spéciaux et gagne des
+                    récompenses exclusives.
+                </p>
+
+                <div class="arrow">→</div>
             </div>
 
+
+            <!-- CLASSEMENT -->
+            <div class="card" onclick="alert('🏆 Le Classement sera bientôt disponible !')">
+                <div class="icon">🏆</div>
+
+                <h2>Classement</h2>
+
+                <p>
+                    Découvre les membres les plus puissants
+                    du Royaume.
+                </p>
+
+                <div class="arrow">→</div>
+            </div>
+
+        </section>
+
+
+        <a href="boss.html" class="enter">
+            🌑 Entrer dans le Royaume
+        </a>
+
+
+        <div class="message">
+            ⚔️ Le Royaume vient d'ouvrir ses portes.
+            Les premiers guerriers peuvent maintenant
+            commencer leur ascension.
         </div>
 
-    </section>
-
-
-    <!-- MENU -->
-
-    <div class="section-title">
-        ⚔️ ACCÈS AU ROYAUME
-    </div>
-
-
-    <div class="grid">
-
-
-        <div class="card" onclick="showMessage(
-            '☠️ LES BOSS',
-            'Affronte les différents Boss du Royaume. Chaque Boss possède son niveau de difficulté, ses questions et ses récompenses.'
-        )">
-
-            <div class="icon">☠️</div>
-
-            <h2>Les Boss</h2>
-
-            <p>
-                Affronte les Boss et tente de gagner leurs récompenses.
-            </p>
-
-        </div>
-
-
-        <div class="card" onclick="showMessage(
-            '⚔️ L’ARÈNE',
-            'L’Arène accueillera les affrontements et les événements spéciaux du Royaume.'
-        )">
-
-            <div class="icon">⚔️</div>
-
-            <h2>L'Arène</h2>
-
-            <p>
-                Entre dans les affrontements du Royaume.
-            </p>
-
-        </div>
-
-
-        <div class="card" onclick="showMessage(
-            '🩸 LES DÉFIS',
-            'Défie un autre membre du Royaume selon les règles établies et mets tes points en jeu.'
-        )">
-
-            <div class="icon">🩸</div>
-
-            <h2>Les Défis</h2>
-
-            <p>
-                Défie un autre membre et tente de prendre sa place.
-            </p>
-
-        </div>
-
-
-        <div class="card" onclick="showMessage(
-            '🏆 CLASSEMENT',
-            'Le classement affichera les membres, leurs points, leurs rangs et leurs titres.'
-        )">
-
-            <div class="icon">🏆</div>
-
-            <h2>Classement</h2>
-
-            <p>
-                Découvre les rangs et les titres des Ombres.
-            </p>
-
-        </div>
-
-    </div>
-
-
-    <!-- ENTRER -->
-
-    <button class="enter" onclick="enterKingdom()">
-        🌑 ENTRER DANS LE ROYAUME
-    </button>
-
-
-    <div id="message">
-
-        <h2 id="messageTitle"></h2>
-
-        <p id="messageText"></p>
-
-    </div>
+    </main>
 
 
     <footer>
-        ⚔️ DÉFI · COMBAT · AURA · GLOIRE ⚔️
-        <br><br>
-        LE ROYAUME DES OMBRES
+        🌑 LE ROYAUME DES OMBRES
+        <br>
+        © 2026 — Tous les droits réservés
     </footer>
 
-</div>
-
-
-<script>
-
-function showMessage(title, text) {
-
-    document.getElementById("messageTitle").textContent = title;
-
-    document.getElementById("messageText").textContent = text;
-
-    document.getElementById("message").style.display = "block";
-
-    document.getElementById("message").scrollIntoView({
-        behavior: "smooth"
-    });
-
-}
-
-
-function enterKingdom() {
-
-    showMessage(
-        "🌑 BIENVENUE, OMBRE",
-        "Le Royaume est ouvert. Les futures sessions, les Boss, les défis et le classement seront accessibles ici."
-    );
-
-}
-
-</script>
 
 </body>
 </html>
