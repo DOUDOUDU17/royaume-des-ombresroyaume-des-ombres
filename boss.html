@@ -1,458 +1,278 @@
+```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>☠️ Les Boss — Le Royaume des Ombres</title>
+<title>Les Boss — Royaume des Ombres</title>
 
 <style>
-
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    margin: 0;
     font-family: Arial, sans-serif;
-    background:
-        radial-gradient(circle at top, #2b0647 0%, #10001c 45%, #050008 100%);
-    color: white;
     min-height: 100vh;
+    background:
+        radial-gradient(circle at top, #35105c 0%, #160725 35%, #05020a 100%);
+    color: white;
+    padding: 30px 15px;
 }
-
-/* =========================
-   HEADER
-========================= */
-
-header {
-    text-align: center;
-    padding: 45px 20px 30px;
-    border-bottom: 1px solid #5c2a82;
-}
-
-header h1 {
-    margin: 0;
-    font-size: 42px;
-    color: #dfb0ff;
-    text-shadow: 0 0 20px rgba(180, 90, 255, 0.5);
-}
-
-header p {
-    margin-top: 10px;
-    color: #c4abcF;
-    font-size: 17px;
-}
-
-/* =========================
-   CONTAINER
-========================= */
 
 .container {
     max-width: 1100px;
     margin: auto;
-    padding: 40px 20px;
 }
 
-/* =========================
-   BOSS GRID
-========================= */
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+header h1 {
+    font-size: 42px;
+    color: #d8a7ff;
+    text-shadow: 0 0 15px #8b2be2;
+    margin-bottom: 10px;
+}
+
+header p {
+    color: #cdb8df;
+    font-size: 18px;
+}
 
 .boss-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 25px;
 }
 
-/* =========================
-   BOSS CARD
-========================= */
-
 .boss-card {
-    background:
-        linear-gradient(
-            145deg,
-            rgba(43, 12, 60, 0.95),
-            rgba(15, 4, 24, 0.98)
-        );
-
-    border: 1px solid #63328a;
+    background: rgba(25, 8, 40, 0.9);
+    border: 1px solid #6e2c91;
     border-radius: 18px;
-
     padding: 25px;
-
     text-align: center;
-
-    box-shadow:
-        0 0 20px rgba(110, 40, 160, 0.18);
-
+    box-shadow: 0 0 20px rgba(130, 40, 200, 0.2);
     transition: 0.3s;
 }
 
 .boss-card:hover {
     transform: translateY(-7px);
-
-    border-color: #a55bd2;
-
-    box-shadow:
-        0 0 30px rgba(150, 70, 220, 0.35);
+    box-shadow: 0 0 30px rgba(170, 60, 255, 0.45);
 }
 
 .boss-icon {
     font-size: 55px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .boss-card h2 {
-    margin: 10px 0;
-    color: #e2b7ff;
+    font-size: 24px;
+    margin-bottom: 10px;
 }
 
 .boss-card p {
-    color: #c2aecb;
-    line-height: 1.5;
+    color: #c9b5d8;
+    margin-bottom: 8px;
 }
-
-/* =========================
-   DIFFICULTÉ
-========================= */
 
 .difficulty {
-    display: inline-block;
-
-    padding: 6px 12px;
-
-    border-radius: 20px;
-
-    margin: 8px 0 18px;
-
-    background: #35134a;
-
-    color: #dcaeff;
-
-    font-size: 13px;
-
     font-weight: bold;
+    margin: 15px 0;
 }
 
-/* =========================
-   BUTTON
-========================= */
+.easy {
+    color: #72e6a5;
+}
 
-.boss-button {
+.medium {
+    color: #ffd166;
+}
+
+.hard {
+    color: #ff9f43;
+}
+
+.expert {
+    color: #ff5c5c;
+}
+
+.ultimate {
+    color: #d78cff;
+}
+
+button {
     width: 100%;
-
     border: none;
-
-    padding: 13px;
-
     border-radius: 10px;
-
-    background: linear-gradient(
-        135deg,
-        #7136a0,
-        #9b4dcc
-    );
-
-    color: white;
-
-    font-size: 15px;
-
+    padding: 13px;
+    font-size: 16px;
     font-weight: bold;
-
     cursor: pointer;
-
-    transition: 0.25s;
+    background: linear-gradient(90deg, #6820a0, #9b3ed1);
+    color: white;
+    transition: 0.3s;
 }
 
-.boss-button:hover {
+button:hover {
     transform: scale(1.03);
-
-    background: linear-gradient(
-        135deg,
-        #8c48c0,
-        #b05be0
-    );
+    box-shadow: 0 0 15px #9b3ed1;
 }
-
-/* =========================
-   LOCKED
-========================= */
 
 .locked {
-    opacity: 0.65;
-}
-
-.locked .boss-button {
-    background: #302037;
-    color: #a997ad;
+    background: #302337;
+    color: #8e8198;
     cursor: not-allowed;
 }
 
 .locked:hover {
     transform: none;
+    box-shadow: none;
 }
-
-/* =========================
-   BACK BUTTON
-========================= */
 
 .back {
     display: block;
-
     width: fit-content;
-
-    margin: 45px auto 0;
-
+    margin: 40px auto 0;
+    color: #d8a7ff;
     text-decoration: none;
-
-    background: #21112b;
-
-    border: 1px solid #63328a;
-
-    color: #d8b7e8;
-
-    padding: 12px 22px;
-
-    border-radius: 10px;
-
-    transition: 0.2s;
+    font-weight: bold;
 }
 
 .back:hover {
-    background: #351746;
-    border-color: #9a58c4;
+    text-decoration: underline;
 }
-
-/* =========================
-   FOOTER
-========================= */
 
 footer {
     text-align: center;
-
-    padding: 30px 15px;
-
-    color: #8e7898;
-
-    border-top: 1px solid #32183f;
-
-    margin-top: 30px;
+    margin-top: 35px;
+    color: #75667f;
+    font-size: 14px;
 }
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 600px) {
-
-    header h1 {
-        font-size: 30px;
-    }
-
-    header p {
-        font-size: 14px;
-    }
-
-    .container {
-        padding: 25px 15px;
-    }
-
-}
-
 </style>
 </head>
 
 <body>
 
-<!-- =========================
-     HEADER
-========================= -->
-
-<header>
-
-    <h1>☠️ LES BOSS</h1>
-
-    <p>
-        Affronte les Boss du Royaume et prouve ta maîtrise.
-    </p>
-
-</header>
-
-
-<!-- =========================
-     BOSS
-========================= -->
-
 <div class="container">
 
-    <div class="boss-grid">
+<header>
+    <h1>☠️ LES BOSS</h1>
+    <p>Affronte les Boss du Royaume des Ombres</p>
+</header>
 
+<div class="boss-grid">
 
-        <!-- 🌑 BOSS DES OMBRES -->
+    <!-- BOSS DES OMBRES -->
+    <div class="boss-card">
+        <div class="boss-icon">🌑</div>
 
-        <div class="boss-card">
+        <h2>Boss des Ombres</h2>
 
-            <div class="boss-icon">🌑</div>
+        <p class="difficulty easy">FACILE</p>
 
-            <h2>Boss des Ombres</h2>
+        <p>5 questions</p>
+        <p>5 minutes au total</p>
 
-            <span class="difficulty">
-                FACILE
-            </span>
+        <br>
 
-            <p>
-                Le premier défi du Royaume.
-                Prouve que tu maîtrises les bases
-                du monde manga et anime.
-            </p>
-
-            <button
-                class="boss-button"
-                onclick="window.location.href='quiz.html?boss=ombres'"
-            >
-                🌑 Affronter le Boss
-            </button>
-
-        </div>
-
-
-        <!-- 🔥 BOSS DES FLAMMES -->
-
-        <div class="boss-card">
-
-            <div class="boss-icon">🔥</div>
-
-            <h2>Boss des Flammes</h2>
-
-            <span class="difficulty">
-                MOYEN
-            </span>
-
-            <p>
-                Les choses deviennent sérieuses.
-                Les questions sont plus difficiles
-                et les pièges commencent.
-            </p>
-
-            <button
-                class="boss-button"
-                onclick="window.location.href='quiz.html?boss=flammes'"
-            >
-                🔥 Affronter le Boss
-            </button>
-
-        </div>
-
-
-        <!-- ⚡ BOSS DU TONNERRE -->
-
-        <div class="boss-card">
-
-            <div class="boss-icon">⚡</div>
-
-            <h2>Boss du Tonnerre</h2>
-
-            <span class="difficulty">
-                DIFFICILE
-            </span>
-
-            <p>
-                Un véritable test de connaissance.
-                Les questions sont plus complexes
-                et le temps devient précieux.
-            </p>
-
-            <button
-                class="boss-button"
-                onclick="window.location.href='quiz.html?boss=tonnerre'"
-            >
-                ⚡ Affronter le Boss
-            </button>
-
-        </div>
-
-
-        <!-- 👹 ROI DÉMON -->
-
-        <div class="boss-card locked">
-
-            <div class="boss-icon">👹</div>
-
-            <h2>Roi Démon</h2>
-
-            <span class="difficulty">
-                EXPERT
-            </span>
-
-            <p>
-                Seuls les véritables maîtres du Royaume
-                pourront affronter ce Boss.
-            </p>
-
-            <button
-                class="boss-button"
-                onclick="alert('👹 Le Roi Démon sera bientôt disponible !')"
-            >
-                🔒 Bientôt
-            </button>
-
-        </div>
-
-
-        <!-- 👑 BOSS ULTIME -->
-
-        <div class="boss-card locked">
-
-            <div class="boss-icon">👑</div>
-
-            <h2>Boss Ultime</h2>
-
-            <span class="difficulty">
-                ULTIME
-            </span>
-
-            <p>
-                Le défi suprême du Royaume.
-                Une épreuve réservée aux meilleurs
-                chasseurs.
-            </p>
-
-            <button
-                class="boss-button"
-                onclick="alert('👑 Le Boss Ultime sera bientôt disponible !')"
-            >
-                🔒 Bientôt
-            </button>
-
-        </div>
-
-
+        <button onclick="window.location.href='quiz.html?boss=ombres'">
+            ⚔️ AFFRONTER
+        </button>
     </div>
 
 
-    <!-- RETOUR -->
+    <!-- BOSS DES FLAMMES -->
+    <div class="boss-card">
+        <div class="boss-icon">🔥</div>
 
-    <a href="index.html" class="back">
-        ← Retour au Royaume
-    </a>
+        <h2>Boss des Flammes</h2>
+
+        <p class="difficulty medium">MOYEN</p>
+
+        <p>7 questions</p>
+        <p>5 minutes au total</p>
+
+        <br>
+
+        <button onclick="window.location.href='quiz.html?boss=flammes'">
+            🔥 AFFRONTER
+        </button>
+    </div>
+
+
+    <!-- BOSS DU TONNERRE -->
+    <div class="boss-card">
+        <div class="boss-icon">⚡</div>
+
+        <h2>Boss du Tonnerre</h2>
+
+        <p class="difficulty hard">DIFFICILE</p>
+
+        <p>8 questions</p>
+        <p>5 minutes au total</p>
+
+        <br>
+
+        <button onclick="window.location.href='quiz.html?boss=tonnerre'">
+            ⚡ AFFRONTER
+        </button>
+    </div>
+
+
+    <!-- ROI DEMON -->
+    <div class="boss-card">
+        <div class="boss-icon">👹</div>
+
+        <h2>Roi Démon</h2>
+
+        <p class="difficulty expert">EXPERT</p>
+
+        <p>10 questions</p>
+        <p>5 minutes au total</p>
+
+        <br>
+
+        <button class="locked" onclick="alert('👹 Le Roi Démon est encore scellé...')">
+            🔒 SCELLÉ
+        </button>
+    </div>
+
+
+    <!-- BOSS ULTIME -->
+    <div class="boss-card">
+        <div class="boss-icon">👑</div>
+
+        <h2>Boss Ultime</h2>
+
+        <p class="difficulty ultimate">ULTIME</p>
+
+        <p>12 questions</p>
+        <p>5 minutes au total</p>
+
+        <br>
+
+        <button class="locked" onclick="alert('👑 Le Boss Ultime est encore scellé...')">
+            🔒 SCELLÉ
+        </button>
+    </div>
 
 </div>
 
-
-<!-- =========================
-     FOOTER
-========================= -->
+<a class="back" href="index.html">
+    ← Retour au Royaume
+</a>
 
 <footer>
-
-    🌑 LE ROYAUME DES OMBRES 🌑
-    <br>
-    <small>
-        Les ténèbres n'attendent que les plus courageux...
-    </small>
-
+    🌑 LE ROYAUME DES OMBRES — Que le meilleur survive.
 </footer>
+
+</div>
 
 </body>
 </html>
+```
