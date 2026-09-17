@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quiz — Le Royaume des Ombres</title>
+
+<title>Quiz — Royaume des Ombres</title>
 
 <style>
 * {
@@ -12,115 +13,85 @@
 
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #08000f, #170025, #050008);
-    color: white;
     min-height: 100vh;
+    font-family: Arial, sans-serif;
+    color: white;
+    background:
+        radial-gradient(circle at top, #35105c, #12051f 45%, #05020a);
 }
 
 .container {
     width: 90%;
     max-width: 850px;
     margin: auto;
-    padding: 25px 0 50px;
+    padding: 30px 0;
 }
 
-header {
+.header {
     text-align: center;
+    margin-bottom: 25px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 35px;
+}
+
+.header p {
+    color: #c9a7ff;
+}
+
+.timer-box {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
     margin-bottom: 20px;
 }
 
-header h1 {
-    color: #c77dff;
-    font-size: 32px;
-    margin-bottom: 5px;
-}
-
-header p {
-    color: #aaa;
-}
-
-.stats {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-bottom: 15px;
-}
-
-.stat {
+.timer {
     flex: 1;
-    min-width: 150px;
-    background: rgba(40, 10, 60, 0.9);
-    border: 1px solid #6a0dad;
-    border-radius: 12px;
-    padding: 12px;
+    padding: 15px;
     text-align: center;
+    border: 1px solid #7135a5;
+    border-radius: 12px;
+    background: rgba(20, 5, 35, 0.9);
 }
 
-.stat strong {
+.timer strong {
     display: block;
-    color: #d8aaff;
-    font-size: 20px;
-    margin-top: 5px;
+    margin-top: 6px;
+    font-size: 25px;
+    color: #e0b7ff;
 }
 
-.timer-global {
-    margin-bottom: 15px;
-}
-
-.timer-global .label {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 5px;
-}
-
-.bar {
-    width: 100%;
-    height: 12px;
-    background: #24102f;
-    border-radius: 20px;
-    overflow: hidden;
-}
-
-.bar-fill {
-    height: 100%;
-    width: 100%;
-    background: #8e44ad;
-    transition: width 1s linear;
+.progress {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #c9a7ff;
 }
 
 .question-box {
-    background: rgba(18, 5, 28, 0.95);
-    border: 1px solid #6a0dad;
-    border-radius: 18px;
     padding: 25px;
-    box-shadow: 0 0 25px rgba(106, 13, 173, 0.25);
+    border-radius: 18px;
+    background: rgba(15, 5, 25, 0.95);
+    border: 1px solid #63318c;
+    box-shadow: 0 0 25px rgba(120, 40, 180, 0.25);
 }
 
-.question-number {
-    color: #b56cff;
-    font-weight: bold;
-    margin-bottom: 10px;
+.type {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 8px;
+    background: #35105c;
+    color: #d9b8ff;
+    font-size: 13px;
+    margin-bottom: 15px;
 }
 
 .question {
     font-size: 22px;
     line-height: 1.5;
     margin-bottom: 20px;
-}
-
-.timer-question {
-    background: #240d32;
-    border-radius: 10px;
-    padding: 12px;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.timer-question strong {
-    color: #e0b3ff;
-    font-size: 22px;
 }
 
 .answers {
@@ -131,150 +102,121 @@ header p {
 .answer {
     width: 100%;
     padding: 15px;
+    border: 1px solid #63318c;
     border-radius: 10px;
-    border: 1px solid #632a80;
-    background: #180622;
+    background: #170821;
     color: white;
-    cursor: pointer;
     text-align: left;
     font-size: 16px;
+    cursor: pointer;
     transition: 0.2s;
 }
 
 .answer:hover {
-    background: #2c0d3d;
+    background: #291039;
     transform: translateX(3px);
 }
 
-.answer.correct {
-    background: #155d27;
-    border-color: #2ecc71;
+.answer.selected {
+    background: #54247a;
+    border-color: #b76cff;
 }
 
-.answer.wrong {
-    background: #6b1515;
-    border-color: #e74c3c;
+.answer.locked {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
-.answer.disabled {
-    pointer-events: none;
-    opacity: 0.8;
+.qrr-area {
+    display: none;
 }
 
-textarea {
+.qrr-area textarea {
     width: 100%;
-    min-height: 170px;
+    min-height: 150px;
     resize: vertical;
     padding: 15px;
-    border-radius: 12px;
-    border: 1px solid #6a0dad;
-    background: #100419;
+    border-radius: 10px;
+    border: 1px solid #63318c;
+    background: #0c0312;
     color: white;
     font-size: 16px;
-    outline: none;
 }
 
-textarea:focus {
-    border-color: #c77dff;
-    box-shadow: 0 0 10px rgba(199, 125, 255, 0.25);
-}
-
-.submit-answer,
-.next-button,
-.finish-button {
-    margin-top: 15px;
-    padding: 13px 20px;
+.validate {
+    margin-top: 12px;
+    padding: 12px 20px;
     border: none;
     border-radius: 10px;
-    background: #6a0dad;
+    background: #7135a5;
     color: white;
-    font-size: 16px;
     font-weight: bold;
     cursor: pointer;
 }
 
-.submit-answer:hover,
-.next-button:hover,
-.finish-button:hover {
-    background: #8e44ad;
-}
-
-.progress {
-    margin-top: 20px;
-}
-
-.progress-bar {
-    width: 100%;
-    height: 8px;
-    background: #26102f;
-    border-radius: 20px;
-    overflow: hidden;
-}
-
-.progress-fill {
-    height: 100%;
-    background: #9b59b6;
-    width: 0%;
-    transition: 0.3s;
+.validate:hover {
+    background: #8e46c7;
 }
 
 .message {
+    margin-top: 20px;
     text-align: center;
-    margin-top: 15px;
-    min-height: 25px;
-    color: #d8aaff;
+    color: #d8b8ff;
 }
 
-.result {
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.nav-btn {
+    flex: 1;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: #32104f;
+    color: white;
+    cursor: pointer;
+}
+
+.nav-btn:hover {
+    background: #4d1974;
+}
+
+.nav-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.end-box {
     display: none;
     text-align: center;
-    background: rgba(18, 5, 28, 0.95);
-    border: 1px solid #6a0dad;
-    border-radius: 18px;
     padding: 30px;
+    border-radius: 18px;
+    background: rgba(15, 5, 25, 0.95);
+    border: 1px solid #7135a5;
 }
 
-.result h2 {
-    color: #c77dff;
-}
-
-.result .big-score {
-    font-size: 40px;
-    color: #e0b3ff;
-    font-weight: bold;
-    margin: 15px 0;
+.end-box h2 {
+    color: #d6a6ff;
 }
 
 .back {
     display: inline-block;
-    margin-top: 25px;
-    color: #c77dff;
+    margin-top: 20px;
+    color: #d0a5ff;
     text-decoration: none;
 }
 
-.back:hover {
-    text-decoration: underline;
-}
-
-.warning {
-    color: #ffcc66;
-}
-
-.danger {
-    color: #ff6666;
-}
-
 @media (max-width: 600px) {
-    header h1 {
-        font-size: 26px;
+    .timer-box {
+        flex-direction: column;
     }
 
     .question {
         font-size: 19px;
-    }
-
-    .question-box {
-        padding: 18px;
     }
 }
 </style>
@@ -284,745 +226,475 @@ textarea:focus {
 
 <div class="container">
 
-<header>
-    <h1>☠️ QUIZ</h1>
-    <p>🌑 Boss des Ombres</p>
-</header>
-
-<div class="stats">
-
-    <div class="stat">
-        Question
-        <strong id="questionNumber">1 / 5</strong>
+    <div class="header">
+        <h1>☠️ QUIZ</h1>
+        <p>🌑 Boss des Ombres — Niveau Facile</p>
     </div>
 
-    <div class="stat">
-        Score
-        <strong id="score">0</strong>
-    </div>
-
-    <div class="stat">
-        Série
-        <strong id="streak">0</strong>
-    </div>
-
-</div>
-
-<div class="timer-global">
-
-    <div class="label">
-        <span>⏳ Temps global</span>
-        <strong id="globalTimer">05:00</strong>
-    </div>
-
-    <div class="bar">
-        <div class="bar-fill" id="globalBar"></div>
-    </div>
-
-</div>
-
-<div id="quizArea">
-
-    <div class="question-box">
-
-        <div class="question-number" id="typeLabel">
-            ☑️ QUESTION À CHOIX MULTIPLE
+    <div class="timer-box">
+        <div class="timer">
+            ⏱️ Temps global
+            <strong id="globalTimer">05:00</strong>
         </div>
 
-        <div class="question" id="question">
-            Chargement...
+        <div class="timer">
+            ⚡ Temps question
+            <strong id="questionTimer">15</strong>
+        </div>
+    </div>
+
+    <div class="progress" id="progress">
+        Question 1 / 5
+    </div>
+
+    <div class="question-box" id="quizBox">
+
+        <div class="type" id="questionType">
+            QCM
         </div>
 
-        <div class="timer-question">
-            ⏱️ Temps pour cette question :
-            <strong id="questionTimer">30</strong>s
-        </div>
+        <div class="question" id="questionText"></div>
 
-        <div id="answers" class="answers"></div>
+        <div class="answers" id="answers"></div>
 
-        <div id="writtenArea" style="display:none;">
-
+        <div class="qrr-area" id="qrrArea">
             <textarea
-                id="writtenAnswer"
-                placeholder="✍️ Rédige ta réponse ici..."
+                id="qrrAnswer"
+                placeholder="Écris ta réponse ici..."
             ></textarea>
 
-            <button
-                class="submit-answer"
-                onclick="submitWrittenAnswer()"
-            >
+            <button class="validate" onclick="submitQRR()">
                 Valider ma réponse
             </button>
-
         </div>
 
         <div class="message" id="message"></div>
 
-        <button
-            class="next-button"
-            id="nextButton"
-            onclick="nextQuestion()"
-            style="display:none;"
-        >
-            Question suivante →
+    </div>
+
+    <div class="navigation">
+        <button class="nav-btn" id="previousBtn" onclick="previousQuestion()">
+            ← Précédente
         </button>
 
+        <button class="nav-btn" id="nextBtn" onclick="nextQuestion()">
+            Suivante →
+        </button>
     </div>
 
-    <div class="progress">
+    <div class="end-box" id="endBox">
+        <h2>🌑 Boss terminé</h2>
 
-        <div class="progress-bar">
-            <div class="progress-fill" id="progressFill"></div>
-        </div>
+        <p>
+            Le temps du Boss est terminé ou toutes les questions ont été
+            traitées.
+        </p>
 
+        <p>
+            Les réponses QRR sont enregistrées pour correction manuelle.
+        </p>
+
+        <a class="back" href="boss.html">
+            ← Retour aux Boss
+        </a>
     </div>
-
-</div>
-
-<div class="result" id="result">
-
-    <h2>👑 Boss terminé !</h2>
-
-    <div class="big-score" id="finalScore">
-        0
-    </div>
-
-    <p id="finalMessage"></p>
-
-    <a class="back" href="boss.html">
-        ← Retour aux Boss
-    </a>
-
-</div>
 
 </div>
 
 <script>
 
-/* =========================================================
-   CONFIGURATION DU BOSS
-   ========================================================= */
+/* =========================================
+   CONFIGURATION OFFICIELLE
+   BOSS DES OMBRES
+   ========================================= */
 
-/*
-   IMPORTANT :
-   Les valeurs de points ne sont PAS inventées ici.
-
-   Le système de points définitif sera intégré lorsque
-   nous aurons fixé les valeurs exactes de chaque Boss.
-*/
-
-const CONFIG = {
+const bossConfig = {
+    nom: "Boss des Ombres",
+    niveau: "Facile",
 
     tempsGlobal: 5 * 60,
 
-    tempsParQuestion: 30,
+    tempsQCM: 15,
+    tempsQRR: null,
 
-    /*
-       Préparation pour les pénalités de retard.
+    questions: [
 
-       On ne met volontairement PAS encore une valeur
-       de retrait de points.
-    */
-    penaliteRetard: null
+        {
+            type: "QCM",
+            question: "Quel est le principal objectif du groupe LE ROYAUME DES OMBRES ?",
+            answers: [
+                "Organiser des quiz et des défis",
+                "Jouer uniquement à Roblox",
+                "Créer uniquement des vidéos",
+                "Faire uniquement du football"
+            ],
+            correct: 0
+        },
 
+        {
+            type: "QCM",
+            question: "Combien de minutes dure le temps global d'un Boss ?",
+            answers: [
+                "3 minutes",
+                "5 minutes",
+                "7 minutes",
+                "10 minutes"
+            ],
+            correct: 1
+        },
+
+        {
+            type: "QCM",
+            question: "Quel type de question demande une réponse écrite ?",
+            answers: [
+                "QCM",
+                "QRR",
+                "Bonus",
+                "Classement"
+            ],
+            correct: 1
+        },
+
+        {
+            type: "QCM",
+            question: "Que signifie QCM ?",
+            answers: [
+                "Question à choix multiples",
+                "Question à correction manuelle",
+                "Question courte mystère",
+                "Question de classement maximal"
+            ],
+            correct: 0
+        },
+
+        {
+            type: "QCM",
+            question: "Que devient une réponse QRR après sa validation ?",
+            answers: [
+                "Elle est automatiquement notée 100 %",
+                "Elle est automatiquement supprimée",
+                "Elle est enregistrée pour correction",
+                "Elle donne automatiquement un bonus"
+            ],
+            correct: 2
+        }
+
+    ]
 };
 
 
-/* =========================================================
-   QUESTIONS
-   ========================================================= */
-
-const questions = [
-
-    {
-        type: "qcm",
-
-        question: "Qui est le capitaine de l'équipage du Chapeau de paille ?",
-
-        answers: [
-            "Roronoa Zoro",
-            "Monkey D. Luffy",
-            "Sanji",
-            "Trafalgar Law"
-        ],
-
-        correct: 1
-    },
-
-    {
-        type: "qcm",
-
-        question: "Comment s'appelle le démon renard à neuf queues dans Naruto ?",
-
-        answers: [
-            "Kurama",
-            "Shukaku",
-            "Gyûki",
-            "Matatabi"
-        ],
-
-        correct: 0
-    },
-
-    {
-        type: "qcm",
-
-        question: "Quelle est la première respiration que Tanjiro maîtrise principalement dans Demon Slayer ?",
-
-        answers: [
-            "Respiration de la Foudre",
-            "Respiration de la Flamme",
-            "Respiration de l'Eau",
-            "Respiration du Vent"
-        ],
-
-        correct: 2
-    },
-
-    {
-        type: "qcm",
-
-        question: "Comment s'appelle le héros principal de Dragon Ball ?",
-
-        answers: [
-            "Vegeta",
-            "Son Goku",
-            "Gohan",
-            "Trunks"
-        ],
-
-        correct: 1
-    },
-
-    {
-        type: "qcm",
-
-        question: "Comment s'appelle le personnage principal de Bleach ?",
-
-        answers: [
-            "Ichigo Kurosaki",
-            "Uryû Ishida",
-            "Renji Abarai",
-            "Byakuya Kuchiki"
-        ],
-
-        correct: 0
-    }
-
-];
-
-
-/* =========================================================
+/* =========================================
    VARIABLES
-   ========================================================= */
+   ========================================= */
 
 let currentQuestion = 0;
 
-let score = 0;
-
-let streak = 0;
-
-let questionTime = CONFIG.tempsParQuestion;
-
-let globalTime = CONFIG.tempsGlobal;
-
-let questionInterval;
+let globalTime = bossConfig.tempsGlobal;
+let questionTime = bossConfig.tempsQCM;
 
 let globalInterval;
+let questionInterval;
 
-let answered = false;
+let finished = false;
 
-
-/* =========================================================
-   ELEMENTS HTML
-   ========================================================= */
-
-const questionElement =
-    document.getElementById("question");
-
-const answersElement =
-    document.getElementById("answers");
-
-const writtenArea =
-    document.getElementById("writtenArea");
-
-const writtenAnswer =
-    document.getElementById("writtenAnswer");
-
-const questionTimer =
-    document.getElementById("questionTimer");
-
-const globalTimer =
-    document.getElementById("globalTimer");
-
-const globalBar =
-    document.getElementById("globalBar");
-
-const questionNumber =
-    document.getElementById("questionNumber");
-
-const scoreElement =
-    document.getElementById("score");
-
-const streakElement =
-    document.getElementById("streak");
-
-const message =
-    document.getElementById("message");
-
-const nextButton =
-    document.getElementById("nextButton");
-
-const typeLabel =
-    document.getElementById("typeLabel");
-
-const progressFill =
-    document.getElementById("progressFill");
-
-const quizArea =
-    document.getElementById("quizArea");
-
-const result =
-    document.getElementById("result");
+let answersGiven = [];
 
 
-/* =========================================================
-   AFFICHER LE TEMPS
-   ========================================================= */
+/* =========================================
+   AFFICHAGE
+   ========================================= */
 
-function formatTime(seconds) {
+function showQuestion() {
 
-    const minutes =
-        Math.floor(seconds / 60);
-
-    const secs =
-        seconds % 60;
-
-    return (
-        String(minutes).padStart(2, "0")
-        + ":"
-        + String(secs).padStart(2, "0")
-    );
-}
-
-
-/* =========================================================
-   TIMER GLOBAL
-   ========================================================= */
-
-function startGlobalTimer() {
-
-    globalInterval = setInterval(() => {
-
-        globalTime--;
-
-        globalTimer.textContent =
-            formatTime(globalTime);
-
-        const percentage =
-            (globalTime / CONFIG.tempsGlobal) * 100;
-
-        globalBar.style.width =
-            percentage + "%";
-
-        if (globalTime <= 30) {
-
-            globalTimer.classList.add("danger");
-
-        } else if (globalTime <= 60) {
-
-            globalTimer.classList.add("warning");
-
-        }
-
-        if (globalTime <= 0) {
-
-            clearInterval(globalInterval);
-
-            finishQuiz("⏰ Le temps global est écoulé.");
-
-        }
-
-    }, 1000);
-
-}
-
-
-/* =========================================================
-   TIMER QUESTION
-   ========================================================= */
-
-function startQuestionTimer() {
+    if (finished) return;
 
     clearInterval(questionInterval);
 
-    questionTime =
-        CONFIG.tempsParQuestion;
+    const q = bossConfig.questions[currentQuestion];
 
-    questionTimer.textContent =
-        questionTime;
+    document.getElementById("progress").textContent =
+        `Question ${currentQuestion + 1} / ${bossConfig.questions.length}`;
 
-    questionTimer.classList.remove(
-        "danger",
-        "warning"
-    );
-
-    questionInterval = setInterval(() => {
-
-        questionTime--;
-
-        questionTimer.textContent =
-            questionTime;
-
-        if (questionTime <= 10) {
-
-            questionTimer.classList.add(
-                "danger"
-            );
-
-        } else if (questionTime <= 20) {
-
-            questionTimer.classList.add(
-                "warning"
-            );
-
-        }
-
-        if (questionTime <= 0) {
-
-            clearInterval(questionInterval);
-
-            timeOutQuestion();
-
-        }
-
-    }, 1000);
-
-}
-
-
-/* =========================================================
-   TEMPS DEPASSE
-   ========================================================= */
-
-function timeOutQuestion() {
-
-    if (answered) return;
-
-    answered = true;
-
-    streak = 0;
-
-    streakElement.textContent =
-        streak;
-
-    message.textContent =
-        "⏰ Temps dépassé ! Cette question est verrouillée.";
-
-    message.classList.add("danger");
-
-    disableAnswers();
-
-    /*
-       Une pénalité pourra être appliquée ici
-       lorsque la valeur officielle sera définie.
-
-       Exemple futur :
-
-       score -= CONFIG.penaliteRetard;
-    */
-
-    nextButton.style.display =
-        "block";
-
-}
-
-
-/* =========================================================
-   CHARGER QUESTION
-   ========================================================= */
-
-function loadQuestion() {
-
-    clearInterval(questionInterval);
-
-    answered = false;
-
-    message.textContent = "";
-
-    message.className = "message";
-
-    nextButton.style.display =
-        "none";
-
-    answersElement.innerHTML =
-        "";
-
-    writtenAnswer.value =
-        "";
-
-    writtenArea.style.display =
-        "none";
-
-    const q =
-        questions[currentQuestion];
-
-    questionNumber.textContent =
-        `${currentQuestion + 1} / ${questions.length}`;
-
-    questionElement.textContent =
+    document.getElementById("questionText").textContent =
         q.question;
 
-    progressFill.style.width =
-        `${((currentQuestion) / questions.length) * 100}%`;
+    document.getElementById("questionType").textContent =
+        q.type;
 
-    if (q.type === "qcm") {
+    const answersContainer =
+        document.getElementById("answers");
 
-        typeLabel.textContent =
-            "☑️ QUESTION À CHOIX MULTIPLE";
+    const qrrArea =
+        document.getElementById("qrrArea");
+
+    const message =
+        document.getElementById("message");
+
+    answersContainer.innerHTML = "";
+    message.textContent = "";
+
+    qrrArea.style.display = "none";
+    answersContainer.style.display = "grid";
+
+    if (q.type === "QCM") {
+
+        questionTime = bossConfig.tempsQCM;
 
         q.answers.forEach((answer, index) => {
 
-            const button =
-                document.createElement("button");
+            const button = document.createElement("button");
 
-            button.className =
-                "answer";
+            button.className = "answer";
+            button.textContent = answer;
 
-            button.textContent =
-                answer;
+            button.onclick = () => selectAnswer(index, button);
 
-            button.onclick =
-                () => checkAnswer(index, button);
-
-            answersElement.appendChild(
-                button
-            );
+            answersContainer.appendChild(button);
 
         });
 
     }
 
-    else if (q.type === "qrr") {
+    else if (q.type === "QRR") {
 
-        typeLabel.textContent =
-            "📝 QUESTION À RÉPONSE RÉDIGÉE";
+        questionTime = bossConfig.tempsQRR;
 
-        writtenArea.style.display =
-            "block";
+        answersContainer.style.display = "none";
+        qrrArea.style.display = "block";
 
+        document.getElementById("qrrAnswer").value = "";
     }
+
+    document.getElementById("questionTimer").textContent =
+        questionTime;
 
     startQuestionTimer();
 
+    document.getElementById("previousBtn").disabled =
+        currentQuestion === 0;
+
+    document.getElementById("nextBtn").disabled =
+        currentQuestion === bossConfig.questions.length - 1;
 }
 
 
-/* =========================================================
-   REPONSE QCM
-   ========================================================= */
+/* =========================================
+   QCM
+   ========================================= */
 
-function checkAnswer(index, button) {
+function selectAnswer(index, button) {
 
-    if (answered) return;
-
-    answered = true;
-
-    clearInterval(questionInterval);
-
-    const q =
-        questions[currentQuestion];
+    if (finished) return;
 
     const buttons =
         document.querySelectorAll(".answer");
 
     buttons.forEach(btn => {
-
-        btn.classList.add("disabled");
-
+        btn.classList.remove("selected");
     });
 
-    if (index === q.correct) {
+    button.classList.add("selected");
 
-        button.classList.add(
-            "correct"
-        );
+    answersGiven[currentQuestion] = {
+        type: "QCM",
+        answer: index
+    };
 
-        /*
-           Le nombre exact de points sera
-           raccordé au système officiel.
-        */
-
-        message.textContent =
-            "✅ Bonne réponse !";
-
-        streak++;
-
-    } else {
-
-        button.classList.add(
-            "wrong"
-        );
-
-        buttons[q.correct].classList.add(
-            "correct"
-        );
-
-        message.textContent =
-            "❌ Mauvaise réponse.";
-
-        streak = 0;
-
-    }
-
-    streakElement.textContent =
-        streak;
-
-    nextButton.style.display =
-        "block";
-
+    document.getElementById("message").textContent =
+        "Réponse enregistrée.";
 }
 
 
-/* =========================================================
-   REPONSE REDIGEE
-   ========================================================= */
+/* =========================================
+   QRR
+   ========================================= */
 
-function submitWrittenAnswer() {
+function submitQRR() {
 
-    if (answered) return;
+    if (finished) return;
 
     const text =
-        writtenAnswer.value.trim();
+        document.getElementById("qrrAnswer").value.trim();
 
     if (text === "") {
 
-        message.textContent =
+        document.getElementById("message").textContent =
             "⚠️ Écris une réponse avant de valider.";
 
         return;
-
     }
 
-    answered = true;
+    answersGiven[currentQuestion] = {
 
-    clearInterval(questionInterval);
+        type: "QRR",
 
-    /*
-       IMPORTANT :
+        answer: text,
 
-       Les QRR seront destinées à une correction
-       manuelle.
+        statut: "à corriger"
 
-       La réponse est donc enregistrée ici
-       pour pouvoir être traitée plus tard.
-    */
+    };
 
-    message.textContent =
-        "📝 Réponse enregistrée. Elle devra être corrigée.";
+    document.getElementById("message").textContent =
+        "✅ Réponse enregistrée — à corriger manuellement.";
 
-    streak = 0;
-
-    streakElement.textContent =
-        streak;
-
-    nextButton.style.display =
-        "block";
-
+    document.getElementById("qrrAnswer").disabled = true;
 }
 
 
-/* =========================================================
-   DESACTIVER LES REPONSES
-   ========================================================= */
+/* =========================================
+   TIMER GLOBAL
+   ========================================= */
 
-function disableAnswers() {
+function startGlobalTimer() {
+
+    clearInterval(globalInterval);
+
+    globalInterval = setInterval(() => {
+
+        globalTime--;
+
+        updateGlobalTimer();
+
+        if (globalTime <= 0) {
+
+            clearInterval(globalInterval);
+
+            finishQuiz("⏱️ Le temps global de 5 minutes est écoulé.");
+        }
+
+    }, 1000);
+}
+
+
+/* =========================================
+   TIMER QUESTION
+   ========================================= */
+
+function startQuestionTimer() {
+
+    clearInterval(questionInterval);
+
+    questionInterval = setInterval(() => {
+
+        questionTime--;
+
+        document.getElementById("questionTimer").textContent =
+            questionTime;
+
+        if (questionTime <= 0) {
+
+            clearInterval(questionInterval);
+
+            lockQuestion();
+
+        }
+
+    }, 1000);
+}
+
+
+function lockQuestion() {
 
     const buttons =
         document.querySelectorAll(".answer");
 
     buttons.forEach(button => {
 
-        button.classList.add(
-            "disabled"
-        );
+        button.disabled = true;
+        button.classList.add("locked");
 
     });
 
-    writtenAnswer.disabled =
-        true;
+    document.getElementById("qrrAnswer").disabled = true;
+
+    document.getElementById("message").textContent =
+        "⏱️ Temps de cette question écoulé.";
 
 }
 
 
-/* =========================================================
-   QUESTION SUIVANTE
-   ========================================================= */
+/* =========================================
+   TIMER GLOBAL AFFICHAGE
+   ========================================= */
+
+function updateGlobalTimer() {
+
+    const minutes =
+        Math.floor(globalTime / 60);
+
+    const seconds =
+        globalTime % 60;
+
+    document.getElementById("globalTimer").textContent =
+        `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+}
+
+
+/* =========================================
+   NAVIGATION
+   ========================================= */
 
 function nextQuestion() {
 
-    if (!answered) return;
+    if (currentQuestion < bossConfig.questions.length - 1) {
 
-    currentQuestion++;
+        currentQuestion++;
 
-    if (
-        currentQuestion >=
-        questions.length
-    ) {
-
-        finishQuiz(
-            "👑 Toutes les questions ont été traitées."
-        );
-
-        return;
-
+        showQuestion();
     }
 
-    loadQuestion();
+    else {
 
+        finishQuiz("🌑 Toutes les questions ont été traitées.");
+    }
 }
 
 
-/* =========================================================
-   FIN DU QUIZ
-   ========================================================= */
+function previousQuestion() {
+
+    if (currentQuestion > 0) {
+
+        currentQuestion--;
+
+        showQuestion();
+    }
+}
+
+
+/* =========================================
+   FIN DU BOSS
+   ========================================= */
 
 function finishQuiz(reason) {
 
-    clearInterval(questionInterval);
+    if (finished) return;
+
+    finished = true;
 
     clearInterval(globalInterval);
+    clearInterval(questionInterval);
 
-    quizArea.style.display =
+    document.getElementById("quizBox").style.display =
         "none";
 
-    result.style.display =
+    document.querySelector(".navigation").style.display =
+        "none";
+
+    document.getElementById("endBox").style.display =
         "block";
 
-    progressFill.style.width =
-        "100%";
-
-    document.getElementById(
-        "finalScore"
-    ).textContent =
-        score + " points";
-
-    document.getElementById(
-        "finalMessage"
-    ).textContent =
+    document.querySelector("#endBox p").textContent =
         reason;
-
 }
 
 
-/* =========================================================
-   DEMARRAGE
-   ========================================================= */
+/* =========================================
+   LANCEMENT
+   ========================================= */
 
-globalTimer.textContent =
-    formatTime(globalTime);
+updateGlobalTimer();
 
-loadQuestion();
+showQuestion();
 
 startGlobalTimer();
 
