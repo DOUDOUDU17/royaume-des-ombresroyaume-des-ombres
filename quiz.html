@@ -223,6 +223,7 @@ textarea:focus {
 .end-box p {
     color: #cdb8df;
     margin-bottom: 25px;
+    line-height: 1.8;
 }
 
 .return-btn {
@@ -254,6 +255,7 @@ footer {
 }
 
 @media (max-width: 600px) {
+
     .timer-area {
         grid-template-columns: 1fr;
     }
@@ -279,6 +281,7 @@ footer {
 </header>
 
 <div class="timer-area">
+
     <div class="timer-box">
         <div class="timer-label">⏱️ TEMPS GLOBAL</div>
         <div class="timer" id="globalTimer">05:00</div>
@@ -288,6 +291,7 @@ footer {
         <div class="timer-label">⚡ TEMPS QUESTION</div>
         <div class="timer" id="questionTimer">00:15</div>
     </div>
+
 </div>
 
 <div class="progress-container">
@@ -311,38 +315,56 @@ footer {
     <div id="answers" class="answers"></div>
 
     <div id="qrrArea" class="hidden">
-        <textarea id="qrrAnswer" placeholder="Écris ta réponse ici..."></textarea>
 
-        <button class="qrr-submit" id="qrrSubmit">
+        <textarea
+            id="qrrAnswer"
+            placeholder="Écris ta réponse ici..."
+        ></textarea>
+
+        <button
+            class="qrr-submit"
+            id="qrrSubmit"
+        >
             📝 Valider ma réponse
         </button>
+
     </div>
 
     <div class="message" id="message"></div>
 
     <div class="navigation">
-        <button class="nav-btn" id="previousBtn">
+
+        <button
+            class="nav-btn"
+            id="previousBtn"
+        >
             ← Précédente
         </button>
 
-        <button class="nav-btn" id="nextBtn">
+        <button
+            class="nav-btn"
+            id="nextBtn"
+        >
             Suivante →
         </button>
+
     </div>
 
 </div>
 
 <div class="end-box" id="endBox">
+
     <h2>🏁 Boss terminé !</h2>
 
-    <p id="endMessage">
-        Tes réponses ont été enregistrées.
-        Les réponses écrites seront corrigées manuellement.
-    </p>
+    <p id="endMessage"></p>
 
-    <a class="return-btn" href="boss.html">
+    <a
+        class="return-btn"
+        href="boss.html"
+    >
         ☠️ Retour aux Boss
     </a>
+
 </div>
 
 <footer>
@@ -353,82 +375,117 @@ footer {
 
 <script>
 
-const urlParams = new URLSearchParams(window.location.search);
-const bossChoisi = urlParams.get("boss") || "ombres";
+const urlParams =
+    new URLSearchParams(window.location.search);
 
+const bossChoisi =
+    urlParams.get("boss") || "ombres";
+
+
+/* =====================================================
+   CONFIGURATION DES BOSS
+   ===================================================== */
 
 const bossConfigs = {
 
-    /* =========================
+
+    /* =====================================================
        🌑 BOSS DES OMBRES
-       ========================= */
+       ===================================================== */
 
     ombres: {
+
         nom: "🌑 Boss des Ombres",
+
         niveau: "Facile",
+
+        pointsParReponse: 10,
+
         tempsGlobal: 5 * 60,
+
         tempsQCM: 15,
+
         tempsQRR: 45,
 
         questions: [
 
             {
                 type: "QCM",
-                question: "Quel est le principal objectif du groupe LE ROYAUME DES OMBRES ?",
+
+                question:
+                    "Quel est le principal objectif du groupe LE ROYAUME DES OMBRES ?",
+
                 options: [
                     "Organiser des quiz et des défis",
                     "Créer uniquement des vidéos",
                     "Faire uniquement du gaming",
                     "Partager uniquement des images"
                 ],
+
                 correct: 0
             },
 
             {
                 type: "QCM",
-                question: "Quelle est la durée globale prévue pour un Boss ?",
+
+                question:
+                    "Quelle est la durée globale prévue pour un Boss ?",
+
                 options: [
                     "3 minutes",
                     "5 minutes",
                     "10 minutes",
                     "15 minutes"
                 ],
+
                 correct: 1
             },
 
             {
                 type: "QCM",
-                question: "Quel type de question demande une réponse écrite ?",
+
+                question:
+                    "Quel type de question demande une réponse écrite ?",
+
                 options: [
                     "QCM",
                     "QRR",
                     "QTF",
                     "QRP"
                 ],
+
                 correct: 1
             },
 
             {
                 type: "QCM",
-                question: "Que signifie QCM ?",
+
+                question:
+                    "Que signifie QCM ?",
+
                 options: [
                     "Question à Choix Multiples",
                     "Question de Combat Manga",
                     "Question à Correction Manuelle",
                     "Question Courte de Mémoire"
                 ],
+
                 correct: 0
             },
 
             {
                 type: "QCM",
-                question: "Après la validation d'une QRR, que devient principalement la réponse ?",
+
+                question:
+                    "Après la validation d'une QRR, que devient principalement la réponse ?",
+
                 options: [
                     "Elle est automatiquement notée",
                     "Elle est enregistrée pour correction",
                     "Elle est supprimée",
                     "Elle est transformée en QCM"
                 ],
+
                 correct: 1
             }
 
@@ -436,351 +493,481 @@ const bossConfigs = {
     },
 
 
-    /* =========================
+    /* =====================================================
        🔥 BOSS DES FLAMMES
-       ========================= */
+       ===================================================== */
 
     flammes: {
+
         nom: "🔥 Boss des Flammes",
+
         niveau: "Moyen",
+
+        pointsParReponse: 20,
+
         tempsGlobal: 5 * 60,
+
         tempsQCM: 25,
+
         tempsQRR: 45,
 
         questions: [
 
             {
                 type: "QCM",
-                question: "À Water 7, quel était le métier de Franky avant de devenir officiellement membre de l'équipage de Luffy ?",
+
+                question:
+                    "À Water 7, quel était le métier de Franky avant de devenir officiellement membre de l'équipage de Luffy ?",
+
                 options: [
                     "Charpentier naval",
                     "Chasseur de primes",
                     "Capitaine corsaire",
                     "Forgeron"
                 ],
+
                 correct: 0
             },
 
             {
                 type: "QCM",
-                question: "Dans Naruto, lequel de ces personnages n'a jamais été Hokage ?",
+
+                question:
+                    "Dans Naruto, lequel de ces personnages n'a jamais été Hokage ?",
+
                 options: [
                     "Minato Namikaze",
                     "Hiruzen Sarutobi",
                     "Jiraiya",
                     "Kakashi Hatake"
                 ],
+
                 correct: 2
             },
 
             {
                 type: "QCM",
-                question: "Avant de devenir Pourfendeur, quel métier Tanjiro exerçait-il principalement avec sa famille ?",
+
+                question:
+                    "Avant de devenir Pourfendeur, quel métier Tanjiro exerçait-il principalement avec sa famille ?",
+
                 options: [
                     "Pêcheur",
                     "Marchand de charbon",
                     "Forgeron",
                     "Cultivateur de riz"
                 ],
+
                 correct: 1
             },
 
             {
                 type: "QCM",
-                question: "Dans Dragon Ball Z, lequel de ces personnages n'est pas un Saiyan ?",
+
+                question:
+                    "Dans Dragon Ball Z, lequel de ces personnages n'est pas un Saiyan ?",
+
                 options: [
                     "Bardock",
                     "Raditz",
                     "Nappa",
                     "Zarbon"
                 ],
+
                 correct: 3
             },
 
             {
                 type: "QCM",
-                question: "Quelle affirmation décrit correctement les Six Eyes de Satoru Gojo ?",
+
+                question:
+                    "Quelle affirmation décrit correctement les Six Eyes de Satoru Gojo ?",
+
                 options: [
                     "C'est une technique qui permet de créer des shikigami",
                     "C'est une capacité liée à une perception extrêmement précise de l'énergie occulte",
                     "C'est le nom de son domaine",
                     "C'est une technique permettant de copier toutes les techniques"
                 ],
+
                 correct: 1
             },
 
             {
                 type: "QRR",
-                question: "Dans Bleach, Ichigo possède plusieurs origines liées à ses pouvoirs. Cite les principales origines qui composent son identité spirituelle et explique brièvement comment elles sont liées à ses pouvoirs."
+
+                question:
+                    "Dans Bleach, Ichigo possède plusieurs origines liées à ses pouvoirs. Cite les principales origines qui composent son identité spirituelle et explique brièvement comment elles sont liées à ses pouvoirs."
             },
 
             {
                 type: "QRR",
-                question: "Pourquoi le Gouvernement Mondial considère-t-il Luffy comme une menace particulière ? Donne au moins deux éléments précis liés à son histoire, à ses pouvoirs ou à ses actions."
+
+                question:
+                    "Pourquoi le Gouvernement Mondial considère-t-il Luffy comme une menace particulière ? Donne au moins deux éléments précis liés à son histoire, à ses pouvoirs ou à ses actions."
             }
 
         ]
     },
 
 
-    /* =========================
+    /* =====================================================
        ⚡ BOSS DU TONNERRE
-       ========================= */
+       ===================================================== */
 
     tonnerre: {
+
         nom: "⚡ Boss du Tonnerre",
+
         niveau: "Difficile",
+
+        pointsParReponse: 40,
+
         tempsGlobal: 5 * 60,
+
         tempsQCM: 30,
+
         tempsQRR: 60,
 
         questions: [
 
             {
                 type: "QCM",
-                question: "Dans One Piece, quel est le véritable nom de Gol D. Roger ?",
+
+                question:
+                    "Dans One Piece, quel est le véritable nom de Gol D. Roger ?",
+
                 options: [
                     "Gol D. Roger",
                     "Gold Roger",
                     "Gol Roger D.",
                     "Roger D. Gol"
                 ],
+
                 correct: 0
             },
 
             {
                 type: "QCM",
-                question: "Dans Naruto, lequel de ces personnages possède le Mangekyō Sharingan ?",
+
+                question:
+                    "Dans Naruto, lequel de ces personnages possède le Mangekyō Sharingan ?",
+
                 options: [
                     "Neji Hyûga",
                     "Rock Lee",
                     "Kakashi Hatake",
                     "Might Guy"
                 ],
+
                 correct: 2
             },
 
             {
                 type: "QCM",
-                question: "Dans Bleach, comment s'appelle le Zanpakutō de Byakuya Kuchiki ?",
+
+                question:
+                    "Dans Bleach, comment s'appelle le Zanpakutō de Byakuya Kuchiki ?",
+
                 options: [
                     "Senbonzakura",
                     "Zangetsu",
                     "Hyōrinmaru",
                     "Katen Kyōkotsu"
                 ],
+
                 correct: 0
             },
 
             {
                 type: "QCM",
-                question: "Dans Hunter × Hunter, quelle catégorie de Nen correspond principalement à Gon lorsqu'il utilise son pouvoir naturel ?",
+
+                question:
+                    "Dans Hunter × Hunter, quelle catégorie de Nen correspond principalement à Gon lorsqu'il utilise son pouvoir naturel ?",
+
                 options: [
                     "Spécialisation",
                     "Renforcement",
                     "Manipulation",
                     "Matérialisation"
                 ],
+
                 correct: 1
             },
 
             {
                 type: "QRR",
-                question: "Explique pourquoi Vegeta est initialement considéré comme un adversaire majeur de Goku, puis indique au moins une raison importante qui explique son évolution par la suite."
+
+                question:
+                    "Explique pourquoi Vegeta est initialement considéré comme un adversaire majeur de Goku, puis indique au moins une raison importante qui explique son évolution par la suite."
             },
 
             {
                 type: "QRR",
-                question: "Quelle est la différence fondamentale entre une Technique Maudite et une Extension du Territoire ? Explique avec un exemple lié à un personnage."
+
+                question:
+                    "Quelle est la différence fondamentale entre une Technique Maudite et une Extension du Territoire ? Explique avec un exemple lié à un personnage."
             },
 
             {
                 type: "QRR",
-                question: "Pourquoi Muzan Kibutsuji cherche-t-il particulièrement à éliminer Tanjiro après certains événements de l'histoire ? Donne au moins deux éléments précis."
+
+                question:
+                    "Pourquoi Muzan Kibutsuji cherche-t-il particulièrement à éliminer Tanjiro après certains événements de l'histoire ? Donne au moins deux éléments précis."
             },
 
             {
                 type: "QRR",
-                question: "Explique pourquoi le Gouvernement Mondial considère l'existence de certaines informations historiques comme dangereuse. Donne au moins deux exemples d'éléments liés à cette menace."
+
+                question:
+                    "Explique pourquoi le Gouvernement Mondial considère l'existence de certaines informations historiques comme dangereuse. Donne au moins deux exemples d'éléments liés à cette menace."
             }
 
         ]
     },
 
 
-    /* =========================
+    /* =====================================================
        👹 ROI DÉMON
-       ========================= */
+       ===================================================== */
 
     "roi-demon": {
+
         nom: "👹 Roi Démon",
+
         niveau: "Expert",
+
+        pointsParReponse: 80,
+
         tempsGlobal: 5 * 60,
+
         tempsQCM: 35,
+
         tempsQRR: 75,
 
         questions: [
 
             {
                 type: "QCM",
-                question: "Quel événement est directement lié au déclenchement de la Grande Ère des Pirates dans One Piece ?",
+
+                question:
+                    "Quel événement est directement lié au déclenchement de la Grande Ère des Pirates dans One Piece ?",
+
                 options: [
                     "La destruction d'Ohara",
                     "L'exécution de Gol D. Roger",
                     "La guerre de Marineford",
                     "L'arrivée de Luffy à Grand Line"
                 ],
+
                 correct: 1
             },
 
             {
                 type: "QCM",
-                question: "Dans Naruto, lequel de ces personnages a été membre de l'Akatsuki ?",
+
+                question:
+                    "Dans Naruto, lequel de ces personnages a été membre de l'Akatsuki ?",
+
                 options: [
                     "Jiraiya",
                     "Orochimaru",
                     "Shikamaru",
                     "Yamato"
                 ],
+
                 correct: 1
             },
 
             {
                 type: "QCM",
-                question: "Quel est le nom du Bankai d'Ichigo Kurosaki dans sa forme connue sous le nom de Tensa Zangetsu ?",
+
+                question:
+                    "Quel est le nom du Bankai d'Ichigo Kurosaki dans sa forme connue sous le nom de Tensa Zangetsu ?",
+
                 options: [
                     "Senbonzakura Kageyoshi",
                     "Daiguren Hyōrinmaru",
                     "Tensa Zangetsu",
                     "Katen Kyōkotsu: Karamatsu Shinjū"
                 ],
+
                 correct: 2
             },
 
             {
                 type: "QRR",
-                question: "Explique pourquoi Goku et Vegeta, malgré leur rivalité, finissent par combattre régulièrement du même côté. Donne au moins deux éléments précis de leur évolution."
+
+                question:
+                    "Explique pourquoi Goku et Vegeta, malgré leur rivalité, finissent par combattre régulièrement du même côté. Donne au moins deux éléments précis de leur évolution."
             },
 
             {
                 type: "QRR",
-                question: "Explique le rôle des Six Eyes de Gojo et indique pourquoi cette capacité est particulièrement importante lorsqu'elle est associée à sa technique du Limitless."
+
+                question:
+                    "Explique le rôle des Six Eyes de Gojo et indique pourquoi cette capacité est particulièrement importante lorsqu'elle est associée à sa technique du Limitless."
             },
 
             {
                 type: "QRR",
-                question: "Explique pourquoi Yoriichi Tsugikuni est considéré comme une figure exceptionnelle dans l'histoire des Pourfendeurs. Donne au moins deux éléments précis."
+
+                question:
+                    "Explique pourquoi Yoriichi Tsugikuni est considéré comme une figure exceptionnelle dans l'histoire des Pourfendeurs. Donne au moins deux éléments précis."
             },
 
             {
                 type: "QRR",
-                question: "Explique ce que représente le Siècle Oublié dans l'histoire de One Piece et pourquoi le Gouvernement Mondial cherche à empêcher certaines informations à son sujet d'être découvertes."
+
+                question:
+                    "Explique ce que représente le Siècle Oublié dans l'histoire de One Piece et pourquoi le Gouvernement Mondial cherche à empêcher certaines informations à son sujet d'être découvertes."
             },
 
             {
                 type: "QRR",
-                question: "Explique pourquoi Itachi Uchiha est un personnage dont les actions sont difficiles à comprendre au début de l'histoire. Donne au moins deux éléments permettant de comprendre ses choix."
+
+                question:
+                    "Explique pourquoi Itachi Uchiha est un personnage dont les actions sont difficiles à comprendre au début de l'histoire. Donne au moins deux éléments permettant de comprendre ses choix."
             },
 
             {
                 type: "QRR",
-                question: "Explique les principales différences entre les Shinigami, Hollows et Quincy, notamment concernant leur nature et leur manière d'utiliser ou d'interagir avec les pouvoirs spirituels."
+
+                question:
+                    "Explique les principales différences entre les Shinigami, Hollows et Quincy, notamment concernant leur nature et leur manière d'utiliser ou d'interagir avec les pouvoirs spirituels."
             },
 
             {
                 type: "QRR",
-                question: "Un personnage peut être extrêmement puissant sans être considéré comme le personnage le plus important de l'histoire. Explique cette différence en utilisant au moins deux exemples provenant de mangas ou animes différents."
+
+                question:
+                    "Un personnage peut être extrêmement puissant sans être considéré comme le personnage le plus important de l'histoire. Explique cette différence en utilisant au moins deux exemples provenant de mangas ou animes différents."
             }
 
         ]
     },
 
 
-    /* =========================
+    /* =====================================================
        👑 BOSS ULTIME
-       ========================= */
+       ===================================================== */
 
     "boss-ultime": {
+
         nom: "👑 Boss Ultime",
+
         niveau: "Ultime",
+
+        pointsParReponse: 160,
+
         tempsGlobal: 5 * 60,
+
         tempsQCM: 40,
+
         tempsQRR: 90,
 
         questions: [
 
             {
                 type: "QCM",
-                question: "Quel événement est associé à la révélation de la véritable nature du fruit de Luffy ?",
+
+                question:
+                    "Quel événement est associé à la révélation de la véritable nature du fruit de Luffy ?",
+
                 options: [
                     "La guerre de Marineford",
                     "L'éveil de son fruit à Wano",
                     "Son arrivée à Dressrosa",
                     "Son combat contre Katakuri"
                 ],
+
                 correct: 1
             },
 
             {
                 type: "QCM",
-                question: "Lequel de ces personnages est directement lié au clan Ōtsutsuki ?",
+
+                question:
+                    "Lequel de ces personnages est directement lié au clan Ōtsutsuki ?",
+
                 options: [
                     "Hashirama Senju",
                     "Madara Uchiha",
                     "Hagoromo Ōtsutsuki",
                     "Tobirama Senju"
                 ],
+
                 correct: 2
             },
 
             {
                 type: "QRR",
-                question: "Explique les différentes composantes de l'identité spirituelle d'Ichigo et comment elles contribuent à son évolution en tant que combattant."
+
+                question:
+                    "Explique les différentes composantes de l'identité spirituelle d'Ichigo et comment elles contribuent à son évolution en tant que combattant."
             },
 
             {
                 type: "QRR",
-                question: "Explique pourquoi le Siècle Oublié, les Ponéglyphes et le Gouvernement Mondial sont liés. Donne au moins deux éléments précis."
+
+                question:
+                    "Explique pourquoi le Siècle Oublié, les Ponéglyphes et le Gouvernement Mondial sont liés. Donne au moins deux éléments précis."
             },
 
             {
                 type: "QRR",
-                question: "Explique le rôle de la volonté du feu dans Naruto et montre comment elle influence les actions de plusieurs générations de ninjas."
+
+                question:
+                    "Explique le rôle de la volonté du feu dans Naruto et montre comment elle influence les actions de plusieurs générations de ninjas."
             },
 
             {
                 type: "QRR",
-                question: "Explique comment la relation entre Goku et Vegeta évolue depuis leur première confrontation jusqu'à leur coopération contre des adversaires majeurs."
+
+                question:
+                    "Explique comment la relation entre Goku et Vegeta évolue depuis leur première confrontation jusqu'à leur coopération contre des adversaires majeurs."
             },
 
             {
                 type: "QRR",
-                question: "Explique la différence entre énergie occulte, technique maudite et extension du territoire, avec au moins un exemple précis."
+
+                question:
+                    "Explique la différence entre énergie occulte, technique maudite et extension du territoire, avec au moins un exemple précis."
             },
 
             {
                 type: "QRR",
-                question: "Explique le lien entre Yoriichi, la Respiration du Soleil et l'évolution des différentes techniques de respiration utilisées par les Pourfendeurs."
+
+                question:
+                    "Explique le lien entre Yoriichi, la Respiration du Soleil et l'évolution des différentes techniques de respiration utilisées par les Pourfendeurs."
             },
 
             {
                 type: "QRR",
-                question: "Explique les principes fondamentaux du Nen et pourquoi la compréhension de ses catégories est importante dans les combats."
+
+                question:
+                    "Explique les principes fondamentaux du Nen et pourquoi la compréhension de ses catégories est importante dans les combats."
             },
 
             {
                 type: "QRR",
-                question: "Explique pourquoi les actions de Luffy ont progressivement attiré l'attention des grandes puissances du monde. Donne au moins trois éléments précis."
+
+                question:
+                    "Explique pourquoi les actions de Luffy ont progressivement attiré l'attention des grandes puissances du monde. Donne au moins trois éléments précis."
             },
 
             {
                 type: "QRR",
-                question: "Explique pourquoi les différentes origines d'Ichigo rendent son parcours particulier dans l'univers de Bleach."
+
+                question:
+                    "Explique pourquoi les différentes origines d'Ichigo rendent son parcours particulier dans l'univers de Bleach."
             },
 
             {
                 type: "QRR",
-                question: "Choisis deux mangas ou animes différents et explique comment chacun construit progressivement le mystère autour de son univers, de ses pouvoirs ou de son histoire. Donne des exemples précis."
+
+                question:
+                    "Choisis deux mangas ou animes différents et explique comment chacun construit progressivement le mystère autour de son univers, de ses pouvoirs ou de son histoire. Donne des exemples précis."
             }
 
         ]
@@ -789,21 +976,38 @@ const bossConfigs = {
 };
 
 
+/* =====================================================
+   INITIALISATION
+   ===================================================== */
+
 const bossConfig =
     bossConfigs[bossChoisi] || bossConfigs.ombres;
 
+
 let currentQuestion = 0;
+
 let answers = [];
 
-let globalTime = bossConfig.tempsGlobal;
+
+let globalTime =
+    bossConfig.tempsGlobal;
+
 let questionTime = 0;
 
+
 let globalInterval = null;
+
 let questionInterval = null;
 
+
 let quizFinished = false;
+
 let questionLocked = false;
 
+
+/* =====================================================
+   ÉLÉMENTS HTML
+   ===================================================== */
 
 const bossTitle =
     document.getElementById("bossTitle");
@@ -853,9 +1057,17 @@ const quizCard =
 const endBox =
     document.getElementById("endBox");
 
+const endMessage =
+    document.getElementById("endMessage");
 
-bossTitle.textContent = bossConfig.nom;
 
+bossTitle.textContent =
+    bossConfig.nom;
+
+
+/* =====================================================
+   FORMAT TEMPS
+   ===================================================== */
 
 function formatTime(seconds) {
 
@@ -865,43 +1077,62 @@ function formatTime(seconds) {
     const secs =
         seconds % 60;
 
+
     return String(minutes).padStart(2, "0")
-        + ":" +
-        String(secs).padStart(2, "0");
+        + ":"
+        + String(secs).padStart(2, "0");
 }
 
+
+/* =====================================================
+   AFFICHER UNE QUESTION
+   ===================================================== */
 
 function showQuestion() {
 
     if (quizFinished) return;
 
+
     clearInterval(questionInterval);
+
 
     const q =
         bossConfig.questions[currentQuestion];
 
+
     questionLocked = false;
+
 
     questionNumber.textContent =
         `Question ${currentQuestion + 1} / ${bossConfig.questions.length}`;
 
+
     questionType.textContent =
         q.type;
+
 
     questionText.textContent =
         q.question;
 
+
     answersContainer.innerHTML = "";
 
+
     qrrArea.classList.add("hidden");
+
 
     message.textContent = "";
 
 
     progressBar.style.width =
         ((currentQuestion + 1) /
-        bossConfig.questions.length * 100) + "%";
+        bossConfig.questions.length * 100)
+        + "%";
 
+
+    /* =================================================
+       QCM
+       ================================================= */
 
     if (q.type === "QCM") {
 
@@ -910,22 +1141,29 @@ function showQuestion() {
             const button =
                 document.createElement("button");
 
+
             button.className =
                 "answer-btn";
+
 
             button.textContent =
                 String.fromCharCode(65 + index)
                 + ". "
                 + option;
 
+
             button.addEventListener(
                 "click",
                 function() {
+
                     selectAnswer(index);
+
                 }
             );
 
+
             answersContainer.appendChild(button);
+
         });
 
 
@@ -939,27 +1177,41 @@ function showQuestion() {
             const buttons =
                 document.querySelectorAll(".answer-btn");
 
+
             buttons.forEach((button, index) => {
 
                 if (index === savedAnswer.answer) {
 
                     button.classList.add("selected");
+
                 }
 
             });
+
         }
 
-    } else {
+    }
+
+
+    /* =================================================
+       QRR
+       ================================================= */
+
+    else {
 
         qrrArea.classList.remove("hidden");
 
+
         qrrAnswer.disabled = false;
+
 
         qrrAnswer.value =
             answers[currentQuestion]?.answer || "";
 
+
         qrrSubmit.disabled =
             answers[currentQuestion]?.submitted || false;
+
     }
 
 
@@ -970,13 +1222,17 @@ function showQuestion() {
     nextBtn.textContent =
         currentQuestion ===
         bossConfig.questions.length - 1
+
             ? "🏁 Terminer"
+
             : "Suivante →";
 
 
     questionTime =
         q.type === "QCM"
+
             ? bossConfig.tempsQCM
+
             : bossConfig.tempsQRR;
 
 
@@ -988,17 +1244,36 @@ function showQuestion() {
 }
 
 
+/* =====================================================
+   RÉPONSE QCM
+   ===================================================== */
+
 function selectAnswer(index) {
 
     if (quizFinished ||
         questionLocked) return;
 
 
+    const q =
+        bossConfig.questions[currentQuestion];
+
+
+    const estCorrect =
+        index === q.correct;
+
+
     answers[currentQuestion] = {
 
         type: "QCM",
 
-        answer: index
+        answer: index,
+
+        correct: estCorrect,
+
+        points:
+            estCorrect
+                ? bossConfig.pointsParReponse
+                : 0
     };
 
 
@@ -1016,10 +1291,23 @@ function selectAnswer(index) {
     });
 
 
-    message.textContent =
-        "✅ Réponse enregistrée.";
+    if (estCorrect) {
+
+        message.textContent =
+            `✅ Réponse enregistrée — +${bossConfig.pointsParReponse} pts`;
+
+    } else {
+
+        message.textContent =
+            "❌ Réponse enregistrée — 0 pt";
+
+    }
 }
 
+
+/* =====================================================
+   RÉPONSE QRR
+   ===================================================== */
 
 function submitQRR() {
 
@@ -1048,7 +1336,9 @@ function submitQRR() {
 
         submitted: true,
 
-        statut: "à corriger"
+        statut: "à corriger",
+
+        points: null
     };
 
 
@@ -1056,9 +1346,13 @@ function submitQRR() {
 
 
     message.textContent =
-        "📝 Réponse enregistrée — elle sera corrigée manuellement.";
+        `📝 Réponse enregistrée — jusqu'à ${bossConfig.pointsParReponse} pts après correction.`;
 }
 
+
+/* =====================================================
+   TIMER QUESTION
+   ===================================================== */
 
 function startQuestionTimer() {
 
@@ -1067,6 +1361,7 @@ function startQuestionTimer() {
 
     questionInterval =
         setInterval(() => {
+
 
             if (questionLocked ||
                 quizFinished) return;
@@ -1083,12 +1378,19 @@ function startQuestionTimer() {
 
                 clearInterval(questionInterval);
 
+
                 lockQuestion();
+
             }
+
 
         }, 1000);
 }
 
+
+/* =====================================================
+   BLOQUER QUESTION
+   ===================================================== */
 
 function lockQuestion() {
 
@@ -1107,6 +1409,7 @@ function lockQuestion() {
         button.disabled = true;
 
         button.classList.add("locked");
+
     });
 
 
@@ -1120,6 +1423,10 @@ function lockQuestion() {
 }
 
 
+/* =====================================================
+   TIMER GLOBAL
+   ===================================================== */
+
 function startGlobalTimer() {
 
     globalTimer.textContent =
@@ -1128,6 +1435,7 @@ function startGlobalTimer() {
 
     globalInterval =
         setInterval(() => {
+
 
             if (quizFinished) return;
 
@@ -1143,12 +1451,19 @@ function startGlobalTimer() {
 
                 clearInterval(globalInterval);
 
+
                 finishQuiz(true);
+
             }
+
 
         }, 1000);
 }
 
+
+/* =====================================================
+   QUESTION SUIVANTE
+   ===================================================== */
 
 function nextQuestion() {
 
@@ -1160,14 +1475,22 @@ function nextQuestion() {
 
         currentQuestion++;
 
+
         showQuestion();
 
-    } else {
+    }
+
+    else {
 
         finishQuiz(false);
+
     }
 }
 
+
+/* =====================================================
+   QUESTION PRÉCÉDENTE
+   ===================================================== */
 
 function previousQuestion() {
 
@@ -1178,10 +1501,16 @@ function previousQuestion() {
 
         currentQuestion--;
 
+
         showQuestion();
+
     }
 }
 
+
+/* =====================================================
+   FIN DU QUIZ + CALCUL DES POINTS
+   ===================================================== */
 
 function finishQuiz(timeUp) {
 
@@ -1196,23 +1525,109 @@ function finishQuiz(timeUp) {
     clearInterval(questionInterval);
 
 
+    let totalPoints = 0;
+
+    let qcmCorrectes = 0;
+
+    let qrrACorriger = 0;
+
+
+    answers.forEach(answer => {
+
+        if (!answer) return;
+
+
+        if (answer.type === "QCM") {
+
+            totalPoints +=
+                answer.points || 0;
+
+
+            if (answer.correct) {
+
+                qcmCorrectes++;
+
+            }
+
+        }
+
+
+        if (answer.type === "QRR") {
+
+            qrrACorriger++;
+
+        }
+
+    });
+
+
     quizCard.classList.add("hidden");
+
 
     endBox.style.display = "block";
 
 
     if (timeUp) {
 
-        document.getElementById("endMessage").textContent =
-            "⏰ Les 5 minutes sont écoulées. Tes réponses enregistrées sont conservées. Les QRR seront corrigées manuellement.";
+        endMessage.innerHTML = `
 
-    } else {
+            ⏰ <strong>Temps écoulé !</strong>
+            <br><br>
 
-        document.getElementById("endMessage").textContent =
-            "🏁 Boss terminé ! Tes réponses ont été enregistrées. Les QRR seront corrigées manuellement.";
+            ⚔️ Score QCM :
+            <strong>${totalPoints} pts</strong>
+
+            <br>
+
+            ✅ QCM correctes :
+            <strong>${qcmCorrectes}</strong>
+
+            <br>
+
+            📝 QRR à corriger :
+            <strong>${qrrACorriger}</strong>
+
+            <br><br>
+
+            Les QRR seront corrigées manuellement.
+
+        `;
+
+    }
+
+    else {
+
+        endMessage.innerHTML = `
+
+            🏁 <strong>Boss terminé !</strong>
+            <br><br>
+
+            ⚔️ Score QCM :
+            <strong>${totalPoints} pts</strong>
+
+            <br>
+
+            ✅ QCM correctes :
+            <strong>${qcmCorrectes}</strong>
+
+            <br>
+
+            📝 QRR à corriger :
+            <strong>${qrrACorriger}</strong>
+
+            <br><br>
+
+            Les QRR seront corrigées manuellement.
+
+        `;
+
     }
 }
 
+
+/* =====================================================
+   ÉVÉNEMENTS
+   ===================================================== */
 
 previousBtn.addEventListener(
     "click",
@@ -1231,6 +1646,10 @@ qrrSubmit.addEventListener(
     submitQRR
 );
 
+
+/* =====================================================
+   DÉMARRAGE
+   ===================================================== */
 
 startGlobalTimer();
 
