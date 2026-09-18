@@ -43,6 +43,34 @@ header h1 {
     font-size: 20px;
 }
 
+.score-box {
+    margin-top: 15px;
+    display: inline-block;
+    background: rgba(25, 8, 40, 0.95);
+    border: 1px solid #8b3eb2;
+    border-radius: 12px;
+    padding: 10px 18px;
+    color: #d8a7ff;
+    font-weight: bold;
+    box-shadow: 0 0 15px rgba(130, 40, 200, 0.2);
+}
+
+.points-info {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 18px;
+}
+
+.points-badge {
+    background: linear-gradient(90deg, #32154a, #4d1e69);
+    border: 1px solid #9b3ed1;
+    color: #f0d8ff;
+    padding: 10px 18px;
+    border-radius: 12px;
+    font-weight: bold;
+    text-align: center;
+}
+
 .timer-area {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -105,7 +133,19 @@ header h1 {
     padding: 6px 10px;
     border-radius: 8px;
     font-size: 13px;
+    margin-bottom: 12px;
+}
+
+.question-points {
+    display: inline-block;
+    background: #5a237d;
+    color: #ffffff;
+    padding: 7px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
     margin-bottom: 15px;
+    border: 1px solid #b44cff;
 }
 
 #questionText {
@@ -226,6 +266,13 @@ textarea:focus {
     line-height: 1.8;
 }
 
+.final-score {
+    font-size: 26px;
+    color: #d8a7ff;
+    font-weight: bold;
+    margin: 15px 0;
+}
+
 .return-btn {
     display: inline-block;
     padding: 14px 25px;
@@ -267,6 +314,10 @@ footer {
     #questionText {
         font-size: 19px;
     }
+
+    .points-badge {
+        font-size: 14px;
+    }
 }
 </style>
 </head>
@@ -277,19 +328,44 @@ footer {
 
 <header>
     <h1>☠️ QUIZ</h1>
-    <p id="bossTitle">🌑 Boss des Ombres</p>
+
+    <p id="bossTitle">
+        🌑 Boss des Ombres
+    </p>
+
+    <div class="score-box">
+        🏆 SCORE ACTUEL :
+        <span id="currentScore">0</span> pts
+    </div>
 </header>
+
+<div class="points-info">
+    <div class="points-badge">
+        ⚔️ VALEUR DE CHAQUE RÉPONSE :
+        <span id="pointsPerAnswer">10</span> pts
+    </div>
+</div>
 
 <div class="timer-area">
 
     <div class="timer-box">
-        <div class="timer-label">⏱️ TEMPS GLOBAL</div>
-        <div class="timer" id="globalTimer">05:00</div>
+        <div class="timer-label">
+            ⏱️ TEMPS GLOBAL
+        </div>
+
+        <div class="timer" id="globalTimer">
+            05:00
+        </div>
     </div>
 
     <div class="timer-box">
-        <div class="timer-label">⚡ TEMPS QUESTION</div>
-        <div class="timer" id="questionTimer">00:15</div>
+        <div class="timer-label">
+            ⚡ TEMPS QUESTION
+        </div>
+
+        <div class="timer" id="questionTimer">
+            00:15
+        </div>
     </div>
 
 </div>
@@ -306,6 +382,10 @@ footer {
 
     <div class="question-type" id="questionType">
         QCM
+    </div>
+
+    <div class="question-points" id="questionPoints">
+        ⚔️ 10 pts
     </div>
 
     <div id="questionText">
@@ -387,7 +467,6 @@ const bossChoisi =
    ===================================================== */
 
 const bossConfigs = {
-
 
     /* =====================================================
        🌑 BOSS DES OMBRES
@@ -988,17 +1067,14 @@ let currentQuestion = 0;
 
 let answers = [];
 
-
 let globalTime =
     bossConfig.tempsGlobal;
 
 let questionTime = 0;
 
-
 let globalInterval = null;
 
 let questionInterval = null;
-
 
 let quizFinished = false;
 
@@ -1011,6 +1087,15 @@ let questionLocked = false;
 
 const bossTitle =
     document.getElementById("bossTitle");
+
+const currentScore =
+    document.getElementById("currentScore");
+
+const pointsPerAnswer =
+    document.getElementById("pointsPerAnswer");
+
+const questionPoints =
+    document.getElementById("questionPoints");
 
 const globalTimer =
     document.getElementById("globalTimer");
@@ -1064,6 +1149,50 @@ const endMessage =
 bossTitle.textContent =
     bossConfig.nom;
 
+pointsPerAnswer.textContent =
+    bossConfig.pointsParReponse;
+
+
+/* =====================================================
+   CALCUL DU SCORE ACTUEL
+   ===================================================== */
+
+function calculateCurrentScore() {
+
+    let score = 0;
+
+    answers.forEach(answer => {
+
+        if (!answer) return;
+
+        if (answer.type === "QCM") {
+
+            score += answer.points || 0;
+
+        }
+
+        if (
+            answer.type === "QRR" &&
+            typeof answer.points === "number"
+        ) {
+
+            score += answer.points;
+
+        }
+
+    });
+
+    return score;
+}
+
+
+function updateScoreDisplay() {
+
+    currentScore.textContent =
+        calculateCurrentScore();
+
+}
+
 
 /* =====================================================
    FORMAT TEMPS
@@ -1076,7 +1205,6 @@ function formatTime(seconds) {
 
     const secs =
         seconds % 60;
-
 
     return String(minutes).padStart(2, "0")
         + ":"
@@ -1092,41 +1220,37 @@ function showQuestion() {
 
     if (quizFinished) return;
 
-
     clearInterval(questionInterval);
-
 
     const q =
         bossConfig.questions[currentQuestion];
 
-
     questionLocked = false;
-
 
     questionNumber.textContent =
         `Question ${currentQuestion + 1} / ${bossConfig.questions.length}`;
 
-
     questionType.textContent =
         q.type;
 
+    questionPoints.textContent =
+        `⚔️ ${bossConfig.pointsParReponse} pts`;
 
     questionText.textContent =
         q.question;
 
-
     answersContainer.innerHTML = "";
-
 
     qrrArea.classList.add("hidden");
 
-
     message.textContent = "";
 
-
     progressBar.style.width =
-        ((currentQuestion + 1) /
-        bossConfig.questions.length * 100)
+        (
+            (currentQuestion + 1) /
+            bossConfig.questions.length *
+            100
+        )
         + "%";
 
 
@@ -1141,16 +1265,13 @@ function showQuestion() {
             const button =
                 document.createElement("button");
 
-
             button.className =
                 "answer-btn";
-
 
             button.textContent =
                 String.fromCharCode(65 + index)
                 + ". "
                 + option;
-
 
             button.addEventListener(
                 "click",
@@ -1161,7 +1282,6 @@ function showQuestion() {
                 }
             );
 
-
             answersContainer.appendChild(button);
 
         });
@@ -1171,22 +1291,41 @@ function showQuestion() {
             answers[currentQuestion];
 
 
-        if (savedAnswer &&
-            savedAnswer.type === "QCM") {
+        if (
+            savedAnswer &&
+            savedAnswer.type === "QCM"
+        ) {
 
             const buttons =
                 document.querySelectorAll(".answer-btn");
 
-
             buttons.forEach((button, index) => {
 
-                if (index === savedAnswer.answer) {
+                if (
+                    index ===
+                    savedAnswer.answer
+                ) {
 
-                    button.classList.add("selected");
+                    button.classList.add(
+                        "selected"
+                    );
 
                 }
 
             });
+
+
+            if (savedAnswer.correct) {
+
+                message.textContent =
+                    `✅ Réponse enregistrée — +${bossConfig.pointsParReponse} pts`;
+
+            } else {
+
+                message.textContent =
+                    "❌ Réponse enregistrée — 0 pt";
+
+            }
 
         }
 
@@ -1201,16 +1340,23 @@ function showQuestion() {
 
         qrrArea.classList.remove("hidden");
 
-
         qrrAnswer.disabled = false;
-
 
         qrrAnswer.value =
             answers[currentQuestion]?.answer || "";
 
-
         qrrSubmit.disabled =
             answers[currentQuestion]?.submitted || false;
+
+
+        if (
+            answers[currentQuestion]?.submitted
+        ) {
+
+            message.textContent =
+                `📝 Réponse enregistrée — jusqu'à ${bossConfig.pointsParReponse} pts après correction.`;
+
+        }
 
     }
 
@@ -1241,6 +1387,9 @@ function showQuestion() {
 
 
     startQuestionTimer();
+
+    updateScoreDisplay();
+
 }
 
 
@@ -1250,8 +1399,10 @@ function showQuestion() {
 
 function selectAnswer(index) {
 
-    if (quizFinished ||
-        questionLocked) return;
+    if (
+        quizFinished ||
+        questionLocked
+    ) return;
 
 
     const q =
@@ -1302,6 +1453,10 @@ function selectAnswer(index) {
             "❌ Réponse enregistrée — 0 pt";
 
     }
+
+
+    updateScoreDisplay();
+
 }
 
 
@@ -1311,8 +1466,10 @@ function selectAnswer(index) {
 
 function submitQRR() {
 
-    if (quizFinished ||
-        questionLocked) return;
+    if (
+        quizFinished ||
+        questionLocked
+    ) return;
 
 
     const text =
@@ -1339,6 +1496,7 @@ function submitQRR() {
         statut: "à corriger",
 
         points: null
+
     };
 
 
@@ -1347,6 +1505,7 @@ function submitQRR() {
 
     message.textContent =
         `📝 Réponse enregistrée — jusqu'à ${bossConfig.pointsParReponse} pts après correction.`;
+
 }
 
 
@@ -1362,9 +1521,10 @@ function startQuestionTimer() {
     questionInterval =
         setInterval(() => {
 
-
-            if (questionLocked ||
-                quizFinished) return;
+            if (
+                questionLocked ||
+                quizFinished
+            ) return;
 
 
             questionTime--;
@@ -1378,11 +1538,9 @@ function startQuestionTimer() {
 
                 clearInterval(questionInterval);
 
-
                 lockQuestion();
 
             }
-
 
         }, 1000);
 }
@@ -1395,7 +1553,6 @@ function startQuestionTimer() {
 function lockQuestion() {
 
     if (questionLocked) return;
-
 
     questionLocked = true;
 
@@ -1436,7 +1593,6 @@ function startGlobalTimer() {
     globalInterval =
         setInterval(() => {
 
-
             if (quizFinished) return;
 
 
@@ -1451,11 +1607,9 @@ function startGlobalTimer() {
 
                 clearInterval(globalInterval);
 
-
                 finishQuiz(true);
 
             }
-
 
         }, 1000);
 }
@@ -1470,11 +1624,12 @@ function nextQuestion() {
     if (quizFinished) return;
 
 
-    if (currentQuestion <
-        bossConfig.questions.length - 1) {
+    if (
+        currentQuestion <
+        bossConfig.questions.length - 1
+    ) {
 
         currentQuestion++;
-
 
         showQuestion();
 
@@ -1485,6 +1640,7 @@ function nextQuestion() {
         finishQuiz(false);
 
     }
+
 }
 
 
@@ -1501,10 +1657,10 @@ function previousQuestion() {
 
         currentQuestion--;
 
-
         showQuestion();
 
     }
+
 }
 
 
@@ -1531,6 +1687,8 @@ function finishQuiz(timeUp) {
 
     let qrrACorriger = 0;
 
+    let questionsRepondues = 0;
+
 
     answers.forEach(answer => {
 
@@ -1538,6 +1696,8 @@ function finishQuiz(timeUp) {
 
 
         if (answer.type === "QCM") {
+
+            questionsRepondues++;
 
             totalPoints +=
                 answer.points || 0;
@@ -1554,6 +1714,8 @@ function finishQuiz(timeUp) {
 
         if (answer.type === "QRR") {
 
+            questionsRepondues++;
+
             qrrACorriger++;
 
         }
@@ -1561,67 +1723,68 @@ function finishQuiz(timeUp) {
     });
 
 
-    quizCard.classList.add("hidden");
+    const maximumPossible =
+        bossConfig.questions.length *
+        bossConfig.pointsParReponse;
 
+
+    const pointsQRRMaximum =
+        qrrACorriger *
+        bossConfig.pointsParReponse;
+
+
+    quizCard.classList.add("hidden");
 
     endBox.style.display = "block";
 
 
-    if (timeUp) {
+    const titre =
+        timeUp
+            ? "⏰ Temps écoulé !"
+            : "🏁 Boss terminé !";
 
-        endMessage.innerHTML = `
 
-            ⏰ <strong>Temps écoulé !</strong>
-            <br><br>
+    endMessage.innerHTML = `
 
-            ⚔️ Score QCM :
-            <strong>${totalPoints} pts</strong>
+        <strong>${titre}</strong>
 
-            <br>
+        <br><br>
 
-            ✅ QCM correctes :
-            <strong>${qcmCorrectes}</strong>
+        ⚔️ <strong>Score actuel :</strong>
 
-            <br>
+        <div class="final-score">
+            ${totalPoints} pts
+        </div>
 
-            📝 QRR à corriger :
-            <strong>${qrrACorriger}</strong>
+        📊 <strong>Maximum du Boss :</strong>
+        ${maximumPossible} pts
 
-            <br><br>
+        <br><br>
 
-            Les QRR seront corrigées manuellement.
+        ✅ QCM correctes :
+        <strong>${qcmCorrectes}</strong>
 
-        `;
+        <br>
 
-    }
+        📝 QRR à corriger :
+        <strong>${qrrACorriger}</strong>
 
-    else {
+        <br>
 
-        endMessage.innerHTML = `
+        🎯 Points QRR encore possibles :
+        <strong>${pointsQRRMaximum} pts</strong>
 
-            🏁 <strong>Boss terminé !</strong>
-            <br><br>
+        <br><br>
 
-            ⚔️ Score QCM :
-            <strong>${totalPoints} pts</strong>
+        ⚔️ Valeur de chaque réponse :
+        <strong>${bossConfig.pointsParReponse} pts</strong>
 
-            <br>
+        <br><br>
 
-            ✅ QCM correctes :
-            <strong>${qcmCorrectes}</strong>
+        Les QRR seront corrigées manuellement.
 
-            <br>
+    `;
 
-            📝 QRR à corriger :
-            <strong>${qrrACorriger}</strong>
-
-            <br><br>
-
-            Les QRR seront corrigées manuellement.
-
-        `;
-
-    }
 }
 
 
