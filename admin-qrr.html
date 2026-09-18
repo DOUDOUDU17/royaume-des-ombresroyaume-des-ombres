@@ -140,71 +140,206 @@ async function chargerQRR() {
 
     data.forEach(qrr => {
 
-        const bloc =
-            document.createElement("div");
+    const bloc =
+        document.createElement("div");
 
-        bloc.className = "qrr";
-
-
-        bloc.innerHTML = `
-
-            <div class="label">
-                Joueur
-            </div>
-
-            <strong>
-                ${qrr.joueur || "Inconnu"}
-            </strong>
-
-            <br><br>
+    bloc.className = "qrr";
 
 
-            <div class="label">
-                Boss
-            </div>
+    bloc.innerHTML = `
 
-            <strong>
-                ${qrr.boss || "Inconnu"}
-            </strong>
+        <div class="label">
+            Joueur
+        </div>
 
-            <br><br>
+        <strong>
+            ${qrr.joueur || "Inconnu"}
+        </strong>
 
-
-            <div class="label">
-                Question
-            </div>
-
-            <div class="reponse">
-                ${qrr.question || ""}
-            </div>
-
-            <br>
+        <br><br>
 
 
-            <div class="label">
-                Réponse du joueur
-            </div>
+        <div class="label">
+            Boss
+        </div>
 
-            <div class="reponse">
-                ${qrr.reponse || ""}
-            </div>
+        <strong>
+            ${qrr.boss || "Inconnu"}
+        </strong>
 
-            <br>
-
-
-            <div class="label">
-                Statut
-            </div>
-
-            <strong>
-                ${qrr.statut || "à corriger"}
-            </strong>
-
-        `;
+        <br><br>
 
 
-        liste.appendChild(bloc);
+        <div class="label">
+            Question
+        </div>
 
+        <div class="reponse">
+            ${qrr.question || ""}
+        </div>
+
+        <br>
+
+
+        <div class="label">
+            Réponse du joueur
+        </div>
+
+        <div class="reponse">
+            ${qrr.reponse || ""}
+        </div>
+
+        <br>
+
+
+        <div class="label">
+            Points maximum
+        </div>
+
+        <strong>
+            ${qrr.points_max}
+        </strong>
+
+        <br><br>
+
+
+        <div class="label">
+            Points obtenus
+        </div>
+
+        <input
+            type="number"
+            class="points-input"
+            min="0"
+            max="${qrr.points_max}"
+            value="${qrr.points_obtenus ?? ""}"
+            placeholder="0 à ${qrr.points_max}"
+        >
+
+        <br><br>
+
+
+        <div class="label">
+            Correction
+        </div>
+
+        <textarea
+            class="correction-input"
+            placeholder="Écris la correction ici..."
+        >${qrr.correction_ia ?? ""}</textarea>
+
+        <br><br>
+
+
+        <strong>
+            Statut :
+            ${qrr.statut || "à corriger"}
+        </strong>
+
+        <br><br>
+
+
+        <button
+            class="corriger-btn"
+            type="button"
+        >
+            ✅ Enregistrer la correction
+        </button>
+
+    `;
+
+
+    const pointsInput =
+        bloc.querySelector(".points-input");
+
+    const correctionInput =
+        bloc.querySelector(".correction-input");
+
+    const corrigerBtn =
+        bloc.querySelector(".corriger-btn");
+
+
+    corrigerBtn.addEventListener(
+        "click",
+        async () => {
+
+            const points =
+                Number(pointsInput.value);
+
+            const correction =
+                correctionInput.value.trim();
+
+
+            if (
+                !Number.isFinite(points) ||
+                points < 0 ||
+                points > qrr.points_max
+            ) {
+
+                alert(
+                    "⚠️ Les points doivent être compris entre 0 et " +
+                    qrr.points_max
+                );
+
+                return;
+            }
+
+
+            const { error } =
+                await supabaseClient
+                    .from("reponses_qrr")
+                    .update({
+
+                        points_obtenus: points,
+
+                        correction_ia: correction,
+
+                        statut: "corrigé"
+
+                    })
+                    .eq("id", qrr.id);
+
+
+            if (error) {
+
+                console.error(
+                    "Erreur correction :",
+                    error
+                );
+
+                alert(
+                    "❌ Impossible d'enregistrer la correction."
+                );
+
+                return;
+            }
+
+
+            alert(
+                "✅ Correction enregistrée !"
+            );
+
+
+            qrr.points_obtenus =
+                points;
+
+            qrr.correction_ia =
+                correction;
+
+            qrr.statut =
+                "corrigé";
+
+
+            corrigerBtn.textContent =
+                "✅ Corrigé";
+
+        }
+    );
+
+
+    liste.appendChild(bloc);
+
+});
     });
 
 }
