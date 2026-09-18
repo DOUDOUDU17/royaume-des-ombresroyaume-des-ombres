@@ -1558,7 +1558,7 @@ supabaseClient
 
         boss: bossConfig.nom,
 
-        question: questions[currentQuestion].question,
+        question: bossConfig.questions[currentQuestion].question,
 
         reponse: text,
 
@@ -1571,21 +1571,21 @@ supabaseClient
         statut: "à corriger"
 
     }])
-    .then(({ error }) => {
+    .then(({ data, error }) => {
 
-        if (error) {
+    if (error) {
 
-            console.error(
-                "Erreur Supabase :",
-                error
-            );
+        console.error("Erreur Supabase :", error);
 
-            message.textContent =
-                "⚠️ Réponse enregistrée localement, mais erreur lors de l'envoi.";
+        message.textContent =
+            "⚠️ Erreur lors de l'enregistrement.";
 
-        }
+        return;
+    }
 
-    });
+    console.log("Réponse envoyée :", data);
+
+});
 
     qrrSubmit.disabled = true;
 
