@@ -527,14 +527,24 @@ const SUPABASE_URL =
     "https://dkdwqqujpsbjqjmfgzxu.supabase.co";
 
 const SUPABASE_KEY =
-   sb_publishable_EKQTBx_F7E8kufwAVh2sAA_u1MSl8dw
+    "sb_publishable_EKQTBx_F7E8kufwAVh2sAA_u1MSl8dw";
 
 const supabaseClient =
     window.supabase.createClient(
         SUPABASE_URL,
         SUPABASE_KEY
     );
+let joueurNom = "";
 
+while (!joueurNom) {
+
+    joueurNom =
+        prompt("🌑 Entre ton nom ou pseudo :");
+
+    if (joueurNom !== null) {
+        joueurNom = joueurNom.trim();
+    }
+}
 
 const urlParams =
     new URLSearchParams(window.location.search);
@@ -1540,7 +1550,42 @@ function submitQRR() {
         points: null
 
     };
+supabaseClient
+    .from("reponses_qrr")
+    .insert([{
 
+        joueur: joueurNom,
+
+        boss: bossConfig.nom,
+
+        question: questions[currentQuestion].question,
+
+        reponse: text,
+
+        points_max: bossConfig.pointsParReponse,
+
+        points_obtenus: null,
+
+        correction_ia: null,
+
+        statut: "à corriger"
+
+    }])
+    .then(({ error }) => {
+
+        if (error) {
+
+            console.error(
+                "Erreur Supabase :",
+                error
+            );
+
+            message.textContent =
+                "⚠️ Réponse enregistrée localement, mais erreur lors de l'envoi.";
+
+        }
+
+    });
 
     qrrSubmit.disabled = true;
 
