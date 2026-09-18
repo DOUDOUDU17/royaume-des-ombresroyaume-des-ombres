@@ -327,6 +327,7 @@ footer {
 <div class="container">
 
 <header>
+
     <h1>☠️ QUIZ</h1>
 
     <p id="bossTitle">
@@ -337,18 +338,26 @@ footer {
         🏆 SCORE ACTUEL :
         <span id="currentScore">0</span> pts
     </div>
+
 </header>
 
+
 <div class="points-info">
+
     <div class="points-badge">
+
         ⚔️ VALEUR DE CHAQUE RÉPONSE :
         <span id="pointsPerAnswer">10</span> pts
+
     </div>
+
 </div>
+
 
 <div class="timer-area">
 
     <div class="timer-box">
+
         <div class="timer-label">
             ⏱️ TEMPS GLOBAL
         </div>
@@ -356,9 +365,12 @@ footer {
         <div class="timer" id="globalTimer">
             05:00
         </div>
+
     </div>
 
+
     <div class="timer-box">
+
         <div class="timer-label">
             ⚡ TEMPS QUESTION
         </div>
@@ -366,92 +378,137 @@ footer {
         <div class="timer" id="questionTimer">
             00:15
         </div>
+
     </div>
 
 </div>
 
+
 <div class="progress-container">
-    <div class="progress-bar" id="progressBar"></div>
+
+    <div
+        class="progress-bar"
+        id="progressBar">
+    </div>
+
 </div>
+
 
 <div class="quiz-card" id="quizCard">
 
-    <div class="question-number" id="questionNumber">
+    <div
+        class="question-number"
+        id="questionNumber">
         Question 1 / 5
     </div>
 
-    <div class="question-type" id="questionType">
+
+    <div
+        class="question-type"
+        id="questionType">
         QCM
     </div>
 
-    <div class="question-points" id="questionPoints">
+
+    <div
+        class="question-points"
+        id="questionPoints">
         ⚔️ 10 pts
     </div>
+
 
     <div id="questionText">
         Chargement...
     </div>
 
-    <div id="answers" class="answers"></div>
 
-    <div id="qrrArea" class="hidden">
+    <div
+        id="answers"
+        class="answers">
+    </div>
+
+
+    <div
+        id="qrrArea"
+        class="hidden">
 
         <textarea
             id="qrrAnswer"
-            placeholder="Écris ta réponse ici..."
-        ></textarea>
+            placeholder="Écris ta réponse ici...">
+        </textarea>
+
 
         <button
             class="qrr-submit"
-            id="qrrSubmit"
-        >
+            id="qrrSubmit">
+
             📝 Valider ma réponse
+
         </button>
 
     </div>
 
-    <div class="message" id="message"></div>
+
+    <div
+        class="message"
+        id="message">
+    </div>
+
 
     <div class="navigation">
 
         <button
             class="nav-btn"
-            id="previousBtn"
-        >
+            id="previousBtn">
+
             ← Précédente
+
         </button>
+
 
         <button
             class="nav-btn"
-            id="nextBtn"
-        >
+            id="nextBtn">
+
             Suivante →
+
         </button>
 
     </div>
 
 </div>
 
-<div class="end-box" id="endBox">
 
-    <h2>🏁 Boss terminé !</h2>
+<div
+    class="end-box"
+    id="endBox">
+
+    <h2>
+        🏁 Boss terminé !
+    </h2>
 
     <p id="endMessage"></p>
 
+
     <a
         class="return-btn"
-        href="boss.html"
-    >
+        href="boss.html">
+
         ☠️ Retour aux Boss
+
     </a>
 
 </div>
 
+
 <footer>
+
     🌑 LE ROYAUME DES OMBRES — Bonne chance.
+
 </footer>
 
 </div>
+
 
 <script>
 
@@ -467,6 +524,7 @@ const bossChoisi =
    ===================================================== */
 
 const bossConfigs = {
+
 
     /* =====================================================
        🌑 BOSS DES OMBRES
@@ -504,6 +562,7 @@ const bossConfigs = {
                 correct: 0
             },
 
+
             {
                 type: "QCM",
 
@@ -519,6 +578,7 @@ const bossConfigs = {
 
                 correct: 1
             },
+
 
             {
                 type: "QCM",
@@ -536,6 +596,7 @@ const bossConfigs = {
                 correct: 1
             },
 
+
             {
                 type: "QCM",
 
@@ -551,6 +612,7 @@ const bossConfigs = {
 
                 correct: 0
             },
+
 
             {
                 type: "QCM",
@@ -569,6 +631,7 @@ const bossConfigs = {
             }
 
         ]
+
     },
 
 
@@ -608,6 +671,7 @@ const bossConfigs = {
                 correct: 0
             },
 
+
             {
                 type: "QCM",
 
@@ -623,6 +687,7 @@ const bossConfigs = {
 
                 correct: 2
             },
+
 
             {
                 type: "QCM",
@@ -640,6 +705,7 @@ const bossConfigs = {
                 correct: 1
             },
 
+
             {
                 type: "QCM",
 
@@ -655,6 +721,7 @@ const bossConfigs = {
 
                 correct: 3
             },
+
 
             {
                 type: "QCM",
@@ -672,12 +739,14 @@ const bossConfigs = {
                 correct: 1
             },
 
+
             {
                 type: "QRR",
 
                 question:
                     "Dans Bleach, Ichigo possède plusieurs origines liées à ses pouvoirs. Cite les principales origines qui composent son identité spirituelle et explique brièvement comment elles sont liées à ses pouvoirs."
             },
+
 
             {
                 type: "QRR",
@@ -687,6 +756,7 @@ const bossConfigs = {
             }
 
         ]
+
     },
 
 
@@ -726,6 +796,7 @@ const bossConfigs = {
                 correct: 0
             },
 
+
             {
                 type: "QCM",
 
@@ -741,6 +812,7 @@ const bossConfigs = {
 
                 correct: 2
             },
+
 
             {
                 type: "QCM",
@@ -758,6 +830,7 @@ const bossConfigs = {
                 correct: 0
             },
 
+
             {
                 type: "QCM",
 
@@ -774,12 +847,14 @@ const bossConfigs = {
                 correct: 1
             },
 
+
             {
                 type: "QRR",
 
                 question:
                     "Explique pourquoi Vegeta est initialement considéré comme un adversaire majeur de Goku, puis indique au moins une raison importante qui explique son évolution par la suite."
             },
+
 
             {
                 type: "QRR",
@@ -788,12 +863,14 @@ const bossConfigs = {
                     "Quelle est la différence fondamentale entre une Technique Maudite et une Extension du Territoire ? Explique avec un exemple lié à un personnage."
             },
 
+
             {
                 type: "QRR",
 
                 question:
                     "Pourquoi Muzan Kibutsuji cherche-t-il particulièrement à éliminer Tanjiro après certains événements de l'histoire ? Donne au moins deux éléments précis."
             },
+
 
             {
                 type: "QRR",
@@ -803,6 +880,7 @@ const bossConfigs = {
             }
 
         ]
+
     },
 
 
@@ -842,6 +920,7 @@ const bossConfigs = {
                 correct: 1
             },
 
+
             {
                 type: "QCM",
 
@@ -857,6 +936,7 @@ const bossConfigs = {
 
                 correct: 1
             },
+
 
             {
                 type: "QCM",
@@ -874,12 +954,14 @@ const bossConfigs = {
                 correct: 2
             },
 
+
             {
                 type: "QRR",
 
                 question:
                     "Explique pourquoi Goku et Vegeta, malgré leur rivalité, finissent par combattre régulièrement du même côté. Donne au moins deux éléments précis de leur évolution."
             },
+
 
             {
                 type: "QRR",
@@ -888,12 +970,14 @@ const bossConfigs = {
                     "Explique le rôle des Six Eyes de Gojo et indique pourquoi cette capacité est particulièrement importante lorsqu'elle est associée à sa technique du Limitless."
             },
 
+
             {
                 type: "QRR",
 
                 question:
                     "Explique pourquoi Yoriichi Tsugikuni est considéré comme une figure exceptionnelle dans l'histoire des Pourfendeurs. Donne au moins deux éléments précis."
             },
+
 
             {
                 type: "QRR",
@@ -902,6 +986,7 @@ const bossConfigs = {
                     "Explique ce que représente le Siècle Oublié dans l'histoire de One Piece et pourquoi le Gouvernement Mondial cherche à empêcher certaines informations à son sujet d'être découvertes."
             },
 
+
             {
                 type: "QRR",
 
@@ -909,12 +994,14 @@ const bossConfigs = {
                     "Explique pourquoi Itachi Uchiha est un personnage dont les actions sont difficiles à comprendre au début de l'histoire. Donne au moins deux éléments permettant de comprendre ses choix."
             },
 
+
             {
                 type: "QRR",
 
                 question:
                     "Explique les principales différences entre les Shinigami, Hollows et Quincy, notamment concernant leur nature et leur manière d'utiliser ou d'interagir avec les pouvoirs spirituels."
             },
+
 
             {
                 type: "QRR",
@@ -924,6 +1011,7 @@ const bossConfigs = {
             }
 
         ]
+
     },
 
 
@@ -963,6 +1051,7 @@ const bossConfigs = {
                 correct: 1
             },
 
+
             {
                 type: "QCM",
 
@@ -979,12 +1068,14 @@ const bossConfigs = {
                 correct: 2
             },
 
+
             {
                 type: "QRR",
 
                 question:
                     "Explique les différentes composantes de l'identité spirituelle d'Ichigo et comment elles contribuent à son évolution en tant que combattant."
             },
+
 
             {
                 type: "QRR",
@@ -993,12 +1084,14 @@ const bossConfigs = {
                     "Explique pourquoi le Siècle Oublié, les Ponéglyphes et le Gouvernement Mondial sont liés. Donne au moins deux éléments précis."
             },
 
+
             {
                 type: "QRR",
 
                 question:
                     "Explique le rôle de la volonté du feu dans Naruto et montre comment elle influence les actions de plusieurs générations de ninjas."
             },
+
 
             {
                 type: "QRR",
@@ -1007,12 +1100,14 @@ const bossConfigs = {
                     "Explique comment la relation entre Goku et Vegeta évolue depuis leur première confrontation jusqu'à leur coopération contre des adversaires majeurs."
             },
 
+
             {
                 type: "QRR",
 
                 question:
                     "Explique la différence entre énergie occulte, technique maudite et extension du territoire, avec au moins un exemple précis."
             },
+
 
             {
                 type: "QRR",
@@ -1021,12 +1116,14 @@ const bossConfigs = {
                     "Explique le lien entre Yoriichi, la Respiration du Soleil et l'évolution des différentes techniques de respiration utilisées par les Pourfendeurs."
             },
 
+
             {
                 type: "QRR",
 
                 question:
                     "Explique les principes fondamentaux du Nen et pourquoi la compréhension de ses catégories est importante dans les combats."
             },
+
 
             {
                 type: "QRR",
@@ -1035,12 +1132,14 @@ const bossConfigs = {
                     "Explique pourquoi les actions de Luffy ont progressivement attiré l'attention des grandes puissances du monde. Donne au moins trois éléments précis."
             },
 
+
             {
                 type: "QRR",
 
                 question:
                     "Explique pourquoi les différentes origines d'Ichigo rendent son parcours particulier dans l'univers de Bleach."
             },
+
 
             {
                 type: "QRR",
@@ -1050,6 +1149,7 @@ const bossConfigs = {
             }
 
         ]
+
     }
 
 };
@@ -1315,17 +1415,14 @@ function showQuestion() {
             });
 
 
-            if (savedAnswer.correct) {
+            /*
+             * IMPORTANT :
+             * On ne révèle jamais si la réponse
+             * est correcte ou incorrecte.
+             */
 
-                message.textContent =
-                    `✅ Réponse enregistrée — +${bossConfig.pointsParReponse} pts`;
-
-            } else {
-
-                message.textContent =
-                    "❌ Réponse enregistrée — 0 pt";
-
-            }
+            message.textContent =
+                "✅ Réponse sélectionnée.";
 
         }
 
@@ -1354,7 +1451,7 @@ function showQuestion() {
         ) {
 
             message.textContent =
-                `📝 Réponse enregistrée — jusqu'à ${bossConfig.pointsParReponse} pts après correction.`;
+                "📝 Réponse enregistrée — correction manuelle à effectuer.";
 
         }
 
@@ -1409,9 +1506,19 @@ function selectAnswer(index) {
         bossConfig.questions[currentQuestion];
 
 
+    /*
+     * Le système vérifie secrètement
+     * si la réponse est correcte.
+     */
+
     const estCorrect =
         index === q.correct;
 
+
+    /*
+     * La réponse et son score sont enregistrés
+     * sans révéler le résultat au joueur.
+     */
 
     answers[currentQuestion] = {
 
@@ -1425,6 +1532,7 @@ function selectAnswer(index) {
             estCorrect
                 ? bossConfig.pointsParReponse
                 : 0
+
     };
 
 
@@ -1442,18 +1550,18 @@ function selectAnswer(index) {
     });
 
 
-    if (estCorrect) {
+    /*
+     * AUCUNE INFORMATION SUR LA BONNE RÉPONSE
+     */
 
-        message.textContent =
-            `✅ Réponse enregistrée — +${bossConfig.pointsParReponse} pts`;
+    message.textContent =
+        "✅ Réponse sélectionnée.";
 
-    } else {
 
-        message.textContent =
-            "❌ Réponse enregistrée — 0 pt";
-
-    }
-
+    /*
+     * Le score est toujours enregistré
+     * en arrière-plan.
+     */
 
     updateScoreDisplay();
 
@@ -1504,7 +1612,7 @@ function submitQRR() {
 
 
     message.textContent =
-        `📝 Réponse enregistrée — jusqu'à ${bossConfig.pointsParReponse} pts après correction.`;
+        "📝 Réponse enregistrée — correction manuelle à effectuer.";
 
 }
 
@@ -1612,6 +1720,7 @@ function startGlobalTimer() {
             }
 
         }, 1000);
+
 }
 
 
