@@ -235,7 +235,26 @@ async function chargerQRR() {
             Statut :
             ${qrr.statut || "à corriger"}
         </strong>
+<br><br>
 
+<div class="label">
+    Correction
+</div>
+
+<textarea id="correction-${qrr.id}" placeholder="Écris la correction ici..."></textarea>
+
+<br>
+
+<input 
+id="points-${qrr.id}" 
+type="number" 
+placeholder="Points obtenus">
+
+<br><br>
+
+<button onclick="corrigerQRR(${qrr.id})">
+    ✅ Valider correction
+</button>
         <br><br>
 
 
@@ -346,7 +365,59 @@ async function chargerQRR() {
 
 
 chargerQRR();
+async function corrigerQRR(id) {
 
+    const correction =
+        document.getElementById(`correction-${id}`).value;
+
+    const points =
+        document.getElementById(`points-${id}`).value;
+
+
+    if (!correction || points === "") {
+
+        alert("Écris une correction et un nombre de points.");
+
+        return;
+
+    }
+
+
+    const { error } =
+        await supabaseClient
+        .from("reponses_qrr")
+        .update({
+
+            correction_ia: correction,
+
+            points_obtenus: Number(points),
+
+            statut: "corrigée"
+
+        })
+        .eq("id", id);
+
+
+    if (error) {
+
+        console.error(
+            "Erreur Supabase :",
+            error
+        );
+
+        alert("Erreur lors de la correction.");
+
+        return;
+
+    }
+
+
+    alert("✅ Correction enregistrée !");
+
+
+    location.reload();
+
+}
 </script>
 
 </body>
