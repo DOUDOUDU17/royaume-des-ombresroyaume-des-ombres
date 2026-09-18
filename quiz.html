@@ -267,10 +267,19 @@ textarea:focus {
 }
 
 .final-score {
-    font-size: 26px;
+    font-size: 42px;
     color: #d8a7ff;
     font-weight: bold;
-    margin: 15px 0;
+    margin: 15px 0 25px;
+    text-shadow: 0 0 15px #8b2be2;
+}
+
+.score-detail {
+    background: #1d1026;
+    border: 1px solid #633082;
+    border-radius: 12px;
+    padding: 15px;
+    margin: 12px 0;
 }
 
 .return-btn {
@@ -525,23 +534,15 @@ const bossChoisi =
 
 const bossConfigs = {
 
-
-    /* =====================================================
-       🌑 BOSS DES OMBRES
-       ===================================================== */
-
     ombres: {
 
         nom: "🌑 Boss des Ombres",
-
         niveau: "Facile",
 
         pointsParReponse: 10,
 
         tempsGlobal: 5 * 60,
-
         tempsQCM: 15,
-
         tempsQRR: 45,
 
         questions: [
@@ -562,7 +563,6 @@ const bossConfigs = {
                 correct: 0
             },
 
-
             {
                 type: "QCM",
 
@@ -578,7 +578,6 @@ const bossConfigs = {
 
                 correct: 1
             },
-
 
             {
                 type: "QCM",
@@ -596,7 +595,6 @@ const bossConfigs = {
                 correct: 1
             },
 
-
             {
                 type: "QCM",
 
@@ -612,7 +610,6 @@ const bossConfigs = {
 
                 correct: 0
             },
-
 
             {
                 type: "QCM",
@@ -631,26 +628,18 @@ const bossConfigs = {
             }
 
         ]
-
     },
 
-
-    /* =====================================================
-       🔥 BOSS DES FLAMMES
-       ===================================================== */
 
     flammes: {
 
         nom: "🔥 Boss des Flammes",
-
         niveau: "Moyen",
 
         pointsParReponse: 20,
 
         tempsGlobal: 5 * 60,
-
         tempsQCM: 25,
-
         tempsQRR: 45,
 
         questions: [
@@ -671,7 +660,6 @@ const bossConfigs = {
                 correct: 0
             },
 
-
             {
                 type: "QCM",
 
@@ -687,7 +675,6 @@ const bossConfigs = {
 
                 correct: 2
             },
-
 
             {
                 type: "QCM",
@@ -705,7 +692,6 @@ const bossConfigs = {
                 correct: 1
             },
 
-
             {
                 type: "QCM",
 
@@ -721,7 +707,6 @@ const bossConfigs = {
 
                 correct: 3
             },
-
 
             {
                 type: "QCM",
@@ -739,14 +724,12 @@ const bossConfigs = {
                 correct: 1
             },
 
-
             {
                 type: "QRR",
 
                 question:
                     "Dans Bleach, Ichigo possède plusieurs origines liées à ses pouvoirs. Cite les principales origines qui composent son identité spirituelle et explique brièvement comment elles sont liées à ses pouvoirs."
             },
-
 
             {
                 type: "QRR",
@@ -756,26 +739,18 @@ const bossConfigs = {
             }
 
         ]
-
     },
 
-
-    /* =====================================================
-       ⚡ BOSS DU TONNERRE
-       ===================================================== */
 
     tonnerre: {
 
         nom: "⚡ Boss du Tonnerre",
-
         niveau: "Difficile",
 
         pointsParReponse: 40,
 
         tempsGlobal: 5 * 60,
-
         tempsQCM: 30,
-
         tempsQRR: 60,
 
         questions: [
@@ -796,7 +771,6 @@ const bossConfigs = {
                 correct: 0
             },
 
-
             {
                 type: "QCM",
 
@@ -812,7 +786,6 @@ const bossConfigs = {
 
                 correct: 2
             },
-
 
             {
                 type: "QCM",
@@ -830,7 +803,6 @@ const bossConfigs = {
                 correct: 0
             },
 
-
             {
                 type: "QCM",
 
@@ -847,14 +819,12 @@ const bossConfigs = {
                 correct: 1
             },
 
-
             {
                 type: "QRR",
 
                 question:
                     "Explique pourquoi Vegeta est initialement considéré comme un adversaire majeur de Goku, puis indique au moins une raison importante qui explique son évolution par la suite."
             },
-
 
             {
                 type: "QRR",
@@ -863,14 +833,12 @@ const bossConfigs = {
                     "Quelle est la différence fondamentale entre une Technique Maudite et une Extension du Territoire ? Explique avec un exemple lié à un personnage."
             },
 
-
             {
                 type: "QRR",
 
                 question:
                     "Pourquoi Muzan Kibutsuji cherche-t-il particulièrement à éliminer Tanjiro après certains événements de l'histoire ? Donne au moins deux éléments précis."
             },
-
 
             {
                 type: "QRR",
@@ -880,26 +848,18 @@ const bossConfigs = {
             }
 
         ]
-
     },
 
-
-    /* =====================================================
-       👹 ROI DÉMON
-       ===================================================== */
 
     "roi-demon": {
 
         nom: "👹 Roi Démon",
-
         niveau: "Expert",
 
         pointsParReponse: 80,
 
         tempsGlobal: 5 * 60,
-
         tempsQCM: 35,
-
         tempsQRR: 75,
 
         questions: [
@@ -920,7 +880,6 @@ const bossConfigs = {
                 correct: 1
             },
 
-
             {
                 type: "QCM",
 
@@ -936,7 +895,6 @@ const bossConfigs = {
 
                 correct: 1
             },
-
 
             {
                 type: "QCM",
@@ -954,14 +912,12 @@ const bossConfigs = {
                 correct: 2
             },
 
-
             {
                 type: "QRR",
 
                 question:
                     "Explique pourquoi Goku et Vegeta, malgré leur rivalité, finissent par combattre régulièrement du même côté. Donne au moins deux éléments précis de leur évolution."
             },
-
 
             {
                 type: "QRR",
@@ -970,14 +926,12 @@ const bossConfigs = {
                     "Explique le rôle des Six Eyes de Gojo et indique pourquoi cette capacité est particulièrement importante lorsqu'elle est associée à sa technique du Limitless."
             },
 
-
             {
                 type: "QRR",
 
                 question:
                     "Explique pourquoi Yoriichi Tsugikuni est considéré comme une figure exceptionnelle dans l'histoire des Pourfendeurs. Donne au moins deux éléments précis."
             },
-
 
             {
                 type: "QRR",
@@ -986,7 +940,6 @@ const bossConfigs = {
                     "Explique ce que représente le Siècle Oublié dans l'histoire de One Piece et pourquoi le Gouvernement Mondial cherche à empêcher certaines informations à son sujet d'être découvertes."
             },
 
-
             {
                 type: "QRR",
 
@@ -994,14 +947,12 @@ const bossConfigs = {
                     "Explique pourquoi Itachi Uchiha est un personnage dont les actions sont difficiles à comprendre au début de l'histoire. Donne au moins deux éléments permettant de comprendre ses choix."
             },
 
-
             {
                 type: "QRR",
 
                 question:
                     "Explique les principales différences entre les Shinigami, Hollows et Quincy, notamment concernant leur nature et leur manière d'utiliser ou d'interagir avec les pouvoirs spirituels."
             },
-
 
             {
                 type: "QRR",
@@ -1011,26 +962,18 @@ const bossConfigs = {
             }
 
         ]
-
     },
 
-
-    /* =====================================================
-       👑 BOSS ULTIME
-       ===================================================== */
 
     "boss-ultime": {
 
         nom: "👑 Boss Ultime",
-
         niveau: "Ultime",
 
         pointsParReponse: 160,
 
         tempsGlobal: 5 * 60,
-
         tempsQCM: 40,
-
         tempsQRR: 90,
 
         questions: [
@@ -1051,7 +994,6 @@ const bossConfigs = {
                 correct: 1
             },
 
-
             {
                 type: "QCM",
 
@@ -1068,14 +1010,12 @@ const bossConfigs = {
                 correct: 2
             },
 
-
             {
                 type: "QRR",
 
                 question:
                     "Explique les différentes composantes de l'identité spirituelle d'Ichigo et comment elles contribuent à son évolution en tant que combattant."
             },
-
 
             {
                 type: "QRR",
@@ -1084,14 +1024,12 @@ const bossConfigs = {
                     "Explique pourquoi le Siècle Oublié, les Ponéglyphes et le Gouvernement Mondial sont liés. Donne au moins deux éléments précis."
             },
 
-
             {
                 type: "QRR",
 
                 question:
                     "Explique le rôle de la volonté du feu dans Naruto et montre comment elle influence les actions de plusieurs générations de ninjas."
             },
-
 
             {
                 type: "QRR",
@@ -1100,14 +1038,12 @@ const bossConfigs = {
                     "Explique comment la relation entre Goku et Vegeta évolue depuis leur première confrontation jusqu'à leur coopération contre des adversaires majeurs."
             },
 
-
             {
                 type: "QRR",
 
                 question:
                     "Explique la différence entre énergie occulte, technique maudite et extension du territoire, avec au moins un exemple précis."
             },
-
 
             {
                 type: "QRR",
@@ -1116,14 +1052,12 @@ const bossConfigs = {
                     "Explique le lien entre Yoriichi, la Respiration du Soleil et l'évolution des différentes techniques de respiration utilisées par les Pourfendeurs."
             },
 
-
             {
                 type: "QRR",
 
                 question:
                     "Explique les principes fondamentaux du Nen et pourquoi la compréhension de ses catégories est importante dans les combats."
             },
-
 
             {
                 type: "QRR",
@@ -1132,14 +1066,12 @@ const bossConfigs = {
                     "Explique pourquoi les actions de Luffy ont progressivement attiré l'attention des grandes puissances du monde. Donne au moins trois éléments précis."
             },
 
-
             {
                 type: "QRR",
 
                 question:
                     "Explique pourquoi les différentes origines d'Ichigo rendent son parcours particulier dans l'univers de Bleach."
             },
-
 
             {
                 type: "QRR",
@@ -1149,7 +1081,6 @@ const bossConfigs = {
             }
 
         ]
-
     }
 
 };
@@ -1162,9 +1093,7 @@ const bossConfigs = {
 const bossConfig =
     bossConfigs[bossChoisi] || bossConfigs.ombres;
 
-
 let currentQuestion = 0;
-
 let answers = [];
 
 let globalTime =
@@ -1173,11 +1102,9 @@ let globalTime =
 let questionTime = 0;
 
 let globalInterval = null;
-
 let questionInterval = null;
 
 let quizFinished = false;
-
 let questionLocked = false;
 
 
@@ -1254,7 +1181,7 @@ pointsPerAnswer.textContent =
 
 
 /* =====================================================
-   CALCUL DU SCORE ACTUEL
+   CALCUL DU SCORE
    ===================================================== */
 
 function calculateCurrentScore() {
@@ -1270,6 +1197,11 @@ function calculateCurrentScore() {
             score += answer.points || 0;
 
         }
+
+        /*
+         * Les QRR restent à 0 tant qu'elles
+         * n'ont pas été corrigées manuellement.
+         */
 
         if (
             answer.type === "QRR" &&
@@ -1350,8 +1282,7 @@ function showQuestion() {
             (currentQuestion + 1) /
             bossConfig.questions.length *
             100
-        )
-        + "%";
+        ) + "%";
 
 
     /* =================================================
@@ -1402,13 +1333,10 @@ function showQuestion() {
             buttons.forEach((button, index) => {
 
                 if (
-                    index ===
-                    savedAnswer.answer
+                    index === savedAnswer.answer
                 ) {
 
-                    button.classList.add(
-                        "selected"
-                    );
+                    button.classList.add("selected");
 
                 }
 
@@ -1417,8 +1345,7 @@ function showQuestion() {
 
             /*
              * IMPORTANT :
-             * On ne révèle jamais si la réponse
-             * est correcte ou incorrecte.
+             * La bonne réponse n'est jamais révélée.
              */
 
             message.textContent =
@@ -1473,9 +1400,7 @@ function showQuestion() {
 
     questionTime =
         q.type === "QCM"
-
             ? bossConfig.tempsQCM
-
             : bossConfig.tempsQRR;
 
 
@@ -1507,8 +1432,7 @@ function selectAnswer(index) {
 
 
     /*
-     * Le système vérifie secrètement
-     * si la réponse est correcte.
+     * Vérification secrète.
      */
 
     const estCorrect =
@@ -1516,8 +1440,8 @@ function selectAnswer(index) {
 
 
     /*
-     * La réponse et son score sont enregistrés
-     * sans révéler le résultat au joueur.
+     * Enregistrement du résultat
+     * sans révéler la réponse.
      */
 
     answers[currentQuestion] = {
@@ -1551,17 +1475,12 @@ function selectAnswer(index) {
 
 
     /*
-     * AUCUNE INFORMATION SUR LA BONNE RÉPONSE
+     * Aucun résultat n'est affiché.
      */
 
     message.textContent =
         "✅ Réponse sélectionnée.";
 
-
-    /*
-     * Le score est toujours enregistré
-     * en arrière-plan.
-     */
 
     updateScoreDisplay();
 
@@ -1625,7 +1544,6 @@ function startQuestionTimer() {
 
     clearInterval(questionInterval);
 
-
     questionInterval =
         setInterval(() => {
 
@@ -1636,7 +1554,6 @@ function startQuestionTimer() {
 
 
             questionTime--;
-
 
             questionTimer.textContent =
                 formatTime(questionTime);
@@ -1706,7 +1623,6 @@ function startGlobalTimer() {
 
             globalTime--;
 
-
             globalTimer.textContent =
                 formatTime(globalTime);
 
@@ -1774,7 +1690,7 @@ function previousQuestion() {
 
 
 /* =====================================================
-   FIN DU QUIZ + CALCUL DES POINTS
+   FIN DU QUIZ
    ===================================================== */
 
 function finishQuiz(timeUp) {
@@ -1790,7 +1706,13 @@ function finishQuiz(timeUp) {
     clearInterval(questionInterval);
 
 
-    let totalPoints = 0;
+    /*
+     * SCORE FINAL
+     */
+
+    const totalPoints =
+        calculateCurrentScore();
+
 
     let qcmCorrectes = 0;
 
@@ -1807,10 +1729,6 @@ function finishQuiz(timeUp) {
         if (answer.type === "QCM") {
 
             questionsRepondues++;
-
-            totalPoints +=
-                answer.points || 0;
-
 
             if (answer.correct) {
 
@@ -1832,10 +1750,19 @@ function finishQuiz(timeUp) {
     });
 
 
+    /*
+     * Maximum théorique du Boss.
+     */
+
     const maximumPossible =
         bossConfig.questions.length *
         bossConfig.pointsParReponse;
 
+
+    /*
+     * Nombre de QRR qui devront encore
+     * être corrigées manuellement.
+     */
 
     const pointsQRRMaximum =
         qrrACorriger *
@@ -1853,44 +1780,115 @@ function finishQuiz(timeUp) {
             : "🏁 Boss terminé !";
 
 
+    /*
+     * AFFICHAGE DU SCORE OBTENU
+     */
+
     endMessage.innerHTML = `
 
-        <strong>${titre}</strong>
+        <strong style="font-size:22px;">
+            ${titre}
+        </strong>
 
-        <br><br>
+        <div class="score-detail">
 
-        ⚔️ <strong>Score actuel :</strong>
+            🏆 SCORE OBTENU
 
-        <div class="final-score">
-            ${totalPoints} pts
+            <div class="final-score">
+                ${totalPoints} pts
+            </div>
+
         </div>
 
-        📊 <strong>Maximum du Boss :</strong>
-        ${maximumPossible} pts
 
-        <br><br>
+        <div class="score-detail">
 
-        ✅ QCM correctes :
-        <strong>${qcmCorrectes}</strong>
+            🎯 MAXIMUM POSSIBLE
+
+            <br>
+
+            <strong>
+                ${maximumPossible} pts
+            </strong>
+
+        </div>
+
+
+        <div class="score-detail">
+
+            📊 QUESTIONS RÉPONDUES
+
+            <br>
+
+            <strong>
+                ${questionsRepondues}
+            </strong>
+            /
+            ${bossConfig.questions.length}
+
+        </div>
+
+
+        <div class="score-detail">
+
+            ✅ QCM CORRECTES
+
+            <br>
+
+            <strong>
+                ${qcmCorrectes}
+            </strong>
+
+        </div>
+
+
+        <div class="score-detail">
+
+            📝 QRR À CORRIGER
+
+            <br>
+
+            <strong>
+                ${qrrACorriger}
+            </strong>
+
+        </div>
+
+
+        ${
+            qrrACorriger > 0
+                ? `
+                    <div class="score-detail">
+
+                        🎯 POINTS QRR ENCORE POSSIBLES
+
+                        <br>
+
+                        <strong>
+                            ${pointsQRRMaximum} pts
+                        </strong>
+
+                    </div>
+                  `
+                : ""
+        }
+
 
         <br>
-
-        📝 QRR à corriger :
-        <strong>${qrrACorriger}</strong>
-
-        <br>
-
-        🎯 Points QRR encore possibles :
-        <strong>${pointsQRRMaximum} pts</strong>
-
-        <br><br>
 
         ⚔️ Valeur de chaque réponse :
-        <strong>${bossConfig.pointsParReponse} pts</strong>
+
+        <strong>
+            ${bossConfig.pointsParReponse} pts
+        </strong>
 
         <br><br>
 
-        Les QRR seront corrigées manuellement.
+        ${
+            qrrACorriger > 0
+                ? "📝 Les QRR seront corrigées manuellement."
+                : "🔥 Toutes les réponses du Boss ont été traitées."
+        }
 
     `;
 
