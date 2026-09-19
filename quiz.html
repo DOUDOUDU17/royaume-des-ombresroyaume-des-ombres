@@ -519,7 +519,7 @@ footer {
 </div>
 
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 
@@ -1571,7 +1571,7 @@ supabaseClient
         statut: "à corriger"
 
     }])
-    .then(({ data, error }) => {
+    .then(async ({ data, error }) => {
 
     if (error) {
 
@@ -1583,7 +1583,70 @@ supabaseClient
         return;
     }
 
+
     console.log("Réponse envoyée :", data);
+
+
+    message.textContent =
+        "🤖 Correction IA en cours...";
+
+
+   
+
+
+    if (correction.error) {
+
+        console.error(
+            "Erreur IA :",
+            correction.error
+        );
+
+        message.textContent =
+            "⚠️ La correction IA a échoué.";
+
+        return;
+
+    }
+const correction =
+    await supabaseClient.functions.invoke(
+        "appeler_correcteur_qrr",
+        {
+            body: {
+
+                question:
+                bossConfig.questions[currentQuestion].question,
+
+                reponse: text,
+
+                points_max:
+                bossConfig.pointsParReponse
+
+            }
+        }
+    );
+
+    const resultat =
+        correction.data;
+
+
+    answers[currentQuestion].points =
+        resultat.points;
+
+
+    answers[currentQuestion].statut =
+        "corrigé";
+
+
+    updateScoreDisplay();
+
+
+    message.innerHTML =
+        `
+        ✅ Correction terminée !<br>
+        🏆 Note IA : ${resultat.points} pts<br>
+        📖 ${resultat.correction}
+        `;
+
 
 });
 
