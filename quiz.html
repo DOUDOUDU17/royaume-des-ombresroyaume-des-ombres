@@ -1587,31 +1587,17 @@ supabaseClient
     console.log("Réponse envoyée :", data);
 
 
-    message.textContent =
-        "🤖 Correction IA en cours...";
+  message.textContent =
+    "🤖 Correction IA en cours...";
 
 
-   
-
-
-    if (correction.error) {
-
-        console.error(
-            "Erreur IA :",
-            correction.error
-        );
-
-        message.textContent =
-            "⚠️ La correction IA a échoué.";
-
-        return;
-
-    }
-const correction =
+const { data: resultat, error: correctionError } =
     await supabaseClient.functions.invoke(
         "appeler_correcteur_qrr",
         {
             body: {
+
+                id: data[0].id,
 
                 question:
                 bossConfig.questions[currentQuestion].question,
@@ -1625,10 +1611,20 @@ const correction =
         }
     );
 
-    const resultat =
-        correction.data;
 
+if (correctionError) {
 
+    console.error(
+        "Erreur IA :",
+        correctionError
+    );
+
+    message.textContent =
+        "⚠️ La correction IA a échoué.";
+
+    return;
+
+} 
     answers[currentQuestion].points =
         resultat.points;
 
